@@ -1,0 +1,50 @@
+.exercisePage {
+    background-color: #E7ECEF;
+    padding :32px 0;
+
+
+    .listExercise{
+        border: 1px solid black;
+        
+    }
+
+    .exercisePage__model{
+        .body-map__muscle{
+            fill: rgb(211,211,211);
+   
+            &:hover{
+                fill: rgb(244, 95, 2);
+            }
+        }
+    }
+    .optionExerciseDiv{
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        background-color: #FFFFFF;
+        padding: 0 0 32px;
+
+        .exercisePage__model{
+            padding: 16px;
+        }
+
+        .optionExerciseHeader{
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background-color: #000000;
+            text-align: center;
+            color: white; 
+            padding: 16px;
+        }
+        .optionExerciseContent{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            font-size: 24px;
+            padding: 16px 0 0 32px;
+            .optionExerciseItem{
+                display: flex;
+                gap: 20px;
+            }
+        }
+    }
+}

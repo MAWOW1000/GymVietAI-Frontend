@@ -5,12 +5,13 @@ const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
-  background-color: transparent;
-  position: fixed; /* Giữ header bám dính vào đầu trang */
-  top: 0;
-  left: 0;
+  // background-color: transparent;
+  background-color: black;
+  // position: fixed; /* Giữ header bám dính vào đầu trang */
+  // top: 0;
+  // left: 0;
   width: 100%;
-  z-index: 1000; /* Đảm bảo rằng nó ở trên các phần tử khác */
+  // z-index: 1000; /* Đảm bảo rằng nó ở trên các phần tử khác */
   transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
 
   &.scrolled {

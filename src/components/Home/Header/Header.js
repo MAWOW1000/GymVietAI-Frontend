@@ -42,8 +42,8 @@ function Header() {
             <nav className="navbar">
                 <ul className="nav-links">
                     <li><NavLink to='/'>Home</NavLink></li>
-                    <li><a href="#exercise">Exercise</a></li>
-                    <li><a href="#chatbox">Chatbox</a></li>
+                    <li><NavLink to='/exercise'>Exercise</NavLink></li>
+                    <li><NavLink to='/dictionary'>Dictionary</NavLink></li>
                     <li><a href="#workout">Workout</a></li>
                     <li><a href="#meal">Meal</a></li>
                 </ul>
@@ -75,10 +75,10 @@ function Header() {
                 </div> */}
 
                 <div className='buttonGroup'>
-                    <button type="button" class="btnLogin btn btn-outline-light"
+                    <button type="button" className="btnLogin btn btn-outline-light"
                         onClick={handleLogIn}
                     >Log In</button>
-                    <button type="button" class="btnSignup btn btn-secondary"
+                    <button type="button" className="btnSignup btn btn-secondary"
                         onClick={handleSignUp}
                     >Sign Up</button>
                 </div>
