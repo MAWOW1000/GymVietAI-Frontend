@@ -1,6 +1,6 @@
 function ModelBack() {
     return (
-        <div className="exercisePage__model-back">
+        <div className="model-back">
             <svg
                 viewBox="0 0 700 1200"
                 xmlns="http://www.w3.org/2000/svg"

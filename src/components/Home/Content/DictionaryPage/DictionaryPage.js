@@ -15,4 +15,4 @@ const DictionaryPage = () => {
     )
 }
 
-export default DictionaryPage;
+export default DictionaryPage;                        

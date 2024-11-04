@@ -1,0 +1,41 @@
+.exerciseItem{
+    margin-bottom: 32px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding-bottom: 32px;
+
+   .exerciseItem__header{
+        background-color: black;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 8px 0px;
+        margin: 0;
+        text-align: center;
+   } 
+
+   .exerciseItem__video{
+        position: relative;
+        video:first-child{
+            border-bottom-right-radius: 10px;
+        }
+        
+        video:last-child{
+            border-bottom-left-radius: 10px;
+        }
+
+        .exerciseItem__video-level{
+            position: absolute;
+            top:0;
+            left: -10px;
+            background-color: black;
+            border: none;
+            width: auto;
+            border-radius: 10px;
+            padding: 4px 12px;
+            font-size: 12px;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+   }
+}

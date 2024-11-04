@@ -1,0 +1,51 @@
+.stepExerciseDivList{
+    margin-top: 40px;
+    padding-right: 8px;
+
+    .stepExerciseDiv{
+        margin-top: 28px;
+
+        .row{
+            display: flex;
+            align-items: center;
+
+            dd{
+                margin: 0;
+                p{
+                    margin: 0;
+                }
+            }
+        }
+
+        .stepExerciseNumber{
+            position: relative;
+
+            .stepExerciseNumber__after{
+                display: block;
+                position: absolute;
+                background-color: white;
+                width: 30px;
+                height: 60px; /* as the half of the width */
+                border-top-left-radius: 9999px;  /* 100px of height + 10px of border */
+                border-bottom-left-radius: 9999px;  /* 100px of height + 10px of border */
+                border-right: 0;
+                top: -6px;
+                left: 0;
+            }
+
+            .stepExerciseNumber__button{
+                position: relative;
+                background-color: black;
+                color: white;
+                height: 50px;
+                width: 50px;
+                border-radius: 9999px;
+                left: -1px;
+            }
+        }
+
+        .stepExerciseDescription{
+
+        }
+    }
+}

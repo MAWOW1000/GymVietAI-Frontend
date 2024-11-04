@@ -1,6 +1,6 @@
 function ModelFront() {
     return (
-        <div className="exercisePage__model-front">
+        <div className="model-front">
             <svg
                 viewBox="0 0 700 1200"
                 fill="none"
