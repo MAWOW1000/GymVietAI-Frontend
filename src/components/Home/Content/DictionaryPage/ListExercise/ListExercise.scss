@@ -1,0 +1,42 @@
+.listExerciseTable{
+    .listExerciseTable__heading{
+        tr{
+            td{
+                padding: 16px !important;
+                color: black !important;
+                font-weight: 500;
+            }
+        }
+    }
+    
+    .listExerciseTable__body{
+
+        .listExerciseTable__body--header{
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        .listExerciseTable__body--content{
+            td{
+                padding: 12px 16px !important;
+            }
+
+            span:first-child{
+                position: relative;
+            }
+            .male{
+                margin-right: 16px;
+            }
+            .male::after{
+               position: absolute;
+               display: block;
+               content: "";
+               width: 12px;
+               height: 24px;
+               border-right: 2px solid var(--borderColor);
+               top: -1px;
+               right: -9px; 
+            }
+        }
+    }
+}

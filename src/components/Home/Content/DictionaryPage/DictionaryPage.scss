@@ -1,9 +1,25 @@
 .dictionaryPage{
+    background-color: #E7ECEF;
+
     .dictionaryPage__heading{
         text-align: center;
+        h3{
+            font-size: 30px;
+        }
+        padding: 24px 0 16px;
     }
     .dictionaryPage__content{
-        border: 1px solid black;
         height: 1000px;
+
+        .dictionaryPage__content__heading{
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .dictionaryPage__content__list{
+            margin-top: 32px;
+            border-radius: 5px;
+            background-color: white;
+        }
     }
 }
