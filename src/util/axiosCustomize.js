@@ -1,8 +1,8 @@
 import axios from "axios";
-
+import qs from 'qs';
 // Set config defaults when creating the instance
 const instance = axios.create({
-    baseURL: 'http://localhost:5000/api/auth'
+    baseURL: 'http://localhost:8082/api/v1/exercise'
 });
 
 // Alter defaults after instance has been created
@@ -12,7 +12,11 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
 
-    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    // config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    // if (config.data && config.headers[config.method]['Content-Type'] === 'application/x-www-form-urlencoded') {
+    // config.data = qs.stringify(config.data)
+    config.headers = { 'content-type': 'application/x-www-form-urlencoded' };
+    config.data = qs.stringify(config.data);  // Use qs.stringify for POST data if needed
     return config;
 }, function (error) {
     // Do something with request error

@@ -3,13 +3,15 @@
     padding :32px 0;
 
     .exercisePage__model{
-        .body-map__muscle{
-            fill: rgb(211,211,211);
-   
-            &:hover, &.active{
-                fill: rgb(244, 95, 2);
+            .body-map__muscle{
+                fill: rgb(211,211,211);
+                pointer-events: none;
+
+                &.active{
+                    fill: rgb(244, 95, 2);
+                }
+
             }
-        }
     } 
     
     .optionExerciseDiv{
