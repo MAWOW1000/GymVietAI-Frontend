@@ -17,6 +17,18 @@
             text-align: center;
         }
         .listExerciseTable__body--content{
+            .optionIcon{
+                svg{
+                   width: 25px;
+                   height: 25px;
+                   margin-right: 8px;
+                }
+            }
+
+            .optionName{
+                font-size: 14px;
+            }
+
             td{
                 padding: 12px 16px !important;
             }

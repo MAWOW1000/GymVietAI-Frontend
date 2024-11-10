@@ -3,17 +3,17 @@ import { useEffect } from "react";
 function ModelBack({ setSelectedMuscle, selectedMuscle }) {
     useEffect(() => {
         const muscleElements = document.querySelectorAll('.body-map__muscle');
-    
+
         muscleElements.forEach(element => {
             const muscleId = element?.dataset?.muscle ?? element.id;
-    
+
             if (selectedMuscle === muscleId) {
                 element.classList.add('active');
             } else {  // Important: Remove 'active' class if not selected
                 element.classList.remove('active');
             }
         });
-    
+
     }, [selectedMuscle]);
     const handleClick = (event) => {
         const muscleId = event.currentTarget?.dataset?.muscle ?? event.currentTarget.id;
@@ -45,7 +45,7 @@ function ModelBack({ setSelectedMuscle, selectedMuscle }) {
 
                     ></path>
                 </g>
-                <g className="body-map__muscle " id="lowerback" onClick={handleClick}>
+                <g className="body-map__muscle " id="lowerback" data-muscle="Lower back" onClick={handleClick}>
                     <path
                         d="M378.772 505.052C366.957 502.464 351.674 502.97 340.251 511.465C332.897 516.937 327.982 524.988 325.595 535.522C323.216 524.988 318.311 516.946 310.957 511.465C299.534 502.961 284.26 502.464 272.436 505.052C278.465 497.576 278.012 486.885 277.542 475.75C277.036 463.856 276.479 450.351 283.101 437.717C303.472 398.873 312.891 375.574 311.471 351.9C316.237 364.656 319.557 370.581 325.586 370.581C331.616 370.581 334.936 364.656 339.684 351.918C338.29 375.591 347.718 398.864 368.072 437.717C374.694 450.351 374.136 463.856 373.631 475.75C373.178 486.894 372.725 497.585 378.754 505.052H378.772Z"
 
@@ -71,7 +71,7 @@ function ModelBack({ setSelectedMuscle, selectedMuscle }) {
 
                     ></path>
                 </g>
-                <g className="body-map__muscle " id="traps-middle" data-muscle="Traps (mid-back)" onClick={handleClick}>
+                <g className="body-map__muscle " id="traps-middle" data-muscle="Traps Middle" onClick={handleClick}>
                     <path
                         d="M384.871 237.078C366.843 271.303 355.568 298.575 347.918 318.929C347.901 318.947 347.901 318.982 347.883 318.999C346.646 322.04 345.557 324.994 344.599 327.878V327.895C343.048 332.191 341.662 336.086 340.425 339.597C333.96 357.921 330.727 367.113 325.595 367.113C320.463 367.113 317.23 357.921 310.765 339.597C309.476 335.946 308.055 331.895 306.435 327.434C306.435 327.416 306.417 327.381 306.4 327.364C305.581 324.915 304.666 322.389 303.638 319.818C303.586 319.696 303.533 319.574 303.481 319.452C303.429 319.295 303.376 319.156 303.307 318.999C295.674 298.645 284.382 271.355 266.354 237.095C268.802 238.263 271.312 238.716 274.109 238.716C277.69 238.716 281.742 237.984 286.656 237.095C295.395 235.509 307.393 233.34 325.586 233.34C343.78 233.34 355.778 235.509 364.534 237.095C369.457 237.984 373.483 238.716 377.064 238.716C379.861 238.716 382.396 238.263 384.854 237.078H384.871Z"
 

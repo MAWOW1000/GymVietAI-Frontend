@@ -2,7 +2,11 @@ import './ExerciseItem.scss'
 import Step from './Step'
 const ExerciseItem = ({ inforExercise, gender }) => {
     const typeVideo = gender ? 'video_female' : 'video_male'
-    inforExercise.description = inforExercise.description ? inforExercise.description.replace(/\*n/g, '*\n').replace(/\.n/g, '.\n').replace(/\)n/g, ')\n\n') : ''
+    let inforExercise_description = inforExercise.description
+    let inforExercise_link_description = inforExercise.link_description
+
+    inforExercise_description = inforExercise_description ? inforExercise_description.replace(/\*n/g, '*\n').replace(/\.n/g, '.\n').replace(/\)n/g, ')\n\n') : ''
+    inforExercise_link_description = inforExercise_link_description.replace(/\?v=([^&]+).*/, '/$1');
     return (
         <>
             <div className='exerciseItem'>
@@ -29,15 +33,17 @@ const ExerciseItem = ({ inforExercise, gender }) => {
                         <>
                             <h4>Detail Description</h4>
                             {
-                                inforExercise.description.split('\n').map((line, index) => (
+                                inforExercise_description.split('\n').map((line, index) => (
                                     <p key={index}>{line}</p>
                                 ))
                             }
+                            <iframe className='exerciseItem__link-description' src={inforExercise_link_description}> </iframe>
                         </>
                         :
                         <></>
                 }
             </div>
+
         </>
 
     )

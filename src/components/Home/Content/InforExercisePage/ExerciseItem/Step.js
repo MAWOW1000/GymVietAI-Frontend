@@ -1,14 +1,8 @@
 import './Step.scss'
-const Step = ({steps}) => {
-    const stepArr = steps.split('.n').filter(item => item.trim() !== "").map((item) => {
-        const trimmedItem = item.trim();
-        const parts = trimmedItem.match(/^(\d+)\.\s(.*)/); // Regular expression to split
-
-        if (parts) {
-            return [parts[1], parts[2] + "."]; // Return an array with the number and text (with period)
-        } else {
-            return ["", trimmedItem + "."]; // Handle cases where the number isn't present
-        }
+const Step = ({ steps }) => {
+    const stepArr = steps.trim().split('\n').map(line => {
+        const [number, ...textParts] = line.split('.');
+        return [number.trim(), textParts.join('.').trim()];
     });
     return (
         <dl className="stepExerciseDivList">
@@ -32,3 +26,4 @@ const Step = ({steps}) => {
 }
 
 export default Step
+

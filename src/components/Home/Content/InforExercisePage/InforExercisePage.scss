@@ -3,6 +3,7 @@
     padding :32px 0;
 
     .exercisePage__model{
+        &.inforExercise{
             .body-map__muscle{
                 fill: rgb(211,211,211);
                 pointer-events: none;
@@ -12,6 +13,7 @@
                 }
 
             }
+        }
     } 
     
     .optionExerciseDiv{

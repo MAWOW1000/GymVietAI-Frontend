@@ -10,6 +10,7 @@ import Forgotpassword from './components/Home/Content/ForgotPassword/Forgotpassw
 import Home from './components/Home/Home';
 import ExercisePage from './components/Home/Content/ExercisePage/ExercisePage';
 import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryPage';
+import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='forgot-password' element={<Forgotpassword />} />
           <Route path='exercise' element={<ExercisePage />} />
+          <Route path='information' element={<InforExercisePage />} />
           <Route path='dictionary' element={<DictionaryPage />} />
         </Route>
 
