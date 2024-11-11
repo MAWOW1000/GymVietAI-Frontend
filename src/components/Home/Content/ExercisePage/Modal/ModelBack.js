@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function ModelBack({ setSelectedMuscle, selectedMuscle }) {
+function ModelBack({ setSelectedMuscle, selectedMuscle, setPage }) {
     useEffect(() => {
         const muscleElements = document.querySelectorAll('.body-map__muscle');
 
@@ -18,6 +18,8 @@ function ModelBack({ setSelectedMuscle, selectedMuscle }) {
     const handleClick = (event) => {
         const muscleId = event.currentTarget?.dataset?.muscle ?? event.currentTarget.id;
         setSelectedMuscle(muscleId);
+        if (setPage) { setPage(1); }
+
         // const previouslyActive = document.querySelector('.body-map__muscle.active'); // Assumes a common class 'muscle-item'
         // if (previouslyActive) {
         //     previouslyActive.classList.remove('active');

@@ -2,22 +2,30 @@ import { useEffect, useState } from 'react';
 import './DictionaryPage.scss'
 import ListExercise from './ListExercise/ListExercise';
 import Option from './Option/Option';
-import { getExerciseByOptions } from '../../../../util/exerciseApi';
+import { getExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseApi';
 
 
 const DictionaryPage = () => {
     const [exercises, setExercises] = useState([])
-    const [selectedMuscle, setSelectedMuscle] = useState(null);
-    const [selectedEquipment, setSelectedEquipment] = useState(null);
-    const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+    const [selectedMuscle, setSelectedMuscle] = useState([]);
+    const [selectedEquipment, setSelectedEquipment] = useState([]);
+    const [selectedDifficulty, setSelectedDifficulty] = useState([]);
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(0)
+    const [totalExercise, setTotalExercise] = useState(0)
+    const [noExercise, setNoExercise] = useState(0)
+    const limit = 30
     useEffect(() => {
         async function callApi() {
             try {
-                const result = await getExerciseByOptions(selectedMuscle, selectedDifficulty, selectedEquipment)
-                if (result.EC === 0) {
-                    setExercises(result.DT)
-                    console.log('>>success ', selectedMuscle, result.DT, selectedEquipment, selectedDifficulty)
+                const result = await getExerciseByOptionsMultiple(selectedMuscle, selectedDifficulty, selectedEquipment, limit, page)
+                const result2 = await getNumberOfExercise()
+                if (result.EC === 0 && result2.EC === 0) {
+                    setExercises(result.DT.exercise)
+                    setTotalPage(result.DT["Total page"])
+                    setTotalExercise(result.DT["Total exercise"])
+                    setNoExercise(result2.DT)
                 }
                 else {
                     console.log('>> fail', result.EM)
@@ -27,7 +35,7 @@ const DictionaryPage = () => {
             }
         }
         callApi();
-    }, [selectedMuscle, selectedEquipment, selectedDifficulty])
+    }, [selectedMuscle, selectedEquipment, selectedDifficulty, page])
     return (
         <div className='dictionaryPage'>
             <div className='container'>
@@ -37,6 +45,8 @@ const DictionaryPage = () => {
                 <div className='dictionaryPage__content container'>
                     <div className='dictionaryPage__content__heading row'>
                         <Option
+                            noExercise={noExercise}
+                            totalExercise={totalExercise}
                             selectedMuscle={selectedMuscle}
                             setSelectedMuscle={setSelectedMuscle}
                             selectedEquipment={selectedEquipment}
@@ -49,6 +59,10 @@ const DictionaryPage = () => {
                     </div>
                     <div className='dictionaryPage__content__list row'>
                         <ListExercise
+                            limit={limit}
+                            page={page}
+                            setPage={setPage}
+                            totalPage={totalPage}
                             setGender={setGender}
                             gender={gender}
                             exercises={exercises}

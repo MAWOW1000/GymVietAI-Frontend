@@ -12,6 +12,7 @@
         padding: 8px 0px;
         margin: 0;
         text-align: center;
+        cursor: pointer;
    } 
 
    .exerciseItem__video{
@@ -52,4 +53,25 @@
                     }
         }
    }
+
+   //    
+}
+.exerciseItem__Pagination{
+    background-color: black;
+    background-image: url("https://musclewiki.com/img/bg-card-body-workouts.png");
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+
+    ul{
+        margin: 0;
+        .active{
+            a{
+                background-color: #F45F02;
+            }
+        }
+    }
 }

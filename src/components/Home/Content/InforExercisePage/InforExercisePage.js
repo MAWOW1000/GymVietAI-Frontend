@@ -11,10 +11,10 @@ const InforExercisePage = () => {
             <div className="container">
                 <div className="row gx-5">
                     <div className="col-9 exercisePage__main">
-                        <ExerciseItem inforExercise={inforExercise}  gender={gender}/>
+                        <ExerciseItem inforExercise={inforExercise} gender={gender} />
                     </div>
                     <div className="col-3 optionExerciseDiv">
-                        <Option  inforExercise={inforExercise} gender={gender}/>
+                        <Option inforExercise={inforExercise} gender={gender} />
                     </div>
                 </div>
             </div>

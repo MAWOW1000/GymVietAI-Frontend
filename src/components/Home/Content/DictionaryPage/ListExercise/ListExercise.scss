@@ -80,3 +80,23 @@
         }
     }
 }
+
+.listExerciseTable__pagination{
+    background-color: black;
+    background-image: url("https://musclewiki.com/img/bg-card-body-workouts.png");
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    margin-bottom: 36px;
+    ul{
+        margin: 0;
+        .active{
+            a{
+                background-color: #F45F02;
+            }
+        }
+    }
+}

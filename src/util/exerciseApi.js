@@ -16,7 +16,30 @@ const getExerciseByOptions = (groupMuscle, difficulty, equipment) => {
         difficulty: difficulty ? difficulty : null,
         equipment: equipment ? equipment : null
     }
-    console.log('>>check data  ', data)
+    return axios.post(URL_API, data)
+}
+
+const getExerciseByOptionsPagination = (groupMuscle, difficulty, equipment, limit, page) => {
+    const URL_API = "/options-pagination";
+    const data = {
+        groupMuscle: groupMuscle ? groupMuscle : null,
+        difficulty: difficulty ? difficulty : null,
+        equipment: equipment ? equipment : null,
+        limit: +limit,
+        page: +page
+    }
+    return axios.post(URL_API, data)
+}
+
+const getExerciseByOptionsMultiple = (groupMuscle, difficulty, equipment, limit, page) => {
+    const URL_API = "/options-multiple-choice";
+    const data = {
+        groupMuscle: groupMuscle ? groupMuscle : null,
+        difficulty: difficulty ? difficulty : null,
+        equipment: equipment ? equipment : null,
+        limit: +limit,
+        page: +page
+    }
     return axios.post(URL_API, data)
 }
 
@@ -30,4 +53,9 @@ const getGroupMuscles = () => {
     return axios.get(URL_API)
 }
 
-export { getExerciseByOptions, getEquipments, getGroupMuscles }
+const getNumberOfExercise = () => {
+    const URL_API = "/number-of-exercise";
+    return axios.get(URL_API)
+}
+
+export { getExerciseByOptions, getEquipments, getGroupMuscles, getExerciseByOptionsPagination, getExerciseByOptionsMultiple, getNumberOfExercise }

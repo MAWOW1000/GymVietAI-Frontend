@@ -4,9 +4,17 @@ import './Option.scss'
 import OptionItem from './OptionItem'
 import { FaFilter } from "react-icons/fa";
 const Option = (props) => {
-    const { selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, selectedDifficulty, setSelectedDifficulty } = props
+    const { selectedMuscle, setSelectedMuscle, selectedEquipment,
+        setSelectedEquipment, selectedDifficulty,
+        setSelectedDifficulty, totalExercise,
+        noExercise } = props
     const [optionsMuscles, setOptionsMuscles] = useState([])
     const [optionsEquipments, setOptionsEquipments] = useState([])
+    const handleClearAll = () => {
+        setSelectedDifficulty([])
+        setSelectedEquipment([])
+        setSelectedMuscle([])
+    }
     const [optionsLevels, setOptionsLevels] = useState([
         {
             "levelID": 1,
@@ -48,11 +56,14 @@ const Option = (props) => {
     return (
         <div className='optionDiv'>
             <div className='optionHeader'>
-                <span className='optionHeader__result'>Showing 0 of 1462</span>
+                <span className='optionHeader__result'>Showing {totalExercise} of {noExercise}</span>
 
                 <div className='optionHeader__filter'>
-                    <span className='optionHeader__filter--clear'>Clear all</span>
-                    <span className='optionHeader__filter--total'> <FaFilter /><span>0 Filters</span></span>
+                    <span style={{ cursor: 'pointer' }} className='optionHeader__filter--clear' onClick={handleClearAll}>Clear all</span>
+                    <span className='optionHeader__filter--total' style={{ cursor: 'default' }}>
+                        <FaFilter />
+                        <span>{selectedDifficulty.length + selectedEquipment.length + selectedMuscle.length} Filters</span>
+                    </span>
                 </div>
             </div>
             <div className='optionContent container row'>

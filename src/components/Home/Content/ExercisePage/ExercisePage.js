@@ -8,21 +8,22 @@ import ModelBackFemale from "./Modal/ModelBackFemale";
 import ModelFrontFemale from "./Modal/ModelFrontFemale";
 import Option from "./Option/Option";
 import ExerciseItem from "./ExerciseItem/ExerciseItem";
-import { getExerciseByOptions } from "../../../../util/exerciseApi"
+import { getExerciseByOptionsPagination } from "../../../../util/exerciseApi"
 
 const ExercisePage = () => {
     const [selectedMuscle, setSelectedMuscle] = useState(null);
     const [selectedEquipment, setSelectedEquipment] = useState(null);
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
     const [listExercise, setListExercise] = useState([]);
-
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage ]= useState(0)
     useEffect(() => {
         async function callApi() {
             try {
-                const result = await getExerciseByOptions(selectedMuscle, null, selectedEquipment)
+                const result = await getExerciseByOptionsPagination(selectedMuscle, null, selectedEquipment, 3, page)
                 if (result.EC === 0) {
-                    setListExercise(result.DT)
-                    console.log('>>success ', selectedMuscle, result.DT, selectedEquipment)
+                    setListExercise(result.DT.exercise)
+                    setTotalPage(result.DT["Total page"])
                 }
                 else {
                     console.log('>> fail', result.EM)
@@ -32,14 +33,19 @@ const ExercisePage = () => {
             }
         }
         callApi();
-    }, [selectedMuscle, selectedEquipment])
+    }, [selectedMuscle, selectedEquipment, page])
     return (
         <div className="exercisePage">
             <div className="container">
                 <div className="row gx-5" style={{ margin: 0 }}>
                     <div className="col-8 exercisePage__main">
                         {
-                            selectedMuscle ? <ExerciseItem gender={gender} setGender={setGender} listExercise={listExercise} />
+                            selectedMuscle ?
+                                <ExerciseItem
+                                    totalPage={totalPage} page={page}
+                                    setPage={setPage} gender={gender}
+                                    setGender={setGender} listExercise={listExercise}
+                                />
                                 :
                                 <div className="row exercisePage__model">
                                     {
@@ -70,11 +76,12 @@ const ExercisePage = () => {
                     <div className="col-4 optionExerciseDiv">
                         <Option
                             gender={gender}
-                            setGender = {setGender}
+                            setGender={setGender}
                             selectedMuscle={selectedMuscle}
                             setSelectedMuscle={setSelectedMuscle}
                             selectedEquipment={selectedEquipment}
                             setSelectedEquipment={setSelectedEquipment}
+                            setPage={setPage}
                         />
                     </div>
                 </div>

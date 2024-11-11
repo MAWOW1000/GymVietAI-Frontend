@@ -5,7 +5,7 @@ import ModelBackFemale from '../Modal/ModelBackFemale'
 import ModelFrontFemale from '../Modal/ModelFrontFemale'
 import { useEffect, useState } from 'react'
 import { getEquipments } from '../../../../../util/exerciseApi'
-const Option = ({ selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, gender, setGender }) => {
+const Option = ({ selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, gender, setGender, setPage }) => {
     const [options, setOptions] = useState([])
     useEffect(() => {
         async function callApi() {
@@ -41,19 +41,19 @@ const Option = ({ selectedMuscle, setSelectedMuscle, selectedEquipment, setSelec
                                 gender ?
                                     <>
                                         <div className="col-6 ">
-                                            <ModelFrontFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                            <ModelFrontFemale setPage={setPage} selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
                                         </div>
                                         <div className="col-6">
-                                            <ModelBackFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                            <ModelBackFemale setPage={setPage} selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
                                         </div>
                                     </>
                                     :
                                     <>
                                         <div className="col-6 ">
-                                            <ModelFront selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                            <ModelFront setPage={setPage} selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
                                         </div>
                                         <div className="col-6">
-                                            <ModelBack selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                            <ModelBack setPage={setPage} selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
                                         </div>
                                     </>
                             }

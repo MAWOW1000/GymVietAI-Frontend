@@ -1,19 +1,31 @@
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import ReactPaginate from 'react-paginate'
+
 import './ExerciseItem.scss'
 import Step from './Step'
-const ExerciseItem = ({ listExercise, gender,setGender }) => {
-    const handleClick = () => {
-        
+import { setExercise, setGender } from '../../../../../redux/slices/exerciseSlice'
+const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const handleClick = (exercise) => {
+        dispatch((setExercise(exercise)))
+        dispatch((setGender(gender)))
+        navigate('../information')
+    }
+    const handlePageClick = (e) => {
+        setPage(e.selected + 1)
     }
     return (
         <>{gender ?
             <>
                 {listExercise.map((exercise, index) => (
                     <div key={`exercise ${index}`} className='exerciseItem'>
-                        <div className='exerciseItem__header'>
+                        <div className='exerciseItem__header' onClick={() => handleClick(exercise)}>
                             <h2 style={{ marginBottom: 0 }}>{exercise.name}</h2>
                         </div>
                         <div className='exerciseItem__video row g-2' style={{ marginTop: "0px" }}>
-                            <button className={`exerciseItem__video-level ${exercise['Difficulty.name']}`} onClick={handleClick}>
+                            <button className={`exerciseItem__video-level ${exercise['Difficulty.name']}`} >
                                 {exercise['Difficulty.name']}
                             </button>
                             <video style={{ marginTop: "0px" }} src={exercise["video_female"].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
@@ -36,7 +48,7 @@ const ExerciseItem = ({ listExercise, gender,setGender }) => {
             <>
                 {listExercise.map((exercise, index) => (
                     <div key={`exercise ${index}`} className='exerciseItem'>
-                        <div className='exerciseItem__header'>
+                        <div className='exerciseItem__header' onClick={() => handleClick(exercise)}>
                             <h2 style={{ marginBottom: 0 }}>{exercise.name}</h2>
                         </div>
                         <div className='exerciseItem__video row g-2' style={{ marginTop: "0px" }}>
@@ -60,6 +72,29 @@ const ExerciseItem = ({ listExercise, gender,setGender }) => {
                 ))}
             </>
         }
+            <div className='exerciseItem__Pagination'>
+                <ReactPaginate
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={totalPage}
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                    forcePage={page-1}
+                />
+            </div>
         </>
     )
 }

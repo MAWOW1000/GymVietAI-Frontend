@@ -27,22 +27,21 @@ const ExerciseItem = ({ inforExercise, gender }) => {
                 </div>
             </div>
 
-            <div className='exerciseItem__description'>
-                {
-                    inforExercise.description ?
-                        <>
-                            <h4>Detail Description</h4>
-                            {
-                                inforExercise_description.split('\n').map((line, index) => (
-                                    <p key={index}>{line}</p>
-                                ))
-                            }
-                            <iframe className='exerciseItem__link-description' src={inforExercise_link_description}> </iframe>
-                        </>
-                        :
-                        <></>
-                }
-            </div>
+
+            {
+                inforExercise.description ?
+                    <div className='exerciseItem__description'>
+                        <h4>Detail Description</h4>
+                        {
+                            inforExercise_description.split('\n').map((line, index) => (
+                                <p key={index}>{line}</p>
+                            ))
+                        }
+                        <iframe className='exerciseItem__link-description' src={inforExercise_link_description}> </iframe>
+                    </div>
+                    :
+                    <></>
+            }
 
         </>
 
