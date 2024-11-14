@@ -3,22 +3,26 @@ import ReactPaginate from 'react-paginate';
 
 import './TableExercise.scss'
 
-function TableExercise() {
+function TableExercise(props) {
+    const { setShow } = props
     const handlePageClick = (selected) => {
         // setPage(+selected.selected + 1)
     }
+    const handleEdit = () => {
+        setShow(true)
+    }
     return (
-        <>
+        <div className="tableExercise">
             <table className="table table-borderless table-striped table-hover">
                 <thead className='theadExercise'>
                     <tr>
                         <th><input type='checkbox' /></th>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Type</th>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Step</th>
+                        <th>Group</th>
                         <th>Equipment</th>
-                        <th>Level</th>
+                        <th>Difficulty</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -32,31 +36,32 @@ function TableExercise() {
                         <td>Bands</td>
                         <td>Intermediate</td>
                         <td>
-                            <i className="tableExerciseIcon">
+                            <i className="tableExerciseIcon" onClick={handleEdit}>
                                 <FaPen />
                             </i>
-                            <i className="tableExerciseIcon">
+                            <i className="tableExerciseIcon" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <FaTrash />
                             </i>
+
+                            <div className="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content modalDelete">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLabel">Warning</h5>
+                                            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            Do you want to delete this exercise ?
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btnCancel" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" className="btn btnDelete">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                    {/* <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>2</td>
-                        <td>Banded crunch isometric hold</td>
-                        <td>The banded crunch isometric hold is an exercise targeting the abdominal muscles, particularly the rectus abdominis or "six-pack" muscles. The band adds resistance and continuous tension to this popular exercise.</td>
-                        <td>Strength</td>
-                        <td>Bands</td>
-                        <td>Intermediate</td>
-                        <td>
-                            <i className="tableExerciseIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableExerciseIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr> */}
                 </tbody >
             </table >
             <ReactPaginate
@@ -80,7 +85,7 @@ function TableExercise() {
                 renderOnZeroPageCount={null}
             // forcePage={props.page - 1}
             />
-        </>
+        </div>
     );
 }
 

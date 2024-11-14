@@ -32,6 +32,22 @@ function ModalCreateUser(props) {
             <div className='formCreateUser container' data-bs-theme="dark">
                 <div className="form-row row">
                     <div className="form-group col-6">
+                        <label htmlFor="inputEmail4">First name</label>
+                        <input type="email" className="form-control mt-1" id="inputEmail4" placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group col-6">
+                        <label htmlFor="inputPassword4">Last name</label>
+                        <input type="password" className="form-control mt-1" id="inputPassword4" placeholder="Password"
+                            value={password}
+                            onChange={(e) => { setPassword(e.target.value) }}
+                        />
+                    </div>
+                </div>
+                <div className="form-row row">
+                    <div className="form-group col-6">
                         <label htmlFor="inputEmail4">Email</label>
                         <input type="email" className="form-control mt-1" id="inputEmail4" placeholder="Email"
                             value={email}
@@ -46,38 +62,44 @@ function ModalCreateUser(props) {
                         />
                     </div>
                 </div>
-                <div className="form-row row">
-                    <div className="form-group col-6">
+                <div className="form-row row mt-1">
+
+                    <div className="form-group col-4">
+                        <label htmlFor="inputState">Date of birth</label>
+                        <input className='form-date' type='date' />
+                    </div>
+
+                    <div className="form-group col-4">
                         <label htmlFor="inputState">Role</label>
-                        <select id="inputState" className="form-control mt-1" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <select id="inputState" className="form-control mt-1 form-select formRole" value={role} onChange={(e) => setRole(e.target.value)}>
                             <option value='User' selected>User</option>
                             <option value='Admin'>Admin</option>
                         </select>
                     </div>
 
-                    <fieldset className="form-group col-6 mt-1">
-                        <div className="formRole row m-t-6">
-                            <legend className="col-form-label col-sm-2 pt-0">Gender</legend>
-                            <div className="col-sm-10">
-                                <div className="form-check mb-2 mt-2">
-                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value='Male'
-                                        checked
-                                        onClick={() => setGender('Male')}
-                                    />
-                                    <label className="form-check-label" htmlFor="gridRadios1">
-                                        Male
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                        value="Female"
-                                        onClick={() => setGender('Female')}
-                                    />
-                                    <label className="form-check-label" htmlFor="gridRadios2">
-                                        Female
-                                    </label>
-                                </div>
+                    <fieldset className="form-group col-4">
+                        <div className="formGender">
+                            <legend className="col-form-label">Gender</legend>
+
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value='Male'
+                                    checked
+                                    onClick={() => setGender('Male')}
+                                />
+                                <label className="form-check-label" htmlFor="gridRadios1">
+                                    Male
+                                </label>
                             </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                    value="Female"
+                                    onClick={() => setGender('Female')}
+                                />
+                                <label className="form-check-label" htmlFor="gridRadios2">
+                                    Female
+                                </label>
+                            </div>
+
                         </div>
                     </fieldset>
                 </div>

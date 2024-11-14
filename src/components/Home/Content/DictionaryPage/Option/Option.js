@@ -3,11 +3,12 @@ import { getGroupMuscles, getEquipments } from '../../../../../util/exerciseApi'
 import './Option.scss'
 import OptionItem from './OptionItem'
 import { FaFilter } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 const Option = (props) => {
-    const { selectedMuscle, setSelectedMuscle, selectedEquipment,
-        setSelectedEquipment, selectedDifficulty,
-        setSelectedDifficulty, totalExercise,
-        noExercise } = props
+    const { selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, selectedDifficulty,
+        setSelectedDifficulty, noExercise } = props
+
+    const totalExercise = useSelector((state) => state.exercise.totalExercise)
     const [optionsMuscles, setOptionsMuscles] = useState([])
     const [optionsEquipments, setOptionsEquipments] = useState([])
     const handleClearAll = () => {

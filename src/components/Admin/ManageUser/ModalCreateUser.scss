@@ -8,8 +8,42 @@
         color: var(--textColor);
 
         .form-group {
+            &.col-4{
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                justify-content: center;
+            }
 
-            .formRole {
+            input[type="date"] {
+                background-color: transparent;
+                color: #A9B5DD;
+                border: none;
+                border:1px solid #59658A;
+                border-radius: 5px;
+                margin-left: 15px;
+                padding: 6px 12px;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                color: rgba(0, 0, 0, 0);
+                opacity: 1;
+                display: block;
+                background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+                width: 20px;
+                height: 20px;
+                border-width: thin;
+                margin-top: 6px;
+                margin-right: 4px;
+            }
+            
+            .formGender {
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                justify-content: center;
+                width: 100px;
+
                 .form-check {
                     color: #A9B5DD;
 
@@ -20,6 +54,10 @@
                     }
                 }
 
+            }
+
+            .formRole{
+                width: 100px;
             }
 
             .form-control {

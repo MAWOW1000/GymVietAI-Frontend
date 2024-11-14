@@ -3,9 +3,13 @@ import ReactPaginate from 'react-paginate';
 
 import './TableUser.scss'
 
-function TableUser() {
+function TableUser(props) {
+    const { setShow } = props
     const handlePageClick = (selected) => {
         // setPage(+selected.selected + 1)
+    }
+    const handleEdit = () => {
+        setShow(true)
     }
     return (
         <div className="tableUsers">
@@ -13,8 +17,9 @@ function TableUser() {
                 <thead className='theadUser'>
                     <tr>
                         <th scope="col"><input type='checkbox' /></th>
-                        <th scope="col">ID</th>
+                        <th scope="col">No</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Gender</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
                         <th scope="col">Time</th>
@@ -26,131 +31,38 @@ function TableUser() {
                         <td><input type='checkbox' /></td>
                         <td>1</td>
                         <td>Dev Pham</td>
+                        <td>Male</td>
                         <td>dev@gmail.com</td>
                         <td>Admin</td>
                         <td>Dec 12,2024</td>
                         <td>
-                            <i className="tableUserIcon">
+                            <i className="tableUserIcon" onClick={handleEdit}>
                                 <FaPen />
                             </i>
-                            <i className="tableUserIcon">
+                            <i className="tableUserIcon" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <FaTrash />
                             </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>2</td>
-                        <td>John Nguyen</td>
-                        <td>johnnguyenajah@gmail.com</td>
-                        <td>User</td>
-                        <td>Sep 9,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>1</td>
-                        <td>Dev Pham</td>
-                        <td>dev@gmail.com</td>
-                        <td>Admin</td>
-                        <td>Dec 12,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>2</td>
-                        <td>John Nguyen</td>
-                        <td>johnnguyenajah@gmail.com</td>
-                        <td>User</td>
-                        <td>Sep 9,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
+
+                            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            ...
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" className="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>1</td>
-                        <td>Dev Pham</td>
-                        <td>dev@gmail.com</td>
-                        <td>Admin</td>
-                        <td>Dec 12,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>2</td>
-                        <td>John Nguyen</td>
-                        <td>johnnguyenajah@gmail.com</td>
-                        <td>User</td>
-                        <td>Sep 9,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>1</td>
-                        <td>Dev Pham</td>
-                        <td>dev@gmail.com</td>
-                        <td>Admin</td>
-                        <td>Dec 12,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type='checkbox' /></td>
-                        <td>2</td>
-                        <td>John Nguyen</td>
-                        <td>johnnguyenajah@gmail.com</td>
-                        <td>User</td>
-                        <td>Sep 9,2024</td>
-                        <td>
-                            <i className="tableUserIcon">
-                                <FaPen />
-                            </i>
-                            <i className="tableUserIcon">
-                                <FaTrash />
-                            </i>
-                        </td>
-                    </tr>
                 </tbody >
             </table >
             <ReactPaginate
