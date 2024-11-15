@@ -25,7 +25,7 @@ function Header() {
     window.addEventListener('scroll', handleScroll);
 
     const handleLogIn = () => {
-        navigator('/login')
+        window.location.href = `${process.env.REACT_APP_BACKEND_SSO_URL}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`
     }
     const handleSignUp = () => {
         navigator('/register')

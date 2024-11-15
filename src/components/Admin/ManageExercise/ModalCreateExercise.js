@@ -2,11 +2,21 @@ import './ModalCreateExercise.scss'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getEquipment, getGroupMuscle } from "../../../redux/slices/exerciseSlice";
 
 function ModalCreateExercise(props) {
-
     const { show, setShow } = props
 
+    const dispatch = useDispatch()
+    const equipments = useSelector(state => state.exercise.equipments)
+    const groupMuscles = useSelector(state => state.exercise.groupMuscles)
+    const difficulty = useSelector(state => state.exercise.difficulty)
+    useEffect(() => {
+        dispatch(getEquipment())
+        dispatch(getGroupMuscle())
+    }, [])
 
     const handleClose = () => {
         setShow(false)
@@ -61,20 +71,26 @@ function ModalCreateExercise(props) {
                 <div className="form-row row">
                     <div className="form-group col-4">
                         <label htmlFor="inputState">Equipment</label>
-                        <select id="inputState" className="form-control mt-1" >
-                            <option value='User' selected>Barbell</option>
+                        <select id="inputState" className="form-control mt-1 form-select" >
+                            {equipments.map((equipment, index) => (
+                                <option key={`equipment ${index}`} value={equipment.name}>{equipment.name}</option>
+                            ))}
                         </select>
                     </div>
                     <div className="form-group col-4">
                         <label htmlFor="inputState">Difficulty</label>
-                        <select id="inputState" className="form-control mt-1" >
-                            <option value='User' selected>Beginner</option>
+                        <select id="inputState" className="form-control mt-1 form-select" >
+                            {difficulty.map((ele, index) => (
+                                <option key={`difficulty ${index}`} value={ele}>{ele}</option>
+                            ))}
                         </select>
                     </div>
                     <div className="form-group col-4">
                         <label htmlFor="inputState">Group</label>
-                        <select id="inputState" className="form-control mt-1">
-                            <option value='User' selected>Chest</option>
+                        <select id="inputState" className="form-control mt-1 form-select">
+                            {groupMuscles.map((group, index) => (
+                                <option key={`groupMuscle ${index}`} value={group.name}>{group.name}</option>
+                            ))}
                         </select>
                     </div>
                 </div>

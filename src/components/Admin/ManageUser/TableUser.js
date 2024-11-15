@@ -43,19 +43,19 @@ function TableUser(props) {
                                 <FaTrash />
                             </i>
 
-                            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog">
-                                    <div className="modal-content">
+                                    <div className="modal-content modalDelete">
                                         <div className="modal-header">
-                                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h5 className="modal-title" id="exampleModalLabel">Warning</h5>
+                                            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div className="modal-body">
-                                            ...
+                                            Do you want to delete this user ?
                                         </div>
                                         <div className="modal-footer">
-                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" className="btn btn-primary">Save changes</button>
+                                            <button type="button" className="btn btnCancel" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" className="btn btnDelete">Delete</button>
                                         </div>
                                     </div>
                                 </div>

@@ -73,6 +73,7 @@ function ModalCreateUser(props) {
                         <label htmlFor="inputState">Role</label>
                         <select id="inputState" className="form-control mt-1 form-select formRole" value={role} onChange={(e) => setRole(e.target.value)}>
                             <option value='User' selected>User</option>
+                            <option value='User' >User Premium</option>
                             <option value='Admin'>Admin</option>
                         </select>
                     </div>
