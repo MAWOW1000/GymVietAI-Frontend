@@ -3,11 +3,9 @@ import './DictionaryPage.scss'
 import ListExercise from './ListExercise/ListExercise';
 import Option from './Option/Option';
 import { getExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseApi';
-import { useDispatch } from 'react-redux';
-import { setTotalExercise } from '../../../../redux/slices/exerciseSlice';
+
 
 const DictionaryPage = () => {
-    const dispatch = useDispatch()
     const [exercises, setExercises] = useState([])
     const [selectedMuscle, setSelectedMuscle] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState([]);
@@ -15,6 +13,7 @@ const DictionaryPage = () => {
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(0)
+    const [totalExercise, setTotalExercise] = useState(0)
     const [noExercise, setNoExercise] = useState(0)
     const limit = 30
     useEffect(() => {
@@ -25,7 +24,7 @@ const DictionaryPage = () => {
                 if (result.EC === 0 && result2.EC === 0) {
                     setExercises(result.DT.exercise)
                     setTotalPage(result.DT["Total page"])
-                    dispatch(setTotalExercise(result.DT["Total exercise"]))
+                    setTotalExercise(result.DT["Total exercise"])
                     setNoExercise(result2.DT)
                 }
                 else {
@@ -47,6 +46,7 @@ const DictionaryPage = () => {
                     <div className='dictionaryPage__content__heading row'>
                         <Option
                             noExercise={noExercise}
+                            totalExercise={totalExercise}
                             selectedMuscle={selectedMuscle}
                             setSelectedMuscle={setSelectedMuscle}
                             selectedEquipment={selectedEquipment}

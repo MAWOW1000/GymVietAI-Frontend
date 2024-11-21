@@ -23,7 +23,7 @@ function ManageUser() {
             </div>
 
             <div className="manageUserContent">
-                <TableUser setShow={setShow}/>
+                <TableUser />
             </div>
             <ModalCreateUser show={show} setShow={setShow} />
         </div>

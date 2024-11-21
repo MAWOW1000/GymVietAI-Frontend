@@ -11,10 +11,12 @@ import Home from './components/Home/Home';
 import ExercisePage from './components/Home/Content/ExercisePage/ExercisePage';
 import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryPage';
 import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
+import Workout from './components/Home/Content/Workout/Workout';
+
 function App() {
   return (
     <div className="App">
-      <Routes>
+      {/* <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />
           <Route path='login' element={<Login />} />
@@ -30,7 +32,9 @@ function App() {
           <Route path='manage-user' element={<ManageUser />} />
           <Route path='manage-exercise' element={<ManageExercise />} />
         </Route>
-      </Routes>
+      </Routes> */}
+
+        <Workout />
     </div >
   );
 }

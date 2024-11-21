@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import hero from "../../../../assets/images/hero.jpg"
 import Wrapper from "./LoginWrapper";
 import { useNavigate } from "react-router-dom";
-import { postLogin, getLoginGoogle } from "../../../../util/authenApi";
+import { postLogin } from "../../../../util/api";
 import { notification } from "antd";
 
 function Login() {
@@ -13,7 +13,7 @@ function Login() {
     const handleSignin = async () => {
         const res = await postLogin(email, password);
 
-        if (res.data.EC === 0) {
+        if (!res.message) {
             localStorage.setItem("token", res.token)
             notification.success({
                 message: "LOGIN SUCCESS",
@@ -28,21 +28,16 @@ function Login() {
             })
         }
     }
-
-    const handleLoginGoogle = async () => {
-        const res = await getLoginGoogle()
-        //window.location.href = `${process.env.REACT_APP_BACKEND_SSO_URL}?serviceURL=${process.env.REACT_APP_SERVICE_URL}`
-    }
     return (
         <Wrapper>
             <div className="login"
                 style={{ backgroundImage: `url(${hero})` }}>
 
-                <div className="loginContain">
+                <form>
                     <h1>Login</h1>
 
                     <div className="register-link">
-                        <p>You not have an <a href="">account?</a></p>
+                        <p>You not have an <Link to="/register">account?</Link></p>
                     </div>
 
                     <div className="input">
@@ -69,12 +64,12 @@ function Login() {
                         <h3>—Or Sign In With—</h3>
 
                         <div className="otherway">
-                            <button onClick={handleLoginGoogle}>Google</button>
                             <button href="">Facebook</button>
+                            <button href="">Twitter</button>
                         </div>
                     </div>
 
-                </div>
+                </form>
 
             </div>
         </Wrapper>
