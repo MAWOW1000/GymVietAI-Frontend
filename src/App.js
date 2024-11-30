@@ -12,6 +12,7 @@ import ExercisePage from './components/Home/Content/ExercisePage/ExercisePage';
 import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryPage';
 import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
 import Workout from './components/Home/Content/Workout/Workout';
+import Meal from './components/Home/Content/Meal/Meal';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         </Route>
       </Routes> */}
 
-        <Workout />
+        <Meal />
     </div >
   );
 }
