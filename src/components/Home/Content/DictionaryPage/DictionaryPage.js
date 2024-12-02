@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './DictionaryPage.scss'
 import ListExercise from './ListExercise/ListExercise';
 import Option from './Option/Option';
-import { getExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseApi';
-import { useDispatch } from 'react-redux';
+import { getExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseAxios/exerciseApi';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTotalExercise } from '../../../../redux/slices/exerciseSlice';
 
 const DictionaryPage = () => {
@@ -16,6 +16,7 @@ const DictionaryPage = () => {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(0)
     const [noExercise, setNoExercise] = useState(0)
+    const language = useSelector((state) => state.system.language)
     const limit = 30
     useEffect(() => {
         async function callApi() {
@@ -41,7 +42,7 @@ const DictionaryPage = () => {
         <div className='dictionaryPage'>
             <div className='container'>
                 <div className='dictionaryPage__heading'>
-                    <h3>Dictionary</h3>
+                    <h3>{language==="VI" ? "Từ điển" : "Dictionary"}</h3>
                 </div>
                 <div className='dictionaryPage__content container'>
                     <div className='dictionaryPage__content__heading row'>

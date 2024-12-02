@@ -4,9 +4,11 @@ import ModelFront from '../Modal/ModelFront'
 import ModelBackFemale from '../Modal/ModelBackFemale'
 import ModelFrontFemale from '../Modal/ModelFrontFemale'
 import { useEffect, useState } from 'react'
-import { getEquipments } from '../../../../../util/exerciseApi'
+import { getEquipments } from '../../../../../util/exerciseAxios/exerciseApi'
+import { useSelector } from 'react-redux';
 const Option = ({ selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, gender, setGender, setPage }) => {
     const [options, setOptions] = useState([])
+    const language = useSelector((state) => state.system.language);
     useEffect(() => {
         async function callApi() {
             try {
@@ -29,8 +31,8 @@ const Option = ({ selectedMuscle, setSelectedMuscle, selectedEquipment, setSelec
                 <label for='switch' className='optionExercise__gender'>
                     <input id="switch" type="checkbox" hidden value={gender} onChange={() => { setGender(!gender) }} />
                     <label for="switch" className="switch" />
-                    <label for="switch" className="female">Female</label>
-                    <label for="switch" className="male">Male</label>
+                    <label for="switch" className="female">{language == "VI" ? "Nữ" : "Female"}</label>
+                    <label for="switch" className="male">{language == "VI" ? "Nam" : "Male"}</label>
                 </label>
             </div>
             {

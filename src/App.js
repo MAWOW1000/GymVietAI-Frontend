@@ -11,13 +11,23 @@ import Home from './components/Home/Home';
 import ExercisePage from './components/Home/Content/ExercisePage/ExercisePage';
 import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryPage';
 import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ToastContainer } from 'react-toastify';
+
+const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
+
 function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={
+            <GoogleOAuthProvider clientId={clientId}>
+              <Login />
+            </GoogleOAuthProvider>
+          } />
           <Route path='register' element={<Register />} />
           <Route path='forgot-password' element={<Forgotpassword />} />
           <Route path='exercise' element={<ExercisePage />} />

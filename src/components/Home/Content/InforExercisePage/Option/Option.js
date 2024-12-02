@@ -9,14 +9,15 @@ import { setGender } from '../../../../../redux/slices/exerciseSlice'
 const Option = ({ inforExercise}) => {
     const dispatch = useDispatch()
     const gender = useSelector((state) => state.exercise.gender)
+    const language = useSelector((state) => state.system.language)
     return (
         <div className="optionExercise">
             <div className="optionExerciseHeader">
                 <label for='switch' className='optionExercise__gender'>
                     <input id="switch" type="checkbox" hidden checked={!gender} value={gender} onChange={() => { dispatch(setGender(!gender)) }} />
                     <label for="switch" className="switch" />
-                    <label for="switch" className="female">Female</label>
-                    <label for="switch" className="male">Male</label>
+                    <label for="switch" className="female">{language=="VI" ? "Nữ" : "Female"}</label>
+                    <label for="switch" className="male">{language=="VI" ? "Nam" : "Male"}</label>
                 </label>
             </div>
             <div className="row exercisePage__model inforExercise">

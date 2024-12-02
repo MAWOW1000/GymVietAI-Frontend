@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 
 import './ExerciseItem.scss'
@@ -8,6 +8,7 @@ import { setExercise, setGender } from '../../../../../redux/slices/exerciseSlic
 const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const language = useSelector((state) => state.system.language)
     const handleClick = (exercise) => {
         dispatch((setExercise(exercise)))
         dispatch((setGender(gender)))
@@ -26,7 +27,22 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                         </div>
                         <div className='exerciseItem__video row g-2' style={{ marginTop: "0px" }}>
                             <button className={`exerciseItem__video-level ${exercise['Difficulty.name']}`} >
-                                {exercise['Difficulty.name']}
+                                {language === 'VI' ? (
+                                    (() => {
+                                        switch (exercise['Difficulty.name']) {
+                                            case "Beginner":
+                                                return "Tập sự";
+                                            case "Intermediate":
+                                                return "Trung cấp";
+                                            case "Advanced":
+                                                return "Nâng cao";
+                                            case "Novice":
+                                                return "Người mới";
+                                            default:
+                                                return exercise['Difficulty.name'];
+                                        }
+                                    })()
+                                ) : exercise['Difficulty.name']}
                             </button>
                             <video style={{ marginTop: "0px" }} src={exercise["video_female"].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
                             </video>
@@ -35,7 +51,7 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                         </div>
                         {exercise.step ?
                             <div className='exerciseItem__step'>
-                                <Step steps={exercise.step} />
+                                <Step steps={language === 'VI' ? exercise.step_vi : exercise.step} />
                             </div>
                             :
                             <></>
@@ -53,7 +69,22 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                         </div>
                         <div className='exerciseItem__video row g-2' style={{ marginTop: "0px" }}>
                             <button className={`exerciseItem__video-level ${exercise['Difficulty.name']}`}>
-                                {exercise['Difficulty.name']}
+                                {language === 'VI' ? (
+                                    (() => {
+                                        switch (exercise['Difficulty.name']) {
+                                            case "Beginner":
+                                                return "Tập sự";
+                                            case "Intermediate":
+                                                return "Trung cấp";
+                                            case "Advanced":
+                                                return "Nâng cao";
+                                            case "Novice":
+                                                return "Người mới";
+                                            default:
+                                                return exercise['Difficulty.name'];
+                                        }
+                                    })()
+                                ) : exercise['Difficulty.name']}
                             </button>
                             <video style={{ marginTop: "0px" }} src={exercise["video_male"].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
                             </video>
@@ -62,7 +93,7 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                         </div>
                         {exercise.step ?
                             <div className='exerciseItem__step'>
-                                <Step steps={exercise.step} />
+                                <Step steps={language === 'VI' ? exercise.step_vi : exercise.step} />
                             </div>
                             :
                             <></>
@@ -78,8 +109,8 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                     pageRangeDisplayed={3}
                     marginPagesDisplayed={2}
                     pageCount={totalPage}
-                    previousLabel="Previous"
-                    nextLabel="Next"
+                    previousLabel={language === 'VI' ? "Trước" : "Previous"} 
+                    nextLabel={language === 'VI' ? "Sau" : "Next"} 
                     pageClassName="page-item"
                     pageLinkClassName="page-link"
                     previousClassName="page-item"
@@ -92,7 +123,7 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                     containerClassName="pagination"
                     activeClassName="active"
                     renderOnZeroPageCount={null}
-                    forcePage={page-1}
+                    forcePage={page - 1}
                 />
             </div>
         </>

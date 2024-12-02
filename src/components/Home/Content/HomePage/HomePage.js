@@ -16,7 +16,7 @@ function HomePage() {
         class5: require('../../../../assets/images/class5.jpg'),
         banner: require('../../../../assets/images/banner.jpg'),
     };
-
+ 
     const teamImages = {
         team1: require('../../../../assets/images/team1.jpg'),
         team2: require('../../../../assets/images/team2.jpg'),

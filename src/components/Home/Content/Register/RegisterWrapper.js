@@ -63,6 +63,7 @@ const Wrapper = styled.div`
     &::placeholder {
       color: black; /* Màu cho chữ placeholder */
     }
+   width: 100%;
   }
 
   button.commit {
@@ -78,6 +79,25 @@ const Wrapper = styled.div`
     &:hover {
       opacity: 50%;
     }
+  }                  
+
+  .divEyes {
+    position: relative;
+  }
+
+  .iconEyes {
+      position: absolute;
+      right: 22px; /* Adjust as needed */
+      top: 7px;
+      cursor: pointer;
+      color: black; /* Change color as needed */
+      font-size: 25px;
+  }
+
+  .notification {
+    color: red; /* Change color as needed */
+    margin-bottom: 20px; /* Space between notification and inputs */
+    text-align: center; /* Center the notification */
   }
 `;
 

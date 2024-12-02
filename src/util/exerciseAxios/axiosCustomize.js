@@ -2,7 +2,8 @@ import axios from "axios";
 import qs from 'qs';
 // Set config defaults when creating the instance
 const instance = axios.create({
-    baseURL: 'http://localhost:8082/api/v1/exercise'
+    baseURL: 'http://localhost:8082/api/v1/exercise',
+    withCredentials: true
 });
 
 // Alter defaults after instance has been created
@@ -11,7 +12,7 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
-
+    config.withCredentials = true;
     // config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     // if (config.data && config.headers[config.method]['Content-Type'] === 'application/x-www-form-urlencoded') {
     // config.data = qs.stringify(config.data)

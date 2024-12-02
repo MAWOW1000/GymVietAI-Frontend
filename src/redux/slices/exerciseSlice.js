@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from '../../util/axiosCustomize'
-import { getNumberOfExercise, getEquipments, getGroupMuscles } from '../../util/exerciseApi'
+import axios from '../../util/exerciseAxios/axiosCustomize'
+import { getNumberOfExercise, getEquipments, getGroupMuscles } from '../../util/exerciseAxios/exerciseApi'
 
 const initialState = {
     listExercise: {},

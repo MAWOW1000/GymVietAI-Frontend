@@ -8,7 +8,7 @@ import ModelBackFemale from "./Modal/ModelBackFemale";
 import ModelFrontFemale from "./Modal/ModelFrontFemale";
 import Option from "./Option/Option";
 import ExerciseItem from "./ExerciseItem/ExerciseItem";
-import { getExerciseByOptionsPagination } from "../../../../util/exerciseApi"
+import { getExerciseByOptionsPagination } from "../../../../util/exerciseAxios/exerciseApi"
 
 const ExercisePage = () => {
     const [selectedMuscle, setSelectedMuscle] = useState(null);

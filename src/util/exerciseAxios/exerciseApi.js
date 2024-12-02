@@ -58,4 +58,6 @@ const getNumberOfExercise = () => {
     return axios.get(URL_API)
 }
 
-export { getExerciseByOptions, getEquipments, getGroupMuscles, getExerciseByOptionsPagination, getExerciseByOptionsMultiple, getNumberOfExercise }
+export {
+    getExerciseByOptions, getEquipments, getGroupMuscles, getExerciseByOptionsPagination, getExerciseByOptionsMultiple, getNumberOfExercise,
+}
