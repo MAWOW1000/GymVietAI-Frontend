@@ -13,6 +13,7 @@ import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryP
 import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ToastContainer } from 'react-toastify';
+import WorkoutPage from './components/Home/Content/WorkoutPage/WorkoutPage';
 
 const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
 
@@ -33,6 +34,7 @@ function App() {
           <Route path='exercise' element={<ExercisePage />} />
           <Route path='information' element={<InforExercisePage />} />
           <Route path='dictionary' element={<DictionaryPage />} />
+          <Route path='workout' element={<WorkoutPage />} />
         </Route>
 
         <Route path='admin' element={<Admin />}>

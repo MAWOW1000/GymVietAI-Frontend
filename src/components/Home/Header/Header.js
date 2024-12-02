@@ -83,7 +83,7 @@ function Header() {
                     <li><NavLink to='/'>{language === 'EN' ? 'Home' : 'Trang Chủ'}</NavLink></li>
                     <li><NavLink to='/exercise'>{language === 'EN' ? 'Exercise' : 'Bài Tập'}</NavLink></li>
                     <li><NavLink to='/dictionary'>{language === 'EN' ? 'Dictionary' : 'Từ Điển'}</NavLink></li>
-                    <li><a href="#workout">{language === 'EN' ? 'Workout' : 'Lịch Tập'}</a></li>
+                    <li><NavLink to='/workout'>{language === 'EN' ? 'Workout' : 'Lịch Tập'}</NavLink></li>
                     <li><a href="#meal">{language === 'EN' ? 'Meal' : 'Lịch Ăn'}</a></li>
                 </ul>
 
