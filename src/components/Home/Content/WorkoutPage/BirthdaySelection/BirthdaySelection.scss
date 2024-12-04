@@ -1,0 +1,73 @@
+.birthday-selection {
+  text-align: center;
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .age-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    height: 18vh;
+
+    input[type="number"] {
+      width: 60px;
+      margin-right: 15px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    input[type="range"] {
+      width: 300px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #e0e0e0;
+      border-radius: 5px;
+      height: 15px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 30px;
+      height: 30px;
+      background: #1e3a8a;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+
+    button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 20px 80px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+} 

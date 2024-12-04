@@ -67,13 +67,13 @@ function Login() {
             } catch (error) {
                 console.log(error);
                 dispatch({ type: 'system/loginUser/rejected' });
-                toast.error("Login failed: " + error.message, { autoClose: 2000 });
+                toast.error("An unexpected error occurred during login. Please try again later.", { autoClose: 2000 });
             }
         },
         onError: (error) => {
             console.log('Login Failed:', error);
             dispatch({ type: 'system/loginUser/rejected' });
-            toast.error("Login Failed: " + error.message, { autoClose: 2000 });
+            toast.error("Login failed due to a network issue. Please check your connection and try again.", { autoClose: 2000 });
         },
     });
 

@@ -9,7 +9,7 @@ const qs = require('qs');
 //     return axios.post(URL_API, data)
 // }
 
-const getExerciseByOptions = (groupMuscle, difficulty, equipment) => {
+const postExerciseByOptions = (groupMuscle, difficulty, equipment) => {
     const URL_API = "/options";
     const data = {
         groupMuscle: groupMuscle ? groupMuscle : null,
@@ -19,7 +19,7 @@ const getExerciseByOptions = (groupMuscle, difficulty, equipment) => {
     return axios.post(URL_API, data)
 }
 
-const getExerciseByOptionsPagination = (groupMuscle, difficulty, equipment, limit, page) => {
+const postExerciseByOptionsPagination = (groupMuscle, difficulty, equipment, limit, page) => {
     const URL_API = "/options-pagination";
     const data = {
         groupMuscle: groupMuscle ? groupMuscle : null,
@@ -31,7 +31,7 @@ const getExerciseByOptionsPagination = (groupMuscle, difficulty, equipment, limi
     return axios.post(URL_API, data)
 }
 
-const getExerciseByOptionsMultiple = (groupMuscle, difficulty, equipment, limit, page) => {
+const postExerciseByOptionsMultiple = (groupMuscle, difficulty, equipment, limit, page) => {
     const URL_API = "/options-multiple-choice";
     const data = {
         groupMuscle: groupMuscle ? groupMuscle : null,
@@ -39,6 +39,28 @@ const getExerciseByOptionsMultiple = (groupMuscle, difficulty, equipment, limit,
         equipment: equipment ? equipment : null,
         limit: +limit,
         page: +page
+    }
+    return axios.post(URL_API, data)
+}
+
+const postCreateExercise = (Gender, Weight, Height, Age, continent, language) => {
+    // Validate inputs
+    if (!Gender || !Weight || !Height || !Age || !continent || !language) {
+        throw new Error("All fields are required");
+    }
+
+    // Capitalize Gender
+    const formattedGender = Gender.toLowerCase() === 'male' ? 'Male' : 
+                            Gender.toLowerCase() === 'female' ? 'Female' : Gender;
+
+    const URL_API = "/create-exercise";
+    const data = {
+        Gender: formattedGender,
+        Weight: +Weight,
+        Height: +Height,
+        Age: +Age,
+        continent: continent ? continent : null,
+        language: language ? language : null
     }
     return axios.post(URL_API, data)
 }
@@ -59,5 +81,7 @@ const getNumberOfExercise = () => {
 }
 
 export {
-    getExerciseByOptions, getEquipments, getGroupMuscles, getExerciseByOptionsPagination, getExerciseByOptionsMultiple, getNumberOfExercise,
+    postExerciseByOptions, getEquipments, getGroupMuscles,
+    postExerciseByOptionsPagination, postExerciseByOptionsMultiple, getNumberOfExercise,
+    postCreateExercise
 }

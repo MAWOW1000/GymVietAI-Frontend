@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './DictionaryPage.scss'
 import ListExercise from './ListExercise/ListExercise';
 import Option from './Option/Option';
-import { getExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseAxios/exerciseApi';
+import { postExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseAxios/exerciseApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalExercise } from '../../../../redux/slices/exerciseSlice';
 
@@ -21,7 +21,7 @@ const DictionaryPage = () => {
     useEffect(() => {
         async function callApi() {
             try {
-                const result = await getExerciseByOptionsMultiple(selectedMuscle, selectedDifficulty, selectedEquipment, limit, page)
+                const result = await postExerciseByOptionsMultiple(selectedMuscle, selectedDifficulty, selectedEquipment, limit, page)
                 const result2 = await getNumberOfExercise()
                 if (result.EC === 0 && result2.EC === 0) {
                     setExercises(result.DT.exercise)
@@ -42,7 +42,7 @@ const DictionaryPage = () => {
         <div className='dictionaryPage'>
             <div className='container'>
                 <div className='dictionaryPage__heading'>
-                    <h3>{language==="VI" ? "Từ điển" : "Dictionary"}</h3>
+                    <h3>{language === "VI" ? "Từ điển" : "Dictionary"}</h3>
                 </div>
                 <div className='dictionaryPage__content container'>
                     <div className='dictionaryPage__content__heading row'>

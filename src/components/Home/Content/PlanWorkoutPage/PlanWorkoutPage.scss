@@ -1,0 +1,21 @@
+.plan-workout-page {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f4f8;
+    min-height: 100vh;
+
+    h1 {
+        font-size: 32px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 20px;
+        color: #333;
+    }
+
+    .plan-card-container {
+        margin-bottom: 30px;
+    }
+}

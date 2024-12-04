@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import './WeightHeightSelection.scss';
 
-const WeightHeightSelection = () => {
-    const [weightUnit, setWeightUnit] = useState('kg');
-    const [heightUnit, setHeightUnit] = useState('cm');
-    const [weight, setWeight] = useState(88);
-    const [height, setHeight] = useState(178);
-
+const WeightHeightSelection = ({ weight, height, weightUnit, heightUnit, setWeight, setHeight, setWeightUnit, setHeightUnit, onGoBack, onContinue }) => {
     const convertWeight = (value, unit) => {
-        return unit === 'kg' ? value * 2.20462 : value / 2.20462;
+        return unit === 'kg' ? (value / 2.205).toFixed(0) : (value * 2.205).toFixed(0);
     };
 
     const convertHeight = (value, unit) => {
-        return unit === 'cm' ? value / 30.48 : value * 30.48;
+        return unit === 'cm' ? (value * 30.48).toFixed(2) : (value / 30.48).toFixed(2);
     };
 
     const handleWeightUnitToggle = () => {
@@ -22,7 +17,7 @@ const WeightHeightSelection = () => {
     };
 
     const handleHeightUnitChange = () => {
-        const newUnit = heightUnit === 'cm' ? 'feet' : 'cm';
+        const newUnit = heightUnit === 'cm' ? 'ft' : 'cm';
         setHeightUnit(newUnit);
         setHeight(convertHeight(height, newUnit));
     };
@@ -52,10 +47,10 @@ const WeightHeightSelection = () => {
                         cm
                     </button>
                     <button
-                        className={`height ${heightUnit === 'feet' ? 'active' : ''}`}
+                        className={`height ${heightUnit === 'ft' ? 'active' : ''}`}
                         onClick={handleHeightUnitChange}
                     >
-                        feet
+                        ft
                     </button>
                 </div>
             </div>
@@ -67,8 +62,11 @@ const WeightHeightSelection = () => {
                     <div className="measurement-value">
                         <input
                             type="text"
-                            value={height.toFixed(2)}
-                            onChange={(e) => setHeight(parseFloat(e.target.value))}
+                            value={height}
+                            onChange={(e) => {
+                                const value = parseFloat(e.target.value);
+                                setHeight(isNaN(value) ? '' : value);
+                            }}
                         />
                         <div className="unit">{heightUnit}</div>
                     </div>
@@ -78,12 +76,19 @@ const WeightHeightSelection = () => {
                     <div className="measurement-value">
                         <input
                             type="text"
-                            value={weight.toFixed(2)}
-                            onChange={(e) => setWeight(parseFloat(e.target.value))}
+                            value={weight}
+                            onChange={(e) => {
+                                const value = parseFloat(e.target.value);
+                                setWeight(isNaN(value) ? '' : value);
+                            }}
                         />
                         <div className="unit">{weightUnit}</div>
                     </div>
                 </div>
+            </div>
+            <div className="navigation-buttons">
+                <button className="go-back" onClick={onGoBack}>Go Back</button>
+                <button className="continue" onClick={onContinue}>Continue</button>
             </div>
         </div>
     );

@@ -8,7 +8,7 @@ import ModelBackFemale from "./Modal/ModelBackFemale";
 import ModelFrontFemale from "./Modal/ModelFrontFemale";
 import Option from "./Option/Option";
 import ExerciseItem from "./ExerciseItem/ExerciseItem";
-import { getExerciseByOptionsPagination } from "../../../../util/exerciseAxios/exerciseApi"
+import { postExerciseByOptionsPagination } from "../../../../util/exerciseAxios/exerciseApi"
 
 const ExercisePage = () => {
     const [selectedMuscle, setSelectedMuscle] = useState(null);
@@ -20,7 +20,7 @@ const ExercisePage = () => {
     useEffect(() => {
         async function callApi() {
             try {
-                const result = await getExerciseByOptionsPagination(selectedMuscle, null, selectedEquipment, 3, page)
+                const result = await postExerciseByOptionsPagination(selectedMuscle, null, selectedEquipment, 3, page)
                 if (result.EC === 0) {
                     setListExercise(result.DT.exercise)
                     setTotalPage(result.DT["Total page"])

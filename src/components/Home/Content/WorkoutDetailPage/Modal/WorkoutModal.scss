@@ -1,0 +1,24 @@
+.content-main__modal {
+    .exercisePage__model {
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        background-color: #FFFFFF;
+        padding: 20px;
+        height: fit-content;
+
+        .model-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .body-map__muscle {
+            fill: rgb(211,211,211);
+            pointer-events: none;
+
+            &.active {
+                fill: rgb(244, 95, 2);
+            }
+        }
+    }
+} 
