@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './WorkoutDetailPage.scss';
 import DescriptionPlan from './DescriptionPlan/DescriptionPlan';
 import DetailPlan from './DetailPlan/DetailPlan';
-import WorkoutModal from './Modal/WorkoutModal';
+import WorkoutModal from './WorkoutModal/WorkoutModal';
 
 const WorkoutDetailPage = () => {
     const location = useLocation();
