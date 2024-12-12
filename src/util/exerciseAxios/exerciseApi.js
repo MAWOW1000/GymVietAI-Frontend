@@ -43,15 +43,15 @@ const postExerciseByOptionsMultiple = (groupMuscle, difficulty, equipment, limit
     return axios.post(URL_API, data)
 }
 
-const postCreateExercise = (Gender, Weight, Height, Age, continent, language) => {
+const postCreateExercise = (Gender, Weight, Height, Age, continent) => {
     // Validate inputs
-    if (!Gender || !Weight || !Height || !Age || !continent || !language) {
+    if (!Gender || !Weight || !Height || !Age || !continent) {
         throw new Error("All fields are required");
     }
 
     // Capitalize Gender
-    const formattedGender = Gender.toLowerCase() === 'male' ? 'Male' : 
-                            Gender.toLowerCase() === 'female' ? 'Female' : Gender;
+    const formattedGender = Gender.toLowerCase() === 'male' ? 'Male' :
+        Gender.toLowerCase() === 'female' ? 'Female' : Gender;
 
     const URL_API = "/create-exercise";
     const data = {
@@ -60,7 +60,6 @@ const postCreateExercise = (Gender, Weight, Height, Age, continent, language) =>
         Height: +Height,
         Age: +Age,
         continent: continent ? continent : null,
-        language: language ? language : null
     }
     return axios.post(URL_API, data)
 }

@@ -1,4 +1,26 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+`;
 
 const Wrapper = styled.div`
 
@@ -472,26 +494,31 @@ a:hover {
         overflow: hidden;
         max-width: 1200px;
         margin: 20px auto;
+        transition: transform 0.3s ease-in-out;
     }
 
     .slides {
         display: flex;
-        transition: transform 1s ease-in-out;
+        transition: transform 0.5s ease-in-out;
+        padding-left: 20px;
     }
 
     .slide {
-        flex: 0 0 360px; /* Đặt chiều rộng của mỗi slide */
-        margin-right: 40px; /* Khoảng cách giữa các slide */
+        flex: 0 0 360px;
+        margin-right: 40px;
+        transition: transform 0.3s ease-in-out;
     }
 
     .slide img {
-        width: 100%; 
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .slide:hover {
         cursor: pointer;
-        transform: scale(1.05); /* Phóng to slide khi hover */
-        transition: transform 0.3s; 
+        transform: scale(1.05);
+        transition: transform 0.3s;
     }
 }
 
@@ -542,6 +569,36 @@ a:hover {
                 margin: 0 0 15px 0;
             }
         }
+    }
+}
+
+section {
+    animation: ${slideIn} 1s ease-in-out forwards; /* Add animation */
+    animation-delay: ${(props) => props.delay}s; /* Add delay */
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    
+    &:nth-child(1) {
+        animation-delay: 0s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.6s;
+    }
+    &:nth-child(5) {
+        animation-delay: 0.8s;
+    }
+    &:nth-child(6) {
+        animation-delay: 1s;
+    }
+    &:nth-child(7) {
+        animation-delay: 1.2s;
     }
 }
 

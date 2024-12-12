@@ -16,7 +16,7 @@ const ExercisePage = () => {
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
     const [listExercise, setListExercise] = useState([]);
     const [page, setPage] = useState(1)
-    const [totalPage, setTotalPage ]= useState(0)
+    const [totalPage, setTotalPage] = useState(0)
     useEffect(() => {
         async function callApi() {
             try {

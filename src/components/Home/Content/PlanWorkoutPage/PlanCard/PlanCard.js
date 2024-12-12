@@ -2,21 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PlanCard.scss';
 
-const PlanCard = ({ badge, title, image, workouts, description,plan }) => {
+const PlanCard = ({ badge, title, image, workouts, description, workoutPlan }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/workout-detail', {
-            state: {
-                workout: {
-                    title,
-                    badge,
-                    workouts,
-                    description,
-                    plan
-                }
-            }
-        });
+        navigate('/workout-detail', { state: { workout: workoutPlan} });
     };
 
     return (
@@ -34,9 +24,9 @@ const PlanCard = ({ badge, title, image, workouts, description,plan }) => {
                 <div className="plan-card__description">
                     {Array.isArray(description) 
                         ? description.map((text, index) => (
-                            <p key={index} className="plan-card__description-item">{text}</p>
+                            <p key={index} className="plan-card__description-item">{text.description}</p>
                         ))
-                        : <p className="plan-card__description-item">{description}</p>
+                        : <p className="plan-card__description-item">{description[0].description}</p>
                     }
                 </div>
             </div>

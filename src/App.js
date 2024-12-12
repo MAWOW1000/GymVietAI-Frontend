@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import WorkoutPage from './components/Home/Content/WorkoutPage/WorkoutPage';
 import PlanWorkoutPage from './components/Home/Content/PlanWorkoutPage/PlanWorkoutPage';
 import WorkoutDetailPage from './components/Home/Content/WorkoutDetailPage/WorkoutDetailPage';
+import NutritionPage from './components/Home/Content/NutritionPage/NutritionPage';
 
 const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
 
@@ -38,7 +39,8 @@ function App() {
           <Route path='dictionary' element={<DictionaryPage />} />
           <Route path='workout' element={<WorkoutPage />} />
           <Route path='planworkout' element={<PlanWorkoutPage />} />
-          <Route path="/workout-detail" element={<WorkoutDetailPage />} />
+          <Route path="workout-detail" element={<WorkoutDetailPage />} />
+          <Route path="nutrition" element={<NutritionPage />} />
         </Route>
 
         <Route path='admin' element={<Admin />}>

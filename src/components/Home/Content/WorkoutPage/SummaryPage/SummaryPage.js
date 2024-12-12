@@ -30,8 +30,7 @@ const SummaryPage = ({
                 formattedWeight,
                 formattedHeight,
                 age,
-                selectedContinent,
-                'en'
+                selectedContinent
             );
             console.log('Exercise created:', response);
 

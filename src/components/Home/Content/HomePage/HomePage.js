@@ -27,10 +27,14 @@ function HomePage() {
     };
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [teamImagesKeys] = useState(Object.keys(teamImages));
 
     // Hàm để chuyển đến hình ảnh tiếp theo
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 3 >= Object.keys(teamImages).length ? 0 : prevIndex + 1));
+        setCurrentIndex((prevIndex) => {
+            const newIndex = (prevIndex + 1) % teamImagesKeys.length;
+            return newIndex;
+        });
     };
 
     // Sử dụng useEffect để tự động chuyển đổi hình ảnh
@@ -39,7 +43,7 @@ function HomePage() {
 
         // Xóa bộ đếm thời gian khi component unmount
         return () => clearInterval(timer);
-    }, []);
+    }, [teamImagesKeys.length]); // Thêm teamImagesKeys.length vào mảng phụ thuộc
 
     return (
         <Wrapper>
@@ -236,13 +240,20 @@ function HomePage() {
                         <a href="">Appointment</a>
                     </div>
                     <div className="slider">
-                        <div className="slides" style={{ transform: `translateX(-${currentIndex * (360 + 10)}px)` }}> {/* Điều chỉnh translateX để chuyển slide */}
-                            {Object.values(teamImages).map((src, index) => (
+                        <div className="slides" style={{ transform: `translateX(-${currentIndex * 370}px)` }}> {/* Điều chỉnh translateX để chuyển slide */}
+                            {teamImagesKeys.map((key, index) => (
                                 <div className="slide" key={index}>
                                     <img
-                                        src={src}
+                                        src={teamImages[key]}
                                         alt={`Team member ${index + 1}`}
                                         onError={(e) => { e.target.src = "defaultImage.jpg"; }}
+                                        style={{ transition: 'transform 0.3s ease-in-out' }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.transform = 'scale(1.1)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.transform = 'scale(1)';
+                                        }}
                                     />
                                 </div>
                             ))}

@@ -1,0 +1,67 @@
+.nutrition-page {
+    background-color: #1e272e;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: sans-serif;
+    width: fit-content;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .diet-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+  
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #354048;
+      }
+  
+      th {
+        font-weight: bold;
+      }
+  
+          tr:nth-child(even) {
+               background-color: #2c3a41;
+          }
+  
+  
+  
+    }
+  
+    .nutrition-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+  
+      .nutrition-item {
+        display: flex;
+        align-items: center;
+  
+          img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+  
+              }
+  
+  
+  
+  
+        .value {
+             font-weight: bold;
+             margin-left: 5px;  // slight improvement: adding a little spacing. 
+           }
+  
+  
+  
+  
+  
+      }
+    }
+  }
