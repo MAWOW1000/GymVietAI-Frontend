@@ -38,8 +38,11 @@ const WorkoutDetailPage = () => {
                             </div>
                         </div>
 
-                        <div className="content-main__modal col-4" style={{padding: '0px'}}>
-                            <WorkoutModal />
+                        <div className="content-main__modal col-4" style={{ padding: '0px' }}>
+                            <WorkoutModal
+                                workoutAllDays={workoutPlan.WorkoutDays}
+                                currentSlide={currentSlide}
+                            />
                         </div>
                     </div>
                 </div>

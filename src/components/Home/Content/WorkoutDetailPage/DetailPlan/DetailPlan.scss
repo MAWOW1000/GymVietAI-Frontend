@@ -59,7 +59,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      text-align: center;
 
       .exercise-item {
         background: #fff;
@@ -85,6 +84,11 @@
             box-shadow: 0 16px 32px rgba(199, 199, 199, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
+        }
+
+        &.rest {
+          position: relative;
+          left: 110%;
         }
 
         &__info {

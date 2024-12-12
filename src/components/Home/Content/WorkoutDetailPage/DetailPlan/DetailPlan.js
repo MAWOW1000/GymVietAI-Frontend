@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import "./DetailPlan.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setExercise, setGender } from "../../../../../redux/slices/exerciseSlice";
+import { useNavigate } from "react-router-dom";
 
 const DetailPlan = ({ workoutAllDays, currentExercise }) => {
+  const dispatch = useDispatch();
+  const gender = useSelector((state) => state.exercise.gender);
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleExercises, setVisibleExercises] = useState([]);
   const exercisesPerView = window.innerWidth <= 768 ? 1 : 3;
@@ -29,13 +35,22 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
     );
   };
 
+  const handleViewDetail = (exercise) => {
+    if (exercise?.Exercise.name === "Rest") return;
+    else {
+      dispatch(setExercise(exercise.Exercise));
+      dispatch(setGender(gender));
+      navigate('/information');
+    }
+  }
+
   return (
     <div className="detail-plan">
       <div className="detail-plan__header">
         <h2 className="detail-plan__title">
           <span className="highlight">{exercises.length}</span> EXERCISES IN THIS WORKOUT
         </h2>
-        <span className="detail-plan__showing">Showing {currentSlide + 1} to {currentSlide + visibleExercises.length} of {exercises.length}</span>
+        <span className="detail-plan__showing">Showing {currentSlide * exercisesPerView + 1} to {Math.min((currentSlide + 1) * exercisesPerView, exercises.length)} of {exercises.length}</span>
       </div>
 
       <div className="detail-plan__content">
@@ -51,7 +66,8 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
           {exercises.map((exercise, index) => (
             <div
               key={index}
-              className={`exercise-item ${visibleExercises.includes(exercise) ? 'active' : ''}`}
+              className={`exercise-item ${visibleExercises.includes(exercise) ? 'active' : ''} ${exercise?.Exercise.name === "Rest" ? 'rest' : ''}`}
+              onClick={() => handleViewDetail(exercise)}
             >
               <div className="exercise-item__image-wrapper">
                 <video
@@ -59,7 +75,7 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
                   muted
                   loop
                   playsInline
-                  src={exercise.Exercise.video_male?.split(',')[0].trim()}
+                  src={gender ? exercise.Exercise.video_female?.split(',')[0].trim() : exercise.Exercise.video_male?.split(',')[0].trim()}
                   alt={exercise.Exercise.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -68,7 +84,13 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
               <div className="exercise-item__info">
                 <span className="exercise-name">{exercise?.Exercise.name}</span>
                 <div className="exercise-tags">
-                  {exercise?.Exercise.name === "Rest" ? <></> :
+                  {exercise?.Exercise.name === "Rest" ?
+                    <>
+                      <span className="tag tag--reps">Light activity or rest</span>
+                      <span className="tag tag--muscle">Recover for next workout</span>
+                      <span className="tag tag--level">All levels</span>
+                    </>
+                    :
                     <>
                       <span className="tag tag--reps">{exercise?.reps}</span>
                       <span className="tag tag--muscle">{exercise?.Exercise.GroupMuscle.name}</span>

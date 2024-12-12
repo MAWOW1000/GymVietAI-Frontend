@@ -55,7 +55,7 @@ const SummaryPage = ({
             <p>Continent: <span>{selectedContinent}</span></p>
             <p>Age: <span>{age}</span></p>
             <p>Weight: <span>{weight.toFixed(0)}</span> <span>{weightUnit}</span></p>
-            <p>Height: <span>{(height / 100).toFixed(2)}</span> <span>{heightUnit}</span></p>
+            <p>Height: <span>{height.toFixed(0)}</span> <span>{heightUnit}</span></p>
             <button className="go-back" onClick={onGoBack}>Go Back</button>
             <button className="generative-button" onClick={handleGenerativeClick}>Generative</button>
         </div>

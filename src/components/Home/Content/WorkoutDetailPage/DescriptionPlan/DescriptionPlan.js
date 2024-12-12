@@ -1,6 +1,6 @@
 import "./DescriptionPlan.scss";
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaDumbbell, FaClock } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaDumbbell, FaClock, FaAllergies } from 'react-icons/fa';
 
 const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
 
@@ -43,6 +43,13 @@ const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
         };
     };
 
+    const handleWorkout = () => {
+        if (currentWorkout.Exercise.name === 'Rest') return
+        else {
+            alert('Start workout');
+        }
+    }
+
     const { totalExercises, estimatedTime } = getWorkoutStats(currentWorkout.WorkoutExercises);
 
     return (
@@ -80,7 +87,7 @@ const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
                                 </div>
                             ))}
                         </div>
-                        <button className="start-workout-button">
+                        <button className="start-workout-button" onClick={() => handleWorkout()}>
                             START WORKOUT
                         </button>
                     </div>
