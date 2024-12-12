@@ -61,16 +61,20 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
                   playsInline
                   src={exercise.Exercise.video_male?.split(',')[0].trim()}
                   alt={exercise.Exercise.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover'}}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
 
               </div>
               <div className="exercise-item__info">
                 <span className="exercise-name">{exercise?.Exercise.name}</span>
                 <div className="exercise-tags">
-                  <span className="tag tag--reps">{exercise?.reps}</span>
-                  <span className="tag tag--muscle">{exercise?.Exercise.GroupMuscle.name}</span>
-                  <span className="tag tag--level">{exercise?.Exercise.Difficulty.name}</span>
+                  {exercise?.Exercise.name === "Rest" ? <></> :
+                    <>
+                      <span className="tag tag--reps">{exercise?.reps}</span>
+                      <span className="tag tag--muscle">{exercise?.Exercise.GroupMuscle.name}</span>
+                      <span className="tag tag--level">{exercise?.Exercise.Difficulty.name}</span>
+                    </>
+                  }
                 </div>
               </div>
             </div>

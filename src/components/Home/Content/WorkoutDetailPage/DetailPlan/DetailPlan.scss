@@ -16,6 +16,18 @@
     transform: scale(1);
   }
 }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .detail-plan {
   background: #fff;
   border-radius: 16px;
@@ -47,31 +59,32 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      text-align: center;
 
       .exercise-item {
         background: #fff;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.3s ease;
-        pointer-events: none;
         display: none;
-        transition: fadeAndBounce 0.5s ease;
-
-        &:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 12px 24px rgba(67, 97, 238, 0.12);
-        }
+        transform: translateX(100px);
+        transition: all 0.5s ease-in-out;
 
         &.active {
           opacity: 1;
-          transform: translateY(0);
+          transform: translateX(0);
           display: flex;
           flex-direction: column;
           pointer-events: auto;
+          box-shadow: 0 12px 24px #c7c7c7;
+          cursor: pointer;
+          animation: slideIn 0.5s ease-in-out;
+          
+          &:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 16px 32px rgba(199, 199, 199, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
         }
 
         &__info {
@@ -127,7 +140,6 @@
       position: absolute;
       color: white;
       top: 50%;
-      transform: translateY(-50%);
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -140,7 +152,7 @@
       justify-content: center;
       transition: all 0.2s ease;
       z-index: 1;
-      top: 50%;
+      top: 55%;
 
       &--prev {
         left: 20px;
@@ -149,13 +161,16 @@
         right: 20px;
       }
 
-      &:hover {
+      &:not([disabled]):hover {
         background: #4361ee;
         color: #fff;
+        transform: scale(1.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
       }
 
-      &:disabled {
-        opacity: 0.8;
+      &[disabled] {
+        opacity: 0.5;
         cursor: not-allowed;
       }
     }
@@ -165,7 +180,7 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    padding: 16px 0;
+    padding: 24px 0;
     .indicator {
       width: 14px;
       height: 14px;
