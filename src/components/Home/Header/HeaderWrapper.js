@@ -56,6 +56,11 @@ const Wrapper = styled.header`
     color: #f36100;
   }
 
+  .nav-links a.active {
+    color: #f36100; /* Màu nổi bật khi active */
+    /* border-bottom: 2px solid #f36100; */
+  }
+
   .social-icons {
     display: flex;
     gap: 15px;

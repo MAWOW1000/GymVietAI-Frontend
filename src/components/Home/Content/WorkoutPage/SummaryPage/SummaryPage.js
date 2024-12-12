@@ -51,11 +51,11 @@ const SummaryPage = ({
     return (
         <div className="summary-page">
             <h2>Summary</h2>
-            <p>Gender: {selectedGender}</p>
-            <p>Continent: {selectedContinent}</p>
-            <p>Age: {age}</p>
-            <p>Weight: {weight.toFixed(0)} {weightUnit}</p>
-            <p>Height: {(height / 100).toFixed(2)} {heightUnit}</p>
+            <p>Gender: <span>{selectedGender}</span></p>
+            <p>Continent: <span>{selectedContinent}</span></p>
+            <p>Age: <span>{age}</span></p>
+            <p>Weight: <span>{weight.toFixed(0)}</span> <span>{weightUnit}</span></p>
+            <p>Height: <span>{(height / 100).toFixed(2)}</span> <span>{heightUnit}</span></p>
             <button className="go-back" onClick={onGoBack}>Go Back</button>
             <button className="generative-button" onClick={handleGenerativeClick}>Generative</button>
         </div>

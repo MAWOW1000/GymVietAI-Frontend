@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     .bg {
         font-family: "Muli", sans-serif;
         flex: 1; /* Đảm bảo phần này chiếm toàn bộ không gian có sẵn */
-        height: 1040px; /* Đặt chiều cao cho phần */
+        height: 960px; /* Đặt chiều cao cho phần */
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

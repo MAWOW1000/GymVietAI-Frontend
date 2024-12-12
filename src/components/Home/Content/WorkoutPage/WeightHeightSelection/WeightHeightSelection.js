@@ -24,6 +24,7 @@ const WeightHeightSelection = ({ weight, height, weightUnit, heightUnit, setWeig
 
     return (
         <div className="weight-height-selection">
+            <h2>Input Some Parameter</h2>
             <div className="unit-toggle">
                 <div className="weight-toggle">
                     <button
