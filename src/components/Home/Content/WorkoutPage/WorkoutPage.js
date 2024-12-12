@@ -59,7 +59,7 @@ const WorkoutPage = () => {
                 </div>
             </div>
 
-            <h1 className="title">LETS GET STARTED</h1>
+            {/* <h1 className="title">LETS GET STARTED</h1> */}
 
             {activeStep === 0 && (
                 <GenderSelection selectedGender={selectedGender} onGenderClick={handleGenderClick} />

@@ -8,7 +8,7 @@ const BirthdaySelection = ({ age, setAge, onGoBack, onContinue }) => {
 
     return (
         <div className="birthday-selection">
-            <h2>Age</h2>
+            <h2>How Old Are You?</h2>
             <div className="age-slider">
                 <input
                     type="number"

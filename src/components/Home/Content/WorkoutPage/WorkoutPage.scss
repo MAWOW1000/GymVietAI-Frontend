@@ -30,7 +30,7 @@
             z-index: 1;
             
             &.active {
-            background-color: #2c3e50;
+            background-color: #20409A;
             transform: scale(1.1);
             }
     
@@ -44,7 +44,7 @@
             position: absolute;
             top: 50%;
             left: 99%;
-            width: 11vw;
+            width: 12vw;
             height: 2vh;
             background-color: #d3d3d3;
             transform: translateY(-50%);
@@ -53,7 +53,7 @@
             }
     
             &.activeProgress:not(:last-child)::after {
-            background-color: #2c3e50;
+            background-color: #20409A;
             }
         }
         }
@@ -61,7 +61,7 @@
 
   .title {
     font-size: 28px;
-    color: #2c3e50;
+    color: #20409A;
     margin: 50px 0;
   }
 }
