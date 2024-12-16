@@ -59,16 +59,16 @@ const Wrapper = styled.div`
     border-radius: 20px;
     border: 1px solid #ccc;
     font-size: 16px;
-    color: black; /* Chữ không bị làm mờ */
+    color: #1A4789; /* Chữ không bị làm mờ */
     &::placeholder {
-      color: black; /* Màu cho chữ placeholder */
+      color: #1A4789; /* Màu cho chữ placeholder */
     }
    width: 100%;
   }
 
   button.commit {
     background-color: #fbceb5;
-    color: black;
+    color: #1A4789;
     padding: 17px;
     font-size: 16px;
     border: none;
@@ -90,7 +90,7 @@ const Wrapper = styled.div`
       right: 22px; /* Adjust as needed */
       top: 7px;
       cursor: pointer;
-      color: black; /* Change color as needed */
+      color: #1A4789; /* Change color as needed */
       font-size: 25px;
   }
 

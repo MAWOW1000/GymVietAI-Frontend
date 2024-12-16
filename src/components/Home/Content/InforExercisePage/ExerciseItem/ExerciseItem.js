@@ -11,6 +11,7 @@ const ExerciseItem = ({ inforExercise, gender }) => {
 
     inforExercise_description = inforExercise_description ? inforExercise_description.replace(/\*n/g, '*\n').replace(/\.n/g, '.\n').replace(/\)n/g, ')\n\n') : ''
     inforExercise_link_description = inforExercise_link_description.replace(/\?v=([^&]+).*/, '/$1');
+    let difficultyName = inforExercise['Difficulty.name'] || inforExercise.Difficulty.name;
     return (
         <>
             <div className='exerciseItem'>
@@ -18,10 +19,10 @@ const ExerciseItem = ({ inforExercise, gender }) => {
                     <h2 style={{ marginBottom: 0 }}>{inforExercise.name}</h2>
                 </div>
                 <div className='exerciseItem__video row g-2' style={{ marginTop: "0px" }}>
-                    <button className={`exerciseItem__video-level ${inforExercise['Difficulty.name']}`}>
+                    <button className={`exerciseItem__video-level ${difficultyName}`}>
                         {language === 'VI' ? (
                             (() => {
-                                switch (inforExercise['Difficulty.name']) {
+                                switch (difficultyName) {
                                     case "Beginner":
                                         return "Tập sự";
                                     case "Intermediate":
@@ -31,10 +32,10 @@ const ExerciseItem = ({ inforExercise, gender }) => {
                                     case "Novice":
                                         return "Người mới";
                                     default:
-                                        return inforExercise['Difficulty.name'];
+                                        return difficultyName;
                                 }
                             })()
-                        ) : inforExercise['Difficulty.name']}
+                        ) : difficultyName}
                     </button>
                     <video style={{ marginTop: "0px" }} src={inforExercise[typeVideo].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
                     </video>

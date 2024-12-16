@@ -28,54 +28,27 @@ export const exerciseSlice = createSlice({
     name: 'exercises',
     initialState,
     reducers: {
-        setExercise: (state, action) => ({
-            ...state,
-            listExercise: action.payload
-        }),
-        setGender: (state, action) => ({
-            ...state,
-            gender: action.payload
-        }),
-        setTotalExercise: (state, action) => ({
-            ...state,
-            totalExercise: action.payload
-        }),
+        setExercise: (state, action) => {
+            state.listExercise = action.payload
+        },
+        setGender: (state, action) => {
+            state.gender = action.payload
+        },
+        setTotalExercise: (state, action) => {
+            state.totalExercise = action.payload
+        },
     },
     extraReducers: (builder) => {
-        builder.addCase(getNoExercise.pending, (state, action) => ({
-            ...state,
-        }))
-        builder.addCase(getNoExercise.fulfilled, (state, action) => ({
-            ...state,
-            totalExercise: action.payload
-        }))
-        builder.addCase(getNoExercise.rejected, (state, action) => ({
-            ...state
-        }))
-
-        // get Equipment
-        builder.addCase(getEquipment.pending, (state, action) => ({
-            ...state,
-        }))
-        builder.addCase(getEquipment.fulfilled, (state, action) => ({
-            ...state,
-            equipments: action.payload
-        }))
-        builder.addCase(getEquipment.rejected, (state, action) => ({
-            ...state
-        }))
-
-        // get Group Muscle
-        builder.addCase(getGroupMuscle.pending, (state, action) => ({
-            ...state,
-        }))
-        builder.addCase(getGroupMuscle.fulfilled, (state, action) => ({
-            ...state,
-            groupMuscles: action.payload
-        }))
-        builder.addCase(getGroupMuscle.rejected, (state, action) => ({
-            ...state
-        }))
+        builder
+            .addCase(getNoExercise.fulfilled, (state, action) => {
+                state.totalExercise = action.payload
+            })
+            .addCase(getEquipment.fulfilled, (state, action) => {
+                state.equipments = action.payload
+            })
+            .addCase(getGroupMuscle.fulfilled, (state, action) => {
+                state.groupMuscles = action.payload
+            })
     }
 })
 

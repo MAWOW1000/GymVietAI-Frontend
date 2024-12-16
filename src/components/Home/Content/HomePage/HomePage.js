@@ -50,21 +50,21 @@ function HomePage() {
         <Wrapper>
             {/* <div className="bg" style={{ backgroundImage: `url(${images.hero})` }}> */}
             <div className="bg">
-            <video
-                src={homepageVideo}
-                autoPlay
-                loop
-                muted
-                style={{
-                    width: "100%",
-                    // height: "100%",
-                    objectFit: "cover",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    zIndex: -1,
-                }}
-            ></video>
+                <video
+                    src={homepageVideo}
+                    autoPlay
+                    loop
+                    muted
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        // position: "absolute",
+                        // top: 0,
+                        // left: 0,
+                        // zIndex: -1,
+                    }}
+                ></video>
                 <div className="about">
                     <span>Shape your body</span>
                     <h1>be <strong>strong</strong><br /> training hard</h1>
@@ -109,7 +109,7 @@ function HomePage() {
                                 <IoIosFitness />
                             </span>
                             <h4>All-in-one Convenience</h4> {/*Tiện ích đa năng */}
-                            <p>Enjoy QR payments, workout management, and result tracking</p> {/*Thanh toán QR, quản lý bài tập và theo dõi kết quả */} 
+                            <p>Enjoy QR payments, workout management, and result tracking</p> {/*Thanh toán QR, quản lý bài tập và theo dõi kết quả */}
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ function HomePage() {
                             <img src={images.class1} alt="" />
 
                             <div className="citext">
-                                <span>SMART</span> 
+                                <span>SMART</span>
                                 <h5>Generate Workout Plan</h5> {/*Tự tạo lịch tập */}
                                 <a href=""><FaChevronRight /></a>
                             </div>

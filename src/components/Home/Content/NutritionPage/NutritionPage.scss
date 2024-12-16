@@ -1,67 +1,164 @@
 .nutrition-page {
-    background-color: #1e272e;
-    color: white;
-    padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .card-title {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+  }
+
+  .form-control {
     border-radius: 8px;
-    font-family: sans-serif;
-    width: fit-content;
-  
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+      border-color: #80bdff;
     }
-  
-    .diet-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-  
-      th, td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #354048;
-      }
-  
-      th {
-        font-weight: bold;
-      }
-  
-          tr:nth-child(even) {
-               background-color: #2c3a41;
-          }
-  
-  
-  
+  }
+
+  .allergen-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
     }
-  
-    .nutrition-summary {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-  
-      .nutrition-item {
-        display: flex;
-        align-items: center;
-  
-          img {
-          width: 20px;
-          height: 20px;
-          margin-right: 10px;
-  
-              }
-  
-  
-  
-  
-        .value {
-             font-weight: bold;
-             margin-left: 5px;  // slight improvement: adding a little spacing. 
-           }
-  
-  
-  
-  
-  
+
+    &.btn-primary {
+      background-color: #1A4789;
+      border-color: #1A4789;
+      color: white;
+    }
+
+    &.btn-outline-primary {
+      color: #1A4789;
+      border-color: #1A4789;
+      
+      &:hover {
+        background-color: #1A4789;
+        color: white;
       }
     }
   }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #1A4789;
+    border: none;
+
+    &:hover {
+      background-color: darken(#1A4789, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      background-color: #6c757d;
+      transform: none;
+    }
+  }
+
+  .nutrition-summary {
+    .nutrition-item {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #e9ecef;
+        transform: translateX(5px);
+      }
+
+      i {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        color: #1A4789;
+      }
+
+      span {
+        font-size: 1.1rem;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+    }
+  }
+
+  // Form sections styling
+  .form-section {
+    margin-bottom: 2rem;
+    
+    h5 {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Alert styling
+  .alert {
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    &.alert-danger {
+      background-color: #fff5f5;
+      border-color: #feb2b2;
+      color: #c53030;
+    }
+
+    &.alert-info {
+      background-color: #ebf8ff;
+      border-color: #90cdf4;
+      color: #2b6cb0;
+    }
+  }
+
+  // Loading spinner
+  .spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  // Responsive adjustments
+  @media (max-width: 991.98px) {
+    .card {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// Custom select styling
+select.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}

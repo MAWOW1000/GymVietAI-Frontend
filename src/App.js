@@ -17,7 +17,9 @@ import WorkoutPage from './components/Home/Content/WorkoutPage/WorkoutPage';
 import PlanWorkoutPage from './components/Home/Content/PlanWorkoutPage/PlanWorkoutPage';
 import WorkoutDetailPage from './components/Home/Content/WorkoutDetailPage/WorkoutDetailPage';
 import NutritionPage from './components/Home/Content/NutritionPage/NutritionPage';
+import NutritionPlanResultPage from './components/Home/Content/NutritionPage/NutritionPlanResultPage/NutritionPlanResultPage';
 import PracticeExercise from './components/Home/Content/PracticeExercise/PracticeExercise';
+import Chatbot from "./components/Chatbot/Chatbot";
 
 const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
 
@@ -25,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
+      <Chatbot />
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />
@@ -42,6 +45,7 @@ function App() {
           <Route path='planworkout' element={<PlanWorkoutPage />} />
           <Route path="workout-detail" element={<WorkoutDetailPage />} />
           <Route path="nutrition" element={<NutritionPage />} />
+          <Route path="nutrition/result" element={<NutritionPlanResultPage />} />
           <Route path='practice' element={<PracticeExercise />} />
         </Route>
 

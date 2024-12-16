@@ -7,7 +7,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, toggleLanguage } from '../../../redux/slices/systemSlice';
 import { toast } from 'react-toastify';
-import Spinner from '../Content/Spinner/Spinner';
+import Spinner from '../../Spinner/Spinner';
 
 function Header() {
     const navigator = useNavigate()
@@ -84,7 +84,7 @@ function Header() {
                     <li><NavLink to='/exercise'>{language === 'EN' ? 'Exercise' : 'Bài Tập'}</NavLink></li>
                     <li><NavLink to='/dictionary'>{language === 'EN' ? 'Dictionary' : 'Từ Điển'}</NavLink></li>
                     <li><NavLink to='/workout'>{language === 'EN' ? 'Workout' : 'Lịch Tập'}</NavLink></li>
-                    <li><a href="#meal">{language === 'EN' ? 'Meal' : 'Lịch Ăn'}</a></li>
+                    <li><NavLink to='/nutrition'>{language === 'EN' ? 'Meal' : 'Lịch Ăn'}</NavLink></li>
                 </ul>
 
                 <div className="switch">

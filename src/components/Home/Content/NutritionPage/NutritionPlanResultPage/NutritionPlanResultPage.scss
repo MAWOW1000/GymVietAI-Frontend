@@ -1,0 +1,222 @@
+.nutrition-plan-result-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  h2 {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .nutrition-plan-result {
+    .card {
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .card-body {
+        padding: 2rem;
+      }
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-title {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
+    .calories-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      border-radius: 1rem;
+      color: white;
+
+      .calories-number {
+        font-size: 3.5rem;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .calories-unit {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+    }
+
+    .macros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+
+      .macro-item {
+        transition: transform 0.2s;
+        border: 1px solid #e9ecef;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h5 {
+          color: #2193b0;
+        }
+
+        .macro-value {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: #333;
+        }
+
+        .macro-calories {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .meal-plan {
+      .meal-item {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        .meal-title {
+          color: #2193b0;
+          border-bottom: 2px solid #e9ecef;
+          padding-bottom: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .meal-macros {
+          background: #f8f9fa;
+          padding: 0.5rem;
+          border-radius: 0.25rem;
+        }
+
+        .meal-foods {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+
+            &:hover {
+              background-color: #f8f9fa;
+            }
+
+            i {
+              color: #2193b0;
+            }
+          }
+        }
+      }
+    }
+
+    .nav-tabs {
+      border-bottom: 2px solid #e9ecef;
+      
+      .nav-link {
+        color: #6c757d;
+        border: none;
+        padding: 1rem 1.5rem;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border: none;
+          color: #2193b0;
+        }
+
+        &.active {
+          color: #2193b0;
+          border: none;
+          background: none;
+
+          &:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #2193b0;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      padding-top: 2rem;
+    }
+
+    .daily-totals {
+      background: #f8f9fa;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-top: 1.5rem;
+
+      h5 {
+        color: #2193b0;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .goals-list, .recommendations-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .list-group-item {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+        color: #6c757d;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #f8f9fa;
+        }
+
+        i {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}

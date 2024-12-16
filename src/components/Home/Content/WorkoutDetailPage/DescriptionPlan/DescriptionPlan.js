@@ -1,8 +1,15 @@
 import "./DescriptionPlan.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaDumbbell, FaClock, FaAllergies } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+import { setExercise } from "../../../../../redux/slices/exerciseSlice";
+import { useDispatch } from "react-redux";
+import Spinner from "../../../../Spinner/Spinner";
 
 const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [videoLoading, setVideoLoading] = useState({});
 
     const workoutDays = workoutAllDays || [];
 
@@ -44,9 +51,9 @@ const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
     };
 
     const handleWorkout = () => {
-        if (currentWorkout.Exercise.name === 'Rest') return
-        else {
-            alert('Start workout');
+        if (currentWorkout.WorkoutExercises[0].Exercise.name !== 'Rest') {
+            dispatch(setExercise(currentWorkout.WorkoutExercises[currentSlide].Exercise));
+            navigate('../practice', { state: { workoutExercises: currentWorkout.WorkoutExercises } });
         }
     }
 
@@ -64,10 +71,15 @@ const DescriptionPlan = ({ workoutAllDays, currentSlide, setCurrentSlide }) => {
                 </button>
 
                 <div className="carousel-content">
-                    <img
-                        src={currentWorkout.imageUrl || 'https://media.musclewiki.com/media/uploads/chest_and_shou.jpg'}
-                        alt="Workout demonstration"
-                    />
+                    <div className="image-wrapper">
+                        {videoLoading[currentSlide] && <Spinner />}
+                        <img
+                            src={currentWorkout.imageUrl || 'https://media.musclewiki.com/media/uploads/chest_and_shou.jpg'}
+                            alt="Workout demonstration"
+                            onLoadStart={() => setVideoLoading(prev => ({ ...prev, [currentSlide]: true }))}
+                            onLoad={() => setVideoLoading(prev => ({ ...prev, [currentSlide]: false }))}
+                        />
+                    </div>
                     <div className="workout-info">
                         <h2>Day {currentSlide + 1} Workout Plan</h2>
                         <div className="workout-stats">

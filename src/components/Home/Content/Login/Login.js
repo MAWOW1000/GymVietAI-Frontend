@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, loginGoogleUser } from '../../../../redux/slices/systemSlice';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../../Spinner/Spinner';
 
 function Login() {
     const navigate = useNavigate()

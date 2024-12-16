@@ -1,95 +1,203 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { postCreateNutritionPlan } from '../../../../util/nutritionAxios/nutritionApi';
+import { toast } from 'react-toastify';
+import BasicInfoForm from './components/BasicInfoForm';
+import DietaryRestrictionsForm from './components/DietaryRestrictionsForm';
+import AllergensForm from './components/AllergensForm';
 import './NutritionPage.scss';
 
 const NutritionPage = () => {
-  const sampleData = {
-    title: "Sample Diet Plan",
-    meals: [
-      {
-        day: "Monday",
-        breakfast: "Oatmeal with berries",
-        lunch: "Chicken salad sandwich",
-        dinner: "Baked salmon with roasted vegetables",
-        snack: "Fruit salad",
-      },
-      {
-        day: "Tuesday",
-        breakfast: "Yogurt with granola",
-        lunch: "Leftover salmon and vegetables",
-        dinner: "Lentil soup",
-        snack: "Apple slices with peanut butter",
-      },
-      // Add more meal data as needed
-    ],
-    nutrition: {
-      calories: 2000,
-      carbs: 150,
-      protein: 100,
-      fat: 50,
-    },
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    Weight: '',
+    Height: '',
+    Age: '',
+    Gender: '',
+    Goal: '',
+    ActivityLevel: '',
+    restrictions: ['none'],
+    allergens: ['none']
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  if (!sampleData) {
-    return <div>Loading diet plan...</div>;
-  }
+  const handleRestrictionChange = (restriction) => {
+    setFormData(prev => {
+      if (restriction === 'none') {
+        return {
+          ...prev,
+          restrictions: ['none']
+        };
+      }
+      
+      let newRestrictions = prev.restrictions.includes('none') 
+        ? [] 
+        : [...prev.restrictions];
+
+      if (newRestrictions.includes(restriction)) {
+        newRestrictions = newRestrictions.filter(r => r !== restriction);
+      } else {
+        newRestrictions.push(restriction);
+      }
+      
+      return {
+        ...prev,
+        restrictions: newRestrictions.length === 0 ? ['none'] : newRestrictions
+      };
+    });
+  };
+
+  const handleAllergenToggle = (allergen) => {
+    setFormData(prev => {
+      if (allergen === 'none') {
+        return {
+          ...prev,
+          allergens: ['none']
+        };
+      }
+
+      let newAllergens = prev.allergens.includes('none') 
+        ? [] 
+        : [...prev.allergens];
+
+      if (newAllergens.includes(allergen)) {
+        newAllergens = newAllergens.filter(a => a !== allergen);
+      } else {
+        newAllergens.push(allergen);
+      }
+
+      return {
+        ...prev,
+        allergens: newAllergens.length === 0 ? ['none'] : newAllergens
+      };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await postCreateNutritionPlan(formData);
+      console.log('API Response:', response);
+
+      if(response.EC !== 0) {
+        console.error('API Error:', response.EM);
+        setError(response.EM);
+        toast.error('❌ ' + (response.EM || 'Unknown error'), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        console.log('API Success - Nutrition Plan Data:', response.DT);
+        
+        if (!response.DT) {
+          throw new Error('No nutrition plan data received from API');
+        }
+
+        // Log the exact structure of response.DT
+        console.log('Response.DT structure:', JSON.stringify(response.DT, null, 2));
+
+        toast.success('🎉 ' + response.EM, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        
+        // Navigate to result page with nutrition plan data
+        console.log('Navigating to result page with data:', response.DT);
+        navigate('/nutrition/result', { 
+          state: { 
+            nutritionPlan: response.DT.nutritionPlan || response.DT
+          }
+        });
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message || 'Failed to create nutrition plan');
+      toast.error('❌ Failed to create nutrition plan: ' + (err.message || 'Unknown error'), {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="nutrition-page">
-      <h2>{sampleData.title}</h2>
-      <table className="diet-table">
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>Meal</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sampleData.meals.map((meal, index) => (
-            <React.Fragment key={index}>
-              <tr>
-                <td>{meal.day}</td>
-                <td>Breakfast</td>
-                <td>{meal.breakfast}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Lunch</td>
-                <td>{meal.lunch}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Dinner</td>
-                <td>{meal.dinner}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Snack</td>
-                <td>{meal.snack}</td>
-              </tr>
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
-      <div className="nutrition-summary">
-        <div className="nutrition-item">
-          <img src="/icons/flame.svg" alt="calories" width="20px" height="20px" />
-          <span>Total Calories: <span className="value">{sampleData.nutrition.calories}</span> kcal</span>
-        </div>
+    <div className="nutrition-page py-5">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-6">
+            <div className="card">
+              <div className="card-header bg-primary text-white">
+                <h3 className="mb-0">Create Your Nutrition Plan</h3>
+              </div>
+              <div className="card-body">
+                <form onSubmit={handleSubmit}>
+                  <BasicInfoForm 
+                    formData={{
+                      Weight: formData.Weight,
+                      Height: formData.Height,
+                      Age: formData.Age,
+                      Gender: formData.Gender,
+                      Goal: formData.Goal,
+                      ActivityLevel: formData.ActivityLevel
+                    }}
+                    onInputChange={handleInputChange}
+                  />
+                  
+                  <DietaryRestrictionsForm 
+                    selectedRestrictions={formData.restrictions}
+                    onRestrictionChange={handleRestrictionChange}
+                  />
+                  
+                  <AllergensForm 
+                    selectedAllergens={formData.allergens}
+                    onAllergenToggle={handleAllergenToggle}
+                  />
 
-        <div className="nutrition-item">
-          <img src="/icons/bread.svg" alt="calories" width="20px" height="20px" />
-          <span>Carbohydrates: <span className="value">{sampleData.nutrition.carbs}</span> g</span>
-        </div>
+                  {error && (
+                    <div className="alert alert-danger" role="alert">
+                      {error}
+                    </div>
+                  )}
 
-        <div className="nutrition-item">
-          <img src="/icons/meat.svg" alt="calories" width="20px" height="20px" />
-          <span>Protein: <span className="value">{sampleData.nutrition.protein}</span> g</span>
-        </div>
-
-        <div className="nutrition-item">
-          <img src="/icons/avocado.svg" alt="calories" width="20px" height="20px" />
-          <span>Fat: <span className="value">{sampleData.nutrition.fat}</span> g</span>
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary w-100"
+                    disabled={loading}
+                  >
+                    {loading ? 'Creating Plan...' : 'Create Nutrition Plan'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

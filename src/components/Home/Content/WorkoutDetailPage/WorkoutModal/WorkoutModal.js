@@ -12,9 +12,7 @@ function WorkoutModal({ workoutAllDays, currentSlide }) {
     const language = useSelector((state) => state.system.language);;
     const gender = useSelector((state) => state.exercise.gender);
     let currentWorkout = workoutAllDays[currentSlide];
-    console.log('check current workout >>> ', currentWorkout);
     let groupMuscle = currentWorkout.WorkoutExercises.map((exercise) => exercise.Exercise.GroupMuscle.name.toLowerCase());
-    console.log('check group muscle >>> ', groupMuscle);
     return (
         <div className="exercisePage__model">
             <div className="optionExerciseHeader">

@@ -25,6 +25,8 @@ const DetailPlan = ({ workoutAllDays, currentExercise }) => {
     setVisibleExercises(exercises.slice(startIdx, endIdx));
   }, [currentSlide, exercises, exercisesPerView]);
 
+  useEffect(() => setCurrentSlide(0), [currentExercise]);
+
   const handlePrevSlide = () => {
     setCurrentSlide(prev => Math.max(prev - 1, 0));
   };

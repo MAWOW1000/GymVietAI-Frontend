@@ -69,7 +69,7 @@ input {
 
 button.summit {
     background-color: #FBCEB5;
-    color: black;
+    color: #1A4789;
     padding: 17px;
     font-size: 16px;
     border: none;
@@ -108,7 +108,7 @@ button.summit:hover {
 
 .otherway button {
     background-color: white;
-    color: black;
+    color: #1A4789;
     padding: 17px;
     border: none;
     border-radius: 5px;
