@@ -39,6 +39,7 @@ const Wrapper = styled.header`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 0;
   }
 
   .nav-links li {
@@ -130,6 +131,67 @@ const Wrapper = styled.header`
 
   .dropdown-menu a:hover {
     color: #007BFF;
+  }
+
+  @media (max-width: 767px) {
+    padding: 10px;
+    
+    .logo {
+      width: 120px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: ${props => props.isOpen ? '0' : '-100%'};
+      width: 70%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      flex-direction: column;
+      padding: 80px 20px;
+      transition: 0.3s ease;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .nav-links li {
+      margin: 15px 0;
+    }
+
+    .hamburger {
+      display: block;
+      position: fixed;
+      right: 20px;
+      z-index: 1001;
+    }
+
+    .social-icons {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 15px;
+
+    .logo {
+      width: 130px;
+    }
+
+    .nav-links li {
+      margin: 0 10px;
+    }
+
+    .social-icons {
+      gap: 10px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    // ...existing desktop styles remain unchanged...
   }
 `;
 

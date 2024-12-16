@@ -1,6 +1,6 @@
 .exercisePage {
     background-color: #E7ECEF;
-    padding :32px 0;
+    padding: 32px 0;
 
     .exercisePage__model{
         .body-map__muscle{
@@ -23,6 +23,71 @@
         .exercisePage__model{
             border: none;
             padding: 20px;
+        }
+    }
+
+    // Mobile devices (<768px)
+    @media screen and (max-width: 767px) {
+        padding: 16px 0;
+
+        .container {
+            .row {
+                flex-direction: column;
+
+                .col-8, .col-4 {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .exercisePage__model {
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .optionExerciseDiv {
+            margin-top: 20px;
+            padding: 0 0 16px;
+        }
+    }
+
+    // Tablet devices (768px - 991px)
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+        padding: 24px 0;
+
+        .container {
+            .row {
+                .col-8 {
+                    width: 60%;
+                }
+                .col-4 {
+                    width: 40%;
+                }
+            }
+        }
+
+        .exercisePage__model {
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    // PC devices (≥992px)
+    @media screen and (min-width: 992px) {
+        .container {
+            .row {
+                .col-8 {
+                    width: 66.66667%;
+                }
+                .col-4 {
+                    width: 33.33333%;
+                }
+            }
         }
     }
 }

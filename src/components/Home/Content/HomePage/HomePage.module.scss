@@ -18,6 +18,10 @@
     background-color: #000;
     color: white;
 
+    @media (max-width: 739px) {
+        height: 400px;
+    }
+
     .about {
         position: absolute;
         bottom: 0;
@@ -26,10 +30,19 @@
         padding: 20px;
         text-align: left;
         
+        @media (max-width: 739px) {
+            padding: 15px;
+            text-align: center;
+        }
+        
         span {
             font-size: 1.5em;
             margin-bottom: 10px;
             font-weight: 600;
+
+            @media (max-width: 739px) {
+                font-size: 1.2em;
+            }
         }
         
         h1 {
@@ -38,6 +51,14 @@
             font-weight: bold;
             font-family: 'Oswald', sans-serif;
             line-height: 1.2;
+
+            @media (max-width: 739px) {
+                font-size: 2em;
+            }
+
+            @media (min-width: 740px) and (max-width: 1023px) {
+                font-size: 2.5em;
+            }
         }
         
         strong {
@@ -54,6 +75,11 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+
+            @media (max-width: 739px) {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
         }
         
         a:hover {
@@ -64,14 +90,22 @@
 
 .choose {
     background-color: #1a1a1a;
-    padding: 60px 0;
+    padding: 80px 0;
     text-align: center;
+
+    @media (max-width: 739px) {
+        padding: 40px 0;
+    }
 
     .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 15px;
-        margin-top: 40px;
+        margin-top: 60px;
+
+        @media (max-width: 739px) {
+            margin-top: 30px;
+        }
 
         .des {
             margin-bottom: 40px;
@@ -84,6 +118,11 @@
                 text-transform: uppercase;
                 letter-spacing: 2px;
                 font-weight: 700;
+
+                @media (max-width: 739px) {
+                    font-size: 14px;
+                    letter-spacing: 1px;
+                }
             }
 
             h2 {
@@ -92,6 +131,14 @@
                 font-weight: 600;
                 color: white;
                 margin-bottom: 20px;
+
+                @media (max-width: 739px) {
+                    font-size: 24px;
+                }
+
+                @media (min-width: 740px) and (max-width: 1023px) {
+                    font-size: 28px;
+                }
             }
         }
 
@@ -108,6 +155,14 @@
                 margin-bottom: 20px;
                 transition: transform 0.3s ease;
                 border-radius: 5px;
+
+                @media (max-width: 739px) {
+                    flex-basis: 100%;
+                }
+
+                @media (min-width: 740px) and (max-width: 1023px) {
+                    flex-basis: 48%;
+                }
 
                 &:hover {
                     transform: translateY(-5px);
@@ -126,6 +181,12 @@
                     align-items: center;
                     justify-content: center;
                     transition: background 0.3s ease, color 0.3s ease;
+
+                    @media (max-width: 739px) {
+                        width: 70px;
+                        height: 70px;
+                        font-size: 30px;
+                    }
                 }
 
                 &:hover span {
@@ -137,16 +198,212 @@
                     font-size: 18px;
                     color: white;
                     margin-bottom: 10px;
+
+                    @media (max-width: 739px) {
+                        font-size: 16px;
+                    }
                 }
 
                 p {
                     font-size: 16px;
                     color: rgba(255, 255, 255, 0.7);
                     line-height: 1.5;
+
+                    @media (max-width: 739px) {
+                        font-size: 14px;
+                    }
                 }
             }
         }
     }
 }
 
-/* ... (rest of your styles) ... */
+.classes {
+    background-color: #1a1a1a;
+    padding: 80px 0;
+    
+    @media (max-width: 739px) {
+        padding: 40px 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+
+        .des {
+            text-align: center;
+            margin-bottom: 60px;
+
+            @media (max-width: 739px) {
+                margin-bottom: 30px;
+            }
+        }
+
+        .item {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -20px;
+            
+            .classitem {
+                flex: 0 0 calc(33.333% - 30px);
+                margin: 20px;
+                position: relative;
+                overflow: hidden;
+                background: #151515;
+                
+                @media (max-width: 739px) {
+                    flex: 0 0 calc(100% - 30px);
+                }
+                
+                @media (min-width: 740px) and (max-width: 1023px) {
+                    flex: 0 0 calc(50% - 30px);
+                }
+
+                img {
+                    width: 100%;
+                    height: 250px;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+
+                    @media (max-width: 739px) {
+                        height: 200px;
+                    }
+                }
+
+                &:hover img {
+                    transform: scale(1.1);
+                }
+
+                .citext {
+                    padding: 20px;
+                    background: rgba(0, 0, 0, 0.8);
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    transition: all 0.3s ease;
+
+                    @media (max-width: 739px) {
+                        padding: 15px;
+                    }
+
+                    h4 {
+                        color: white;
+                        margin-bottom: 10px;
+                        font-size: 20px;
+
+                        @media (max-width: 739px) {
+                            font-size: 18px;
+                        }
+                    }
+
+                    p {
+                        color: #f36100;
+                        margin: 0;
+                        font-size: 16px;
+
+                        @media (max-width: 739px) {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Media queries for responsive design
+@media (min-width: 1024px) {
+    // PC styles
+    .hero .about {
+        h1 {
+            font-size: 60px;
+            line-height: 70px;
+        }
+    }
+
+    .choose .container .item .col {
+        flex-basis: 23%;
+    }
+
+    .classes .container .classitem {
+        flex: 0 0 calc(33.333% - 30px);
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    // Tablet styles
+    .hero {
+        height: 400px;
+
+        .about {
+            h1 {
+                font-size: 40px;
+                line-height: 50px;
+            }
+        }
+    }
+
+    .choose .container .item .col {
+        flex-basis: 48%;
+    }
+
+    .classes .container .classitem {
+        flex: 0 0 calc(50% - 30px);
+    }
+}
+
+@media (max-width: 739px) {
+    // Mobile styles
+    .hero {
+        height: 300px;
+
+        .about {
+            h1 {
+                font-size: 30px;
+                line-height: 40px;
+            }
+
+            span {
+                font-size: 14px;
+            }
+
+            a.btn {
+                padding: 12px 20px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .choose .container .item .col {
+        flex-basis: 100%;
+    }
+
+    .classes .container .classitem {
+        flex: 0 0 100%;
+    }
+
+    .support .items {
+        flex-direction: column;
+        
+        .item {
+            margin-bottom: 20px;
+        }
+    }
+
+    .team .slider {
+        max-width: 90%;
+    }
+
+    .choose .container .des,
+    .classes .container .des,
+    .price .title {
+        h2 {
+            font-size: 24px;
+        }
+        
+        span {
+            font-size: 14px;
+        }
+    }
+}

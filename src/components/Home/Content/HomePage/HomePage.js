@@ -44,7 +44,7 @@ function HomePage() {
 
         // Xóa bộ đếm thời gian khi component unmount
         return () => clearInterval(timer);
-    }, [teamImagesKeys.length]); // Thêm teamImagesKeys.length vào mảng phụ thuộc
+    }, [teamImagesKeys.length - 1]); // Thêm teamImagesKeys.length vào mảng phụ thuộc
 
     return (
         <Wrapper>
@@ -73,14 +73,17 @@ function HomePage() {
             </div>
 
             <section className="choose">
-                <div className="container">
-                    <div className="des">
-                        <span>why choose us</span>
-                        <h2>push your limits forward</h2>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="des">
+                                <span>why choose us</span>
+                                <h2>push your limits forward</h2>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="item">
-                        <div className="col">
+                    <div className="row">
+                        <div className="col-lg-3 col-md-6 col-sm-12 align-items-center d-flex flex-column">
                             <span>
                                 <IoNutrition />
                             </span>
@@ -88,7 +91,7 @@ function HomePage() {
                             <p>Get personalized workout and meal suggestions based on your profile</p> {/*Đề xuất lịch tập và thực đơn cá nhân hóa*/}
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-3 col-md-6 col-sm-12 align-items-center d-flex flex-column">
                             <span>
                                 <MdDirectionsBike />
                             </span>
@@ -96,7 +99,7 @@ function HomePage() {
                             <p>Chatbot AI provides instant support and guidance</p> {/*Chatbot AI hỗ trợ và hướng dẫn nhanh chóng */}
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-3 col-md-6 col-sm-12 align-items-center d-flex flex-column">
                             <span>
                                 <IoFitnessSharp />
                             </span>
@@ -104,7 +107,7 @@ function HomePage() {
                             <p>Easily track and adjust your workout schedule</p> {/*Dễ dàng theo dõi và điều chỉnh lịch tập */}
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-3 col-md-6 col-sm-12 align-items-center d-flex flex-column">
                             <span>
                                 <IoIosFitness />
                             </span>
@@ -121,186 +124,198 @@ function HomePage() {
                         <span>Our classes</span>
                         <h2>what we can offer</h2>
                     </div>
-
                     <div className="item">
-                        <div className="classitem">
-                            <img src={images.class1} alt="" />
-
-                            <div className="citext">
-                                <span>SMART</span>
-                                <h5>Generate Workout Plan</h5> {/*Tự tạo lịch tập */}
-                                <a href=""><FaChevronRight /></a>
+                        {[
+                            {
+                                img: images.class1,
+                                tag: 'SMART',
+                                title: 'Generate Workout Plan'
+                            },
+                            {
+                                img: images.class2,
+                                tag: 'SMART',
+                                title: 'Generate Meal Plan'
+                            },
+                            {
+                                img: images.class3,
+                                tag: 'INFORMATION',
+                                title: 'Extensive online library'
+                            },
+                            {
+                                img: images.class4,
+                                tag: 'FAST',
+                                title: 'Smart chatbot system'
+                            },
+                            {
+                                img: images.class5,
+                                tag: 'FAST',
+                                title: 'Online payment'
+                            }
+                        ].map((item, index) => (
+                            <div className="classitem" key={index}>
+                                <img src={item.img} alt={item.title} />
+                                <div className="citext">
+                                    <span>{item.tag}</span>
+                                    <h5>{item.title}</h5>
+                                    <a href=""><FaChevronRight /></a>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="classitem">
-                            <img src={images.class2} alt="" />
-
-                            <div className="citext">
-                                <span>SMART</span>
-                                <h5>Generate Meal Plan</h5> {/*Tự tạo lịch ăn uống */}
-                                <a href=""><FaChevronRight /></a>
-                            </div>
-                        </div>
-
-                        <div className="classitem">
-                            <img src={images.class3} alt="" />
-
-                            <div className="citext">
-                                <span>INFORMATION</span>
-                                <h5>Extensive online library</h5> {/*Thư viện rộng lớn */}
-                                <a href=""><FaChevronRight /></a>
-                            </div>
-                        </div>
-
-                        <div className="classitem">
-                            <img src={images.class4} alt="" />
-
-                            <div className="citext">
-                                <span>FAST</span>
-                                <h5>Smart chatbot system</h5> {/*hệ thống chatbot thông minh*/}
-                                <a href=""><FaChevronRight /></a>
-                            </div>
-                        </div>
-
-                        <div className="classitem">
-                            <img src={images.class5} alt="" />
-
-                            <div className="citext">
-                                <span>FAST</span>
-                                <h5>Online payment</h5> {/*Thanh toán trực tuyến*/}
-                                <a href=""><FaChevronRight /></a>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-
                 </div>
             </section>
 
             <section className="banner" style={{ backgroundImage: `url(${images.banner})` }}>
-                <div className="container">
-                    <h2>registration now to get more deals</h2>
-                    <h4>Where health, beauty and fitness meet.</h4>
-                    <a href="">Appointment</a>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2>registration now to get more deals</h2>
+                            <h4>Where health, beauty and fitness meet.</h4>
+                            <a href="">Appointment</a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section className="price">
-                <div className="container">
-                    <div className="title">
-                        <span>Our class</span>
-                        <h2>choose your pricing plan</h2>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="title">
+                                <span>Our class</span>
+                                <h2>choose your pricing plan</h2>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="item">
-                        <div className="priceitem">
-                            <h3>BASIC</h3>
-                            <div className="money">
-                                <h2>$ 0.0</h2>
-                                <span>On 30-Days</span>
+                    <div className="row">
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="priceitem">
+                                <h3>BASIC</h3>
+                                <div className="money">
+                                    <h2>$ 0.0</h2>
+                                    <span>On 30-Days</span>
+                                </div>
+                                <ul>
+                                    <li>Free riding</li>
+                                    <li>Unlimited equipments</li>
+                                    <li>Personal trainer</li>
+                                    <li>Weight losing classes</li>
+                                    <li>Month to mouth</li>
+                                    <li>No time restriction</li>
+                                </ul>
+                                <a className="btn" href="">enroll now</a>
                             </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Unlimited equipments</li>
-                                <li>Personal trainer</li>
-                                <li>Weight losing classes</li>
-                                <li>Month to mouth</li>
-                                <li>No time restriction</li>
-                            </ul>
-                            <a className="btn" href="">enroll now</a>
                         </div>
 
-                        <div className="priceitem">
-                            <h3>PREMIUM</h3>
-                            <div className="money">
-                                <h2>$ 3.9</h2>
-                                <span>On 30-Days</span>
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="priceitem">
+                                <h3>PREMIUM</h3>
+                                <div className="money">
+                                    <h2>$ 3.9</h2>
+                                    <span>On 30-Days</span>
+                                </div>
+                                <ul>
+                                    <li>Free riding</li>
+                                    <li>Unlimited equipments</li>
+                                    <li>Personal trainer</li>
+                                    <li>Weight losing classes</li>
+                                    <li>Month to mouth</li>
+                                    <li>No time restriction</li>
+                                </ul>
+                                <a className="btn" href="">enroll now</a>
                             </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Unlimited equipments</li>
-                                <li>Personal trainer</li>
-                                <li>Weight losing classes</li>
-                                <li>Month to mouth</li>
-                                <li>No time restriction</li>
-                            </ul>
-                            <a className="btn" href="">enroll now</a>
                         </div>
 
-                        <div className="priceitem">
-                            <h3>VIP</h3>
-                            <div className="money">
-                                <h2>$ 7.9</h2>
-                                <span>On 30-Days</span>
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="priceitem">
+                                <h3>VIP</h3>
+                                <div className="money">
+                                    <h2>$ 7.9</h2>
+                                    <span>On 30-Days</span>
+                                </div>
+                                <ul>
+                                    <li>Free riding</li>
+                                    <li>Unlimited equipments</li>
+                                    <li>Personal trainer</li>
+                                    <li>Weight losing classes</li>
+                                    <li>Month to mouth</li>
+                                    <li>No time restriction</li>
+                                </ul>
+                                <a className="btn" href="">enroll now</a>
                             </div>
-                            <ul>
-                                <li>Free riding</li>
-                                <li>Unlimited equipments</li>
-                                <li>Personal trainer</li>
-                                <li>Weight losing classes</li>
-                                <li>Month to mouth</li>
-                                <li>No time restriction</li>
-                            </ul>
-                            <a className="btn" href="">enroll now</a>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section className="team">
-                <div className="container">
-                    <div className="title">
-                        <div className="teamtitle">
-                            <span>our team</span>
-                            <h2>TRAIN WITH EXPERTS</h2>
-                        </div>
-                        <a href="">Appointment</a>
-                    </div>
-                    <div className="slider">
-                        <div className="slides" style={{ transform: `translateX(-${currentIndex * 370}px)` }}> {/* Điều chỉnh translateX để chuyển slide */}
-                            {teamImagesKeys.map((key, index) => (
-                                <div className="slide" key={index}>
-                                    <img
-                                        src={teamImages[key]}
-                                        alt={`Team member ${index + 1}`}
-                                        onError={(e) => { e.target.src = "defaultImage.jpg"; }}
-                                        style={{ transition: 'transform 0.3s ease-in-out' }}
-                                        onMouseEnter={(e) => {
-                                            e.target.style.transform = 'scale(1.1)';
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.target.style.transform = 'scale(1)';
-                                        }}
-                                    />
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="title">
+                                <div className="teamtitle">
+                                    <span>our team</span>
+                                    <h2>TRAIN WITH EXPERTS</h2>
                                 </div>
-                            ))}
+                                <a href="">Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="slider">
+                                <div className="slides" style={{ transform: `translateX(-${currentIndex * 250}px)` }}> {/* Điều chỉnh translateX để chuyển slide */}
+                                    {teamImagesKeys.map((key, index) => (
+                                        <div className="slide" key={index}>
+                                            <img
+                                                src={teamImages[key]}
+                                                alt={`Team member ${index + 1}`}
+                                                onError={(e) => { e.target.src = "defaultImage.jpg"; }}
+                                                style={{ transition: 'transform 0.3s ease-in-out' }}
+                                                onMouseEnter={(e) => {
+                                                    e.target.style.transform = 'scale(1.1)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.target.style.transform = 'scale(1)';
+                                                }}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section className="support">
-                <div className="container">
-                    <div className="items">
-                        <div className="item">
-                            <span>
-                                <FaMapMarkerAlt />
-                            </span>
-                            <p>333 Middle Winchendon Rd, Rindge,<br />NH 03461</p>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="item">
+                                <span>
+                                    <FaMapMarkerAlt />
+                                </span>
+                                <p>333 Middle Winchendon Rd, Rindge,<br />NH 03461</p>
+                            </div>
                         </div>
 
-                        <div className="item">
-                            <span>
-                                <MdOutlineSmartphone />
-                            </span>
-                            <p>125-711-811</p>
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="item">
+                                <span>
+                                    <MdOutlineSmartphone />
+                                </span>
+                                <p>125-711-811</p>
+                            </div>
                         </div>
 
-                        <div className="item">
-                            <span>
-                                <IoMdMail />
-                            </span>
-                            <p>Support.gymcenter@gmail.com</p>
+                        <div className="col-lg-4 col-md-6 col-sm-12">
+                            <div className="item">
+                                <span>
+                                    <IoMdMail />
+                                </span>
+                                <p>Support.gymcenter@gmail.com</p>
+                            </div>
                         </div>
                     </div>
                 </div>

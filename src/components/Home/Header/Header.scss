@@ -171,4 +171,93 @@
       input.check-toggle-round-flat:checked + label:after {
         margin-left: 44px;
       }
+
+    // Mobile styles (< 768px)
+    @media (max-width: 767px) {
+        .buttonGroup {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            margin: 0;
+            z-index: 1000;
+            
+            .btnSignup,
+            .btnLogin {
+                width: 45%;
+                max-width: 150px;
+            }
+        }
+
+        .user-info {
+            margin-right: 5px;
+            
+            .user-picture {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .user-name {
+                font-size: 14px;
+                display: none;
+            }
+        }
+
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+            width: 200px;
+        }
+    }
+
+    // Tablet styles (768px - 991px)
+    @media (min-width: 768px) and (max-width: 991px) {
+        .buttonGroup {
+            gap: 10px;
+            
+            .btnSignup,
+            .btnLogin {
+                width: 100px;
+                padding: 8px;
+            }
+        }
+
+        .user-info {
+            .user-picture {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .user-name {
+                font-size: 15px;
+            }
+        }
+    }
+
+    // Desktop styles (≥ 992px)
+    @media (min-width: 992px) {
+        .buttonGroup {
+            gap: 20px;
+            
+            .btnSignup,
+            .btnLogin {
+                width: 120px;
+                padding: 10px;
+            }
+        }
+
+        .user-info {
+            .user-picture {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .user-name {
+                font-size: 16px;
+            }
+        }
+    }
 }

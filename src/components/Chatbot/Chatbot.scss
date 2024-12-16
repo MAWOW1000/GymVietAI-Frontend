@@ -8,6 +8,120 @@
   height: 60px;
   background: transparent;
 
+  // Mobile devices (<740px)
+  @media screen and (max-width: 739px) {
+    bottom: 10px;
+    right: 10px;
+
+    &.open {
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      border-radius: 0;
+
+      .chatbot-header {
+        border-radius: 0;
+        padding: 12px;
+        font-size: 16px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .chatbot-body {
+        height: calc(100vh - 52px);
+        padding: 12px;
+      }
+
+      .messages {
+        .message {
+          max-width: 85%;
+          
+          .message-content {
+            padding: 10px 12px;
+            font-size: 13px;
+          }
+
+          &.bot .bot-avatar {
+            width: 28px;
+            height: 28px;
+            
+            svg {
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
+      }
+
+      .input-area {
+        padding: 12px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        margin: 0;
+        border-top: 1px solid #eee;
+
+        input[type="text"] {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+
+        button svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  // Tablet devices (≥740px and <1024px)
+  @media screen and (min-width: 740px) and (max-width: 1023px) {
+    bottom: 15px;
+    right: 15px;
+
+    &.open {
+      width: 400px;
+      
+      .chatbot-body {
+        height: 450px;
+      }
+
+      .messages {
+        .message {
+          max-width: 85%;
+        }
+      }
+
+      .chatbot-header {
+        font-size: 17px;
+      }
+    }
+  }
+
+  // PC devices (≥1024px)
+  @media screen and (min-width: 1024px) {
+    &.open {
+      width: 360px;
+
+      .chatbot-body {
+        height: 500px;
+      }
+
+      .messages {
+        .message {
+          max-width: 80%;
+        }
+      }
+    }
+  }
+
   .chatbot-body {
     display: none;
   }
@@ -49,6 +163,10 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       animation: fadeIn 0.3s ease-in-out;
 
+      @media screen and (max-width: 739px) {
+        display: none;
+      }
+
       &::after {
         content: '';
         position: absolute;
@@ -87,7 +205,6 @@
     .chatbot-body {
       display: flex;
       flex-direction: column;
-      height: 500px;
       padding: 16px;
     }
   }
@@ -117,7 +234,6 @@
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      max-width: 80%;
 
       &.bot {
         .message-content {

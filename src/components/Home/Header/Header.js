@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Wrapper from './HeaderWrapper';
 import homepagelogo from '../../../assets/images/homepagelogo.png';
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaChevronDown, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaChevronDown, FaSignInAlt, FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import './Header.scss'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ function Header() {
 
     const [scrolling, setScrolling] = useState(false);
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     const handleScroll = () => {
@@ -72,14 +73,27 @@ function Header() {
         dispatch(toggleLanguage());
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     return (
-        <Wrapper className={scrolling ? 'scrolled' : ''}>
+        <Wrapper className={scrolling ? 'scrolled' : ''} isOpen={isMenuOpen}>
             {isLoading && <Spinner />}
             <div className="logo-container container" onClick={() => navigator('/')}>
                 <img src={homepagelogo} alt="Logo" className="logo" />
             </div>
+            
+            <div className="hamburger" onClick={toggleMenu}>
+                {isMenuOpen ? <FaTimes size={24} color="white" /> : <FaBars size={24} color="white" />}
+            </div>
+
             <nav className="navbar header_navbar">
-                <ul className="nav-links">
+                <ul className="nav-links" onClick={closeMenu}>
                     <li><NavLink to='/'>{language === 'EN' ? 'Home' : 'Trang Chủ'}</NavLink></li>
                     <li><NavLink to='/exercise'>{language === 'EN' ? 'Exercise' : 'Bài Tập'}</NavLink></li>
                     <li><NavLink to='/dictionary'>{language === 'EN' ? 'Dictionary' : 'Từ Điển'}</NavLink></li>
