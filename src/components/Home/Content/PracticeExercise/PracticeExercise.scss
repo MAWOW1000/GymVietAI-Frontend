@@ -1,0 +1,83 @@
+// ExerciseCarousel.scss
+.practice-exercise{
+    background-color: #E6EBEE;
+
+    .trackingExercise{
+        padding: 32px 0;
+        background-color: #E6EBEE;
+        .exercise-carousel {
+            background-color: #f0f2f5; //Light grey background
+            padding: 16px;
+            border-radius: 8px; // Slight rounding of the container
+            overflow: hidden; // prevents content from spilling out
+        
+        
+            .carousel-header {
+                text-align: center; // or justify to have centered text, or left
+                margin-bottom: 8px;
+                font-weight: 600;
+                font-size: 22px;
+                color: #19337B; // Dark Blue-ish color  used throughout.  Adjust if you need different color.
+            }
+        
+            .carousel-controls {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                /*distribute space evenly */
+                margin-bottom: 10px;
+        
+                button {
+                    background-color: #19337B;
+                    /* Dark Blue-ish color  used throughout */
+                    border: none;
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    svg{
+                        fill: white;
+                        width: 24px;
+                        height: 24;
+                    }
+                }
+        
+                .progress-bar {
+                    background-color: lightgray;
+                    height: 8px;
+                    border-radius: 4px;
+                    flex-grow: 1;
+                    /*Takes up remaining horizontal space */
+                    margin: 0 8px;
+        
+        
+                    .progress {
+                        background-color: #19337B;
+                        /* Dark Blue-ish color used throughout */
+                        height: 100%;
+                        border-radius: 4px;
+                        /* Rounded progress */
+                    }
+        
+        
+                }
+            }
+        
+        
+        
+            .exercise-labels {
+                display: flex; // places each label in a row
+                justify-content: center;
+                gap: 42px;
+
+                .exercise-label {
+                    color: #19337B;
+                }
+        
+        
+            }
+        
+        }
+    }
+}

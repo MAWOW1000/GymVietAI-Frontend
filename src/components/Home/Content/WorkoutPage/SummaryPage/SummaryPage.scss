@@ -1,0 +1,67 @@
+.summary-page {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  span {
+    font-weight: bold; /* In đậm nội dung */
+    color: #20409A; /* Màu xanh đậm */
+    font-size: 1.1rem; /* Tăng kích thước chữ */
+    padding: 2px 5px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo tròn góc */
+    background-color: #f0f0f0; /* Màu nền nhạt */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng khi hover */
+    text-transform: capitalize;
+    
+    &:hover {
+      background-color: #20409A; /* Đổi màu nền khi hover */
+      color: #fff; /* Đổi màu chữ khi hover */
+    }
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #20409A;
+  }
+
+  p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .go-back {
+    background-color: #20409A;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: #D3D3D3;
+      transform: scale(1.1);
+    }
+  }
+
+  .generative-button {
+    background-color: #20409A;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #D3D3D3;
+      transform: scale(1.1);
+    }
+  }
+} 

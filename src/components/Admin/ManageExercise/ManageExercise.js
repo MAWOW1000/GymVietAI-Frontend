@@ -22,7 +22,7 @@ function ManageExercise() {
             </div>
 
             <div className="manageExerciseContent">
-                <TableExercise />
+                <TableExercise setShow={setShow}/>
             </div>
             <ModalCreateExercise show={show} setShow={setShow}/>
         </div>

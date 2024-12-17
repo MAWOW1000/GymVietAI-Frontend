@@ -11,21 +11,42 @@ import Home from './components/Home/Home';
 import ExercisePage from './components/Home/Content/ExercisePage/ExercisePage';
 import DictionaryPage from './components/Home/Content/DictionaryPage/DictionaryPage';
 import InforExercisePage from './components/Home/Content/InforExercisePage/InforExercisePage';
-import Workout from './components/Home/Content/Workout/Workout';
-import Meal from './components/Home/Content/Meal/Meal';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ToastContainer } from 'react-toastify';
+import WorkoutPage from './components/Home/Content/WorkoutPage/WorkoutPage';
+import PlanWorkoutPage from './components/Home/Content/PlanWorkoutPage/PlanWorkoutPage';
+import WorkoutDetailPage from './components/Home/Content/WorkoutDetailPage/WorkoutDetailPage';
+import NutritionPage from './components/Home/Content/NutritionPage/NutritionPage';
+import NutritionPlanResultPage from './components/Home/Content/NutritionPage/NutritionPlanResultPage/NutritionPlanResultPage';
+import PracticeExercise from './components/Home/Content/PracticeExercise/PracticeExercise';
+import Chatbot from "./components/Chatbot/Chatbot";
+
+const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
 
 function App() {
   return (
     <div className="App">
-      {/* <Routes>
+      <ToastContainer />
+      <Chatbot />
+      <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={
+            <GoogleOAuthProvider clientId={clientId}>
+              <Login />
+            </GoogleOAuthProvider>
+          } />
           <Route path='register' element={<Register />} />
           <Route path='forgot-password' element={<Forgotpassword />} />
           <Route path='exercise' element={<ExercisePage />} />
           <Route path='information' element={<InforExercisePage />} />
           <Route path='dictionary' element={<DictionaryPage />} />
+          <Route path='workout' element={<WorkoutPage />} />
+          <Route path='planworkout' element={<PlanWorkoutPage />} />
+          <Route path="workout-detail" element={<WorkoutDetailPage />} />
+          <Route path="nutrition" element={<NutritionPage />} />
+          <Route path="nutrition/result" element={<NutritionPlanResultPage />} />
+          <Route path='practice' element={<PracticeExercise />} />
         </Route>
 
         <Route path='admin' element={<Admin />}>
@@ -33,9 +54,7 @@ function App() {
           <Route path='manage-user' element={<ManageUser />} />
           <Route path='manage-exercise' element={<ManageExercise />} />
         </Route>
-      </Routes> */}
-
-        <Meal />
+      </Routes>
     </div >
   );
 }

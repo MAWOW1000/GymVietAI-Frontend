@@ -9,25 +9,16 @@ const Wrapper = styled.div`
     align-items: center;
     background-size: cover;
     background-position: center;
-
-    opacity: 0;
-    animation: popUp 1s forwards
 }
 
 form {
-    background-color: transparent; /* Nền trong suốt nhẹ */
+    background-color: transparent;
     padding: 40px;
-    border-radius: 10px;
-    position: relative; /* Để dùng pseudo-element */
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
     width: 100%;
     max-width: 420px;
-    overflow: hidden; /* Ẩn phần hiệu ứng ra ngoài */
-    backdrop-filter: blur(20px);
-
-    opacity: 0;
-    animation: popUp 0.8s ease-out forwards 0.2s;
 }
-
 
 h1 {
     text-align: center;
@@ -36,9 +27,6 @@ h1 {
     font-size: 28px;
     font-weight: 500;
     color: white;
-
-    /* opacity: 0;
-    animation: popUp 0.8s ease-out forwards 0.2s; */
 }
 
 .register-link p {
@@ -55,7 +43,7 @@ h1 {
     transition: color 0.3s ease;
 
     &:hover {
-        color: #f36100; 
+        color: #0056b3; 
         text-decoration: underline;
     }
 }
@@ -74,9 +62,6 @@ input {
     border: 1px solid #ccc;
     font-size: 16px;
 
-    /* opacity: 0;
-    animation: popUp 0.8s ease-out forwards 0.2s; */
-
     &::placeholder {
         color: #ccc; 
     }
@@ -84,33 +69,17 @@ input {
 
 button.summit {
     background-color: #FBCEB5;
-    color: black;
+    color: #1A4789;
     padding: 17px;
     font-size: 16px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     margin-top: 5px;
-
-    /* opacity: 0;
-    animation: popUp 0.8s ease-out forwards 0.2s; */
 }
 
 button.summit:hover {
-    /* opacity: 50%; */
-    animation: pulse 0.6s ease;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1); /* Ban đầu */
-  }
-  50% {
-    transform: scale(1.2); /* Giãn ra */
-  }
-  100% {
-    transform: scale(1); /* Thu lại */
-  }
+    opacity: 50%;
 }
 
 .remember-forgot {
@@ -122,17 +91,11 @@ button.summit:hover {
 .remember-forgot a {
     color: white;
     text-decoration: none;
-    transition: color 0.5s ease;
+    transition: color 0.3s ease;
 
       &:hover {
-        color: #f36100;
-        font-weight: bold;
+        color: #0056b3;
         text-decoration: underline;
-        transform: scale(1.2);
-        
-      }
-      &:hover::after{
-        content: " ?";
       }
 }
 
@@ -140,17 +103,18 @@ button.summit:hover {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+    align-item: center;
 }
 
 .otherway button {
     background-color: white;
-    color: black;
+    color: #1A4789;
     padding: 17px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
-    width: 45%;
+    width: 70%;
     
 }
 
@@ -171,25 +135,39 @@ h3{
     font-weight: 400;
 }
 
-@keyframes popUp {
-    0% {
-        transform: translateY(20px); /* Bắt đầu từ dưới */
-        /* opacity: 0; */
-    }
-    100% {
-        transform: translateY(0); /* Cuối cùng là vị trí bình thường */
-        opacity: 1;
-    }
-}
-
-/* @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-} */
+.login-with-google-btn {
+  transition: background-color .3s, box-shadow .3s;
+    
+  padding: 12px 16px 12px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 18px;
+  
+  &:hover {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+  }
+  
+  &:active {
+    background-color: #eeeeee;
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+  }
 
 `;
 

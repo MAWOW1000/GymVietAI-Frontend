@@ -5,19 +5,14 @@ const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
-  // background-color: transparent;
   background-color: black;
-  // position: fixed; /* Giữ header bám dính vào đầu trang */
-  // top: 0;
-  // left: 0;
   width: 100%;
-  // z-index: 1000; /* Đảm bảo rằng nó ở trên các phần tử khác */
-  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền */
+  transition: background-color 0.3s ease;
 
   &.scrolled {
-        background-color: rgba(51, 51, 51, 0.9); /* Màu nền khi cuộn xuống */
-    }
-  
+    background-color: rgba(51, 51, 51, 0.9);
+  }
+
   .logo-container {
     flex: 1;
   }
@@ -32,6 +27,11 @@ const Wrapper = styled.header`
     justify-content: space-between;
     flex: 2;
     align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Thêm thanh cuộn ngang */
+    box-sizing: border-box;
   }
 
   .nav-links {
@@ -39,6 +39,7 @@ const Wrapper = styled.header`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 0;
   }
 
   .nav-links li {
@@ -53,6 +54,10 @@ const Wrapper = styled.header`
   }
 
   .nav-links a:hover {
+    color: #f36100;
+  }
+
+  .nav-links a.active {
     color: #f36100;
   }
 
@@ -71,7 +76,6 @@ const Wrapper = styled.header`
     color: #f36100;
   }
 
-  /* Dropdown menu */
   .dropdown {
     position: relative;
   }
@@ -107,14 +111,14 @@ const Wrapper = styled.header`
   }
 
   .menu-icon {
-    margin-right: 10px; /* Khoảng cách giữa icon và chữ */
+    margin-right: 10px;
   }
 
   .divider {
     border: none;
-    height: 1px; /* Chiều cao của dấu gạch */
-    background-color: #ccc; /* Màu của dấu gạch */
-    margin: 10px 0; /* Khoảng cách trên và dưới dấu gạch */
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
   }
 
   .dropdown-menu a {
@@ -125,6 +129,70 @@ const Wrapper = styled.header`
 
   .dropdown-menu a:hover {
     color: #007BFF;
+  }
+
+  @media (max-width: 767px) {
+    padding: 10px;
+    
+    .logo {
+      width: 120px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      flex-direction: column;
+      padding: 80px 20px;
+      transition: 0.3s ease;
+      z-index: 1000;
+      flex-wrap: wrap; /* Cho phép các phần tử bẻ dòng khi không gian không đủ */
+      overflow-x: hidden;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      display: block;
+    }
+
+    .hamburger {
+      display: block;
+      position: fixed;
+      right: 20px;
+      z-index: 1001;
+    }
+
+    .social-icons {
+      display: none;
+    }
+
+    .dropdown {
+      display: none; /* Ẩn dropdown khi màn hình nhỏ */
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 15px;
+
+    .logo {
+      width: 130px;
+    }
+
+    .nav-links li {
+      margin: 0 10px;
+    }
+
+    .social-icons {
+      gap: 10px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    /* ...existing desktop styles remain unchanged... */
   }
 `;
 

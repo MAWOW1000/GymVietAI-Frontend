@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { getGroupMuscles, getEquipments } from '../../../../../util/exerciseApi';
+import { getGroupMuscles, getEquipments } from '../../../../../util/exerciseAxios/exerciseApi';
 import './Option.scss'
 import OptionItem from './OptionItem'
 import { FaFilter } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 const Option = (props) => {
-    const { selectedMuscle, setSelectedMuscle, selectedEquipment,
-        setSelectedEquipment, selectedDifficulty,
-        setSelectedDifficulty, totalExercise,
-        noExercise } = props
+    const { selectedMuscle, setSelectedMuscle, selectedEquipment, setSelectedEquipment, selectedDifficulty,
+        setSelectedDifficulty, noExercise } = props
+
+    const totalExercise = useSelector((state) => state.exercise.totalExercise)
+    const language = useSelector((state) => state.system.language);
     const [optionsMuscles, setOptionsMuscles] = useState([])
     const [optionsEquipments, setOptionsEquipments] = useState([])
     const handleClearAll = () => {
@@ -18,19 +20,23 @@ const Option = (props) => {
     const [optionsLevels, setOptionsLevels] = useState([
         {
             "levelID": 1,
-            "name": "Beginner"
+            "name": "Beginner",
+            "name_vi": "Tập sự"
         },
         {
             "levelID": 2,
-            "name": "Intermediate"
+            "name": "Intermediate",
+            "name_vi": "Trung cấp"
         },
         {
             "levelID": 3,
             "name": "Advanced",
+            "name_vi": "Nâng cao"
         },
         {
             "levelID": 4,
-            "name": "Novice"
+            "name": "Novice",
+            "name_vi": "Người mới"
         }
     ])
     useEffect(() => {
@@ -56,13 +62,23 @@ const Option = (props) => {
     return (
         <div className='optionDiv'>
             <div className='optionHeader'>
-                <span className='optionHeader__result'>Showing {totalExercise} of {noExercise}</span>
+                <span className='optionHeader__result'>
+                    {language === 'VI' 
+                        ? `Hiển thị ${totalExercise} của ${noExercise}` // Vietnamese text
+                        : `Showing ${totalExercise} of ${noExercise}`} 
+                </span>
 
                 <div className='optionHeader__filter'>
-                    <span style={{ cursor: 'pointer' }} className='optionHeader__filter--clear' onClick={handleClearAll}>Clear all</span>
+                    <span style={{ cursor: 'pointer' }} className='optionHeader__filter--clear' onClick={handleClearAll}>
+                        {language === 'VI' ? 'Xóa tất cả' : 'Clear all'} {/* Conditional text */}
+                    </span>
                     <span className='optionHeader__filter--total' style={{ cursor: 'default' }}>
                         <FaFilter />
-                        <span>{selectedDifficulty.length + selectedEquipment.length + selectedMuscle.length} Filters</span>
+                        <span>
+                            {language === 'VI' 
+                                ? `${selectedDifficulty.length + selectedEquipment.length + selectedMuscle.length} Bộ lọc` // Vietnamese text
+                                : `${selectedDifficulty.length + selectedEquipment.length + selectedMuscle.length} Filters`} 
+                        </span>
                     </span>
                 </div>
             </div>
@@ -74,7 +90,7 @@ const Option = (props) => {
                     <OptionItem col={"col-4"} options={optionsEquipments} title={"Equipment"} selectedEquipment={selectedEquipment} setSelectedEquipment={setSelectedEquipment} />
                 </div>
                 <div className='optionContent--difficult col-1'>
-                    <OptionItem col={"col-12"} options={optionsLevels} title={"Difficulty"} selectedDifficulty={selectedDifficulty} setSelectedDifficulty={setSelectedDifficulty} />
+                    <OptionItem col={"col-12"} options={optionsLevels} title={"Difficulty"} selectedDifficulty={selectedDifficulty} setSelectedDifficulty={setSelectedDifficulty} language2={language} />
                 </div>
             </div>
         </div>

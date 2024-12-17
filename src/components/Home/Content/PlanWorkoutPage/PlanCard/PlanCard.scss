@@ -1,0 +1,86 @@
+.plan-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #fff;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+        .plan-card__image {
+            transform: scale(1.05);
+        }
+    }
+
+    &__image {
+        height: 240px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        transition: transform 0.5s ease;
+    }
+
+    &__overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: #fff;
+    }
+
+    &__badge {
+        display: inline-block;
+        background-color: #ff6b6b;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &__content {
+        padding: 24px;
+    }
+
+    &__workouts {
+        margin-bottom: 16px;
+        
+        &-count {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+    }
+
+    &__description {
+        &-item {
+            color: #636e72;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 8px 0;
+            
+            &:before {
+                content: "•";
+                color: #ff6b6b;
+                margin-right: 8px;
+            }
+        }
+    }
+} 

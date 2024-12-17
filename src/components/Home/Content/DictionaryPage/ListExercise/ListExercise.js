@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 
 import './ListExercise.scss'
@@ -8,6 +8,34 @@ import { setExercise, setGender } from '../../../../../redux/slices/exerciseSlic
 const ListExercise = ({ exercises, selectedMuscle, selectedDifficulty, selectedEquipment, page, totalPage, setPage, limit }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const language = useSelector((state) => state.system.language)
+
+    const translate = (text) => {
+        const translations = {
+            EN: {
+                no: "No",
+                exercise: "Exercise",
+                video: "Video",
+                groupMuscle: "Group Muscle",
+                equipment: "Equipment",
+                difficulty: "Difficulty",
+                male: "Male",
+                female: "Female",
+            },
+            VI: {
+                no: "Thứ tự",
+                exercise: "Tên",
+                video: "Video",
+                groupMuscle: "Nhóm cơ",
+                equipment: "Thiết bị",
+                difficulty: "Độ khó",
+                male: "Nam",
+                female: "Nữ",
+            }
+        };
+        return translations[language][text] || text;
+    };
+
     const handleClick = (event, exercise) => {
         if (event?.target?.id === 'male') {
             dispatch(setGender(false))
@@ -41,12 +69,12 @@ const ListExercise = ({ exercises, selectedMuscle, selectedDifficulty, selectedE
             <table className="table listExerciseTable">
                 <thead style={{ padding: "0px" }} className='listExerciseTable__heading'>
                     <tr>
-                        <td>No</td>
-                        <td>Exercise</td>
-                        <td>Video</td>
-                        <td>Group Muscle</td>
-                        <td>Equipment</td>
-                        <td>Difficulty</td>
+                        <td>{translate('no')}</td>
+                        <td>{translate('exercise')}</td>
+                        <td>{translate('video')}</td>
+                        <td>{translate('groupMuscle')}</td>
+                        <td>{translate('equipment')}</td>
+                        <td>{translate('difficulty')}</td>
                     </tr>
                 </thead>
                 <tbody style={{ padding: "0px" }} className='listExerciseTable__body'>
@@ -64,8 +92,8 @@ const ListExercise = ({ exercises, selectedMuscle, selectedDifficulty, selectedE
                                                 <td>{overallIndex}</td>
                                                 <td className='name' onClick={(event) => handleClick(event, exercise)}>{exercise.name}</td>
                                                 <td>
-                                                    <span className='male' id='male' onClick={(event) => handleClick(event, exercise)}>Male</span>
-                                                    <span className='female' id='female' onClick={(event) => handleClick(event, exercise)}>Female</span>
+                                                    <span className='male' id='male' onClick={(event) => handleClick(event, exercise)}>{translate('male')}</span>
+                                                    <span className='female' id='female' onClick={(event) => handleClick(event, exercise)}>{translate('female')}</span>
                                                 </td>
                                                 <td>
                                                     <span className={`${exercise['GroupMuscle.name']}`}>{exercise['GroupMuscle.name']}</span>
@@ -75,7 +103,25 @@ const ListExercise = ({ exercises, selectedMuscle, selectedDifficulty, selectedE
                                                     <span className='optionName'>{exercise['Equipment.name']}</span>
                                                 </td>
                                                 <td>
-                                                    <span className={`${exercise['Difficulty.name']}`}>{exercise['Difficulty.name']}</span>
+                                                    <span className={`${exercise['Difficulty.name']}`}>
+                                                        {/* {language === 'VI' ? exercise['Difficulty.name_vi'] : exercise['Difficulty.name']} */}
+                                                        {language === 'VI' ? (
+                                                            (() => {
+                                                                switch (exercise['Difficulty.name']) {
+                                                                    case "Beginner":
+                                                                        return "Tập sự";
+                                                                    case "Intermediate":
+                                                                        return "Trung cấp";
+                                                                    case "Advanced":
+                                                                        return "Nâng cao";
+                                                                    case "Novice":
+                                                                        return "Người mới";
+                                                                    default:
+                                                                        return exercise['Difficulty.name'];
+                                                                }
+                                                            })()
+                                                        ) : exercise['Difficulty.name']}
+                                                    </span>
                                                 </td>
                                             </tr>)
                                     })}
@@ -94,8 +140,8 @@ const ListExercise = ({ exercises, selectedMuscle, selectedDifficulty, selectedE
                         pageRangeDisplayed={3}
                         marginPagesDisplayed={2}
                         pageCount={totalPage}
-                        previousLabel="Previous"
-                        nextLabel="Next"
+                        previousLabel={language === 'VI' ? "Trước" : "Previous"}
+                        nextLabel={language === 'VI' ? "Sau" : "Next"}
                         pageClassName="page-item"
                         pageLinkClassName="page-link"
                         previousClassName="page-item"

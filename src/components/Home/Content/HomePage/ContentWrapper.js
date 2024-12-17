@@ -1,11 +1,32 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+`;
 
 const Wrapper = styled.div`
 
     .bg {
         font-family: "Muli", sans-serif;
         flex: 1; /* Đảm bảo phần này chiếm toàn bộ không gian có sẵn */
-        height: 1040px; /* Đặt chiều cao cho phần */
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -14,13 +35,14 @@ const Wrapper = styled.div`
         justify-content: center; /* Căn giữa theo chiều dọc */
         align-items: flex-end; /* Căn các phần tử về phía lề trái */
         color: white; /* Màu chữ */
-        padding: 50px; /* Thêm khoảng đệm */
         text-transform: uppercase;
         font-weight: 700;
+        position: relative; /* Đặt vị trí tương đối */
    
 
     .about {
-        margin-right: 13%;
+        position: absolute; /* Đặt vị trí tuyệt đối */
+        right: 5%;
     }
 
     .about h1 strong {
@@ -63,89 +85,93 @@ const Wrapper = styled.div`
 }
 
     .choose {
-        background-color: #0a0a0a; /* Màu nền cho toàn bộ section */
-        padding: 60px 0; /* Khoảng cách trên dưới */
-        text-align: center; /* Căn giữa nội dung */
+        background-color: #0a0a0a;
+        padding: 80px 0; // Increased padding
+        overflow: hidden; /* Đảm bảo không có phần tử nào bị tràn ra ngoài */
+        
+        .container-fluid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
 
-        .container {
-            max-width: 1200px; /* Giới hạn chiều rộng */
-            margin: 0 auto; /* Căn giữa phần tử */
-            padding: 0 15px; /* Khoảng cách hai bên */
-            margin-top: 40px;
+            .row {
+                margin: 0 -20px; // Increased margin
+                flex-wrap: wrap; /* Đảm bảo các phần tử tự xuống dòng khi không đủ không gian */
 
-            .des {
-                margin-bottom: 40px; /* Khoảng cách dưới */
-                
-                span {
-                    display: block;
-                    font-size: 16px;
-                    color: #f36100; /* Màu sắc cho tiêu đề nhỏ */
-                    margin-bottom: 10px;
-                    text-transform: uppercase;
-                    letter-spacing: 2px; /* Khoảng cách giữa các chữ */
-                    font-weight: 700;
+                [class*="col-"] {
+                    padding: 20px; // Increased padding
+                    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước cột */
                 }
 
-                h2 {
-                    text-transform: uppercase;
-                    font-size: 32px;
-                    font-weight: 600;
-                    font-weight: bold;
-                    color: white; /* Màu sắc cho tiêu đề chính */
-                    margin: 0 0 0 20px;
+                .col-12 .des {
+                    text-align: center;
+                    margin-bottom: 40px;
+                    
+                    span {
+                        display: block;
+                        font-size: 16px;
+                        color: #f36100;
+                        margin-bottom: 10px;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        font-weight: 700;
+                    }
+
+                    h2 {
+                        text-transform: uppercase;
+                        font-size: 32px;
+                        font-weight: 600;
+                        color: white;
+                        margin: 0;
+                    }
                 }
-            }
 
-            .item {
-                display: flex;
-                justify-content: space-between; /* Chia đều các phần tử */
-                flex-wrap: wrap;
-
-                .col {
-                    flex-basis: 23%; /* Chiếm khoảng 1/4 chiều rộng */
-                    background-color: #0a0a0a;
-                    padding: 20px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
-                    margin-bottom: 20px;
-
+                .col-lg-3 {
+                    background-color: #151515;
+                    padding: 30px 20px;
+                    border-radius: 5px;
                     transition: transform 0.3s ease;
+                    margin-bottom: 20px;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 250px; /* Đảm bảo chiều cao tối thiểu để tránh nội dung bị bó hẹp */
+
                     &:hover {
-                        transform: translateY(-10px); /* Di chuyển khối lên khi hover */
+                        transform: translateY(-10px);
                     }
 
                     span {
                         display: inline-flex;
-                        background: rgba(255, 255, 255, 0.1);
-                        width: 90px;
-                        height: 90px;
-                        border-radius: 50%;
-                        font-size: 40px; /* Kích thước lớn cho icon */
-                        color: #f36100; /* Màu cho icon */
-                        margin-bottom: 15px;
                         align-items: center;
                         justify-content: center;
-
-                        transition: background 0.3s ease, border 0.3s ease;
+                        width: 70px;
+                        height: 70px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                        font-size: 30px;
+                        color: #f36100;
+                        margin-bottom: 20px;
+                        transition: all 0.3s ease;
                     }
+
                     &:hover span {
-                    background: #f36100; /* Màu nền khi hover */
-                    color: white;
-                    }
-                    
-                    .col:hover span {
-
+                        background: #f36100;
+                        color: white;
                     }
 
                     h4 {
-                        font-size: 18px;
-                        color: white; /* Màu cho tiêu đề trong khối */
-                        margin-bottom: 10px;
+                        color: white;
+                        font-size: 20px;
+                        margin-bottom: 15px;
+                        font-weight: 600;
                     }
 
                     p {
-                        font-size: 16px;
-                        color: white;
-                        opacity: 50%;
+                        color: #c4c4c4;
+                        margin: 0;
+                        font-size: 14px;
+                        line-height: 1.6;
                     }
                 }
             }
@@ -154,7 +180,7 @@ const Wrapper = styled.div`
 
     .classes {
     background-color: #1a1a1a; /* Màu nền cho toàn bộ section */
-    padding: 60px 0; /* Khoảng cách trên dưới */
+    padding: 80px 0; // Increased padding
     text-align: center; /* Căn giữa nội dung */
 
     .container {
@@ -187,12 +213,13 @@ const Wrapper = styled.div`
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            gap: 30px; // Added gap between items
         }
 
         .classitem {
             flex: 0 0 calc(33.33% - 20px);
             background-color: black; /* Màu nền cho mỗi lớp học */
-            margin-bottom: 20px;
+            margin-bottom: 30px; // Increased margin
             /* width: calc(20% - 20px); */
             position: relative;
             text-transform: uppercase;
@@ -472,76 +499,139 @@ a:hover {
         overflow: hidden;
         max-width: 1200px;
         margin: 20px auto;
+        transition: transform 0.3s ease-in-out;
     }
 
     .slides {
         display: flex;
-        transition: transform 1s ease-in-out;
+        transition: transform 0.5s ease-in-out;
+        padding-left: 20px;
     }
 
     .slide {
-        flex: 0 0 360px; /* Đặt chiều rộng của mỗi slide */
-        margin-right: 40px; /* Khoảng cách giữa các slide */
+        flex: 0 0 360px;
+        margin-right: 40px;
+        transition: transform 0.3s ease-in-out;
     }
 
     .slide img {
-        width: 100%; 
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .slide:hover {
         cursor: pointer;
-        transform: scale(1.05); /* Phóng to slide khi hover */
-        transition: transform 0.3s; 
+        transform: scale(1.05);
+        transition: transform 0.3s;
     }
 }
 
 .support {
     background-color: #151515;
-    padding: 30px 0;
+    padding: 50px 0;
 
-    .container {
+    .container-fluid {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 15px;
-    }
 
-    .items{
-        justify-content: space-between;
-        display: flex;
+        .row {
+            margin: 0 -15px;
 
-        .item{
-            text-align: left;
-            /* background-color: #ffffff; */
-            padding: 15px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-
-            span{
-                font-size: 24px;
-                color: white;
-                display: inline-block;
-                margin-bottom: 10px;
-                margin-right: 10px;
-                padding: 20px;
-                border-radius: 50%; 
-                text-align: center;
-                width: 65px; 
-                height: 65px;
-                background-color: #e55700;
-                
+            [class*="col-"] {
+                padding: 15px;
             }
 
-            p{
-                color: white;
-                margin: 0;
-                font-size: 14px; 
-                font-weight: 400;
-                line-height: 24px;
-                margin: 0 0 15px 0;
+            .item {
+                background-color: #0a0a0a;
+                padding: 30px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                height: 100%;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                span {
+                    flex-shrink: 0;
+                    width: 70px;
+                    height: 70px;
+                    background-color: #f36100;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                    color: white;
+                }
+
+                p {
+                    color: white;
+                    margin: 0;
+                    font-size: 16px;
+                    line-height: 1.6;
+                }
             }
         }
+    }
+
+    @media (max-width: 768px) {
+        .item {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        padding: 30px 0;
+        
+        .item {
+            padding: 20px;
+            
+            span {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+section {
+    animation: ${slideIn} 1s ease-in-out forwards; /* Add animation */
+    animation-delay: ${(props) => props.delay}s; /* Add delay */
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    
+    &:nth-child(1) {
+        animation-delay: 0s;
+    }
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    &:nth-child(4) {
+        animation-delay: 0.6s;
+    }
+    &:nth-child(5) {
+        animation-delay: 0.8s;
+    }
+    &:nth-child(6) {
+        animation-delay: 1s;
+    }
+    &:nth-child(7) {
+        animation-delay: 1.2s;
     }
 }
 
