@@ -1,9 +1,11 @@
 import axios from './axiosCustomize';
 
-const postRegister = (email, password) => {
+const postRegister = (email, password, otp) => {
     const URL_API = "/register";
     const data = {
-        email, password
+        email,
+        password,
+        otp
     }
     return axios.post(URL_API, data)
 }
@@ -31,4 +33,14 @@ const postLogout = () => {
     return axios.post(URL_API)
 }
 
-export { postRegister, postLogin, postLoginGoogle, postLogout }
+const sendOTP = (email) => {
+    const URL_API = "/sendOTP";
+    return axios.post(URL_API, { email });
+}
+
+const resetPassword = (email, otp, newPassword) => {
+    const URL_API = "/resetPassword";
+    return axios.post(URL_API, { email, otp, newPassword });
+}
+
+export { postRegister, postLogin, postLoginGoogle, postLogout, sendOTP, resetPassword }

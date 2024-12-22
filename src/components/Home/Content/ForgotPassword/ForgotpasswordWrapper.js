@@ -90,6 +90,59 @@ const Wrapper = styled.div`
       }
     }
   }
+
+  .otp-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 23px;
+
+    input {
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    button {
+      background-color: #fbceb5;
+      color: #1A4789;
+      padding: 14px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+
+      &:hover {
+        opacity: 50%;
+      }
+    }
+  }
+
+  .password-container {
+    position: relative;
+    margin-bottom: 23px;
+
+    input {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #1A4789;
+      font-size: 20px;
+    }
+  }
+
+  ${props => props.isLoading && `
+    .forgotpassword {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+  `}
 `;
 
 export default Wrapper;

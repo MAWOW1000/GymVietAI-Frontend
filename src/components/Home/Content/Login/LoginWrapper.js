@@ -53,6 +53,26 @@ h1 {
     flex-direction: column;
 }
 
+.password-container {
+    position: relative;
+    margin-bottom: 23px;
+
+    input {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .eye-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #1A4789;
+        font-size: 20px;
+    }
+}
+
 input {
     background-color: rgba(255, 255, 255, 0.5);
     /* opacity: 50%; */

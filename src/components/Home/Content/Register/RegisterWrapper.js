@@ -8,6 +8,7 @@ const Wrapper = styled.div`
     align-items: center;
     background-size: cover;
     background-position: center;
+    position: relative; // Add this to ensure spinner positions correctly
   }
 
   form {
@@ -99,6 +100,40 @@ const Wrapper = styled.div`
     margin-bottom: 20px; /* Space between notification and inputs */
     text-align: center; /* Center the notification */
   }
+
+  .otp-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 23px;
+
+    input {
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    button.send-otp {
+      background-color: #fbceb5;
+      color: #1A4789;
+      padding: 14px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+
+      &:hover {
+        opacity: 50%;
+      }
+    }
+  }
+
+  // Add styles to handle content during loading
+  ${props => props.isLoading && `
+    .register {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+  `}
 `;
 
 export default Wrapper;

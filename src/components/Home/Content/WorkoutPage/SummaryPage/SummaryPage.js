@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SummaryPage.scss';
 import { postCreateExercise } from '../../../../../util/exerciseAxios/exerciseApi';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LoginModal from '../../Login/LoginModal';
 
 const SummaryPage = ({
     selectedGender,
@@ -17,8 +18,19 @@ const SummaryPage = ({
     onGoBack
 }) => {
     const navigate = useNavigate();
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const isAuthenticated = useSelector((state) => state.system.isLogin);
 
     const handleGenerativeClick = async () => {
+        if (!isAuthenticated) {
+            setShowLoginModal(true);
+            return;
+        }
+
+        await createExercise();
+    };
+
+    const createExercise = async () => {
         try {
             // Format weight and height
             const formattedWeight = weight.toFixed(0);
@@ -58,8 +70,14 @@ const SummaryPage = ({
             <p>Height: <span>{height.toFixed(0)}</span> <span>{heightUnit}</span></p>
             <button className="go-back" onClick={onGoBack}>Go Back</button>
             <button className="generative-button" onClick={handleGenerativeClick}>Generative</button>
+
+            <LoginModal
+                show={showLoginModal}
+                onHide={() => setShowLoginModal(false)}
+                onLoginSuccess={() => createExercise()}
+            />
         </div>
     );
 };
 
-export default SummaryPage; 
+export default SummaryPage;

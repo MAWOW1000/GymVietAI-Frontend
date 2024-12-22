@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import hero from "../../../../assets/images/hero.jpg"
 import Wrapper from "./LoginWrapper";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ function Login() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false);
     const isLoading = useSelector((state) => state.system.isLoading);
     const isSuccess = useSelector((state) => state.system.isSuccess);
     const isFailed = useSelector((state) => state.system.isFailed);
@@ -97,12 +99,17 @@ function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <input
-                            type='password'
-                            placeholder='Password'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className="password-container">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder='Password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                            </span>
+                        </div>
 
                         <button className="summit" type='button' onClick={handleSignin} disabled={isLoading}>
                             {isLoading ? 'Loading...' : 'SIGN IN'}

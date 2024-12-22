@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, toggleLanguage } from '../../../redux/slices/systemSlice';
 import { toast } from 'react-toastify';
 import Spinner from '../../Spinner/Spinner';
+import defaultAvatar from '../../../assets/images/team3.jpg'; // Add this import
 
 function Header() {
     const navigator = useNavigate()
@@ -18,6 +19,7 @@ function Header() {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [profileImageError, setProfileImageError] = useState(false);
 
     const handleScroll = () => {
         if (window.scrollY > 0) {
@@ -81,13 +83,17 @@ function Header() {
         setIsMenuOpen(false);
     };
 
+    const handleImageError = () => {
+        setProfileImageError(true);
+    };
+
     return (
         <Wrapper className={scrolling ? 'scrolled' : ''} isOpen={isMenuOpen}>
             {isLoading && <Spinner />}
             <div className="logo-container container" onClick={() => navigator('/')}>
                 <img src={homepagelogo} alt="Logo" className="logo" />
             </div>
-            
+
             <div className="hamburger" onClick={toggleMenu}>
                 {isMenuOpen ? <FaTimes size={24} color="white" /> : <FaBars size={24} color="white" />}
             </div>
@@ -113,7 +119,13 @@ function Header() {
                         className='user-info'
                         onClick={toggleDropdown}
                     >
-                        <img src={picture} alt={fullname} className="user-picture" onClick={toggleDropdown} />
+                        <img
+                            src={profileImageError ? defaultAvatar : picture}
+                            alt={fullname}
+                            className="user-picture"
+                            onClick={toggleDropdown}
+                            onError={handleImageError}
+                        />
                         <span className="user-name" onClick={toggleDropdown}>{fullname}</span>
                         <i className="user-name-icon" onClick={toggleDropdown}><FaChevronDown /></i>
                         {dropdownVisible && (

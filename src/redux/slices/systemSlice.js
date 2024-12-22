@@ -71,9 +71,8 @@ const systemSlice = createSlice({
                 state.isFailed = false;
                 state.isLogin = true;
 
-                const { given_name, family_name, picture } = action?.payload?.DT ?? {};
-                console.log('check >>> ', given_name, family_name, picture, action?.payload?.DT)
-                state.fullname = (given_name && family_name) ? `${given_name} ${family_name}` : 'Gym Bro';
+                const { firstName, lastName, picture } = action?.payload?.DT ?? {};
+                state.fullname = (firstName && lastName) ? `${firstName} ${lastName}` : 'Gym Bro';
                 state.picture = picture || 'https://imgcdn.stablediffusionweb.com/2024/5/17/f5fb790b-36d9-4504-9ad0-d1142269fe98.jpg';
             })
             .addCase(loginGoogleUser.rejected, (state) => {

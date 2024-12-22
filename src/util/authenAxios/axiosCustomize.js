@@ -3,7 +3,8 @@ import qs from 'qs';
 // Set config defaults when creating the instance
 const instance = axios.create({
     baseURL: 'http://localhost:8083/api/v1',
-    withCredentials: true
+    withCredentials: true,
+    timeout: 5000, // 5 second timeout
 });
 
 // Alter defaults after instance has been created
@@ -31,10 +32,22 @@ instance.interceptors.response.use(function (response) {
     if (response && response.data) return response.data
     return response;
 }, function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
+    // Handle timeout error
+    if (error.code === 'ECONNABORTED') {
+        return {
+            EM: 'Request timeout - Please try again later',
+            EC: -1,
+            DT: null
+        };
+    }
+    
+    // Handle other errors
     if (error?.response?.data) return error?.response?.data;
-    return Promise.reject(error);
+    return {
+        EM: 'System error occurred',
+        EC: -1,
+        DT: null
+    };
 });
 
-export default instance
+export default instance;

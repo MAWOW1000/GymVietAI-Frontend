@@ -21,7 +21,6 @@ import NutritionPlanResultPage from './components/Home/Content/NutritionPage/Nut
 import PracticeExercise from './components/Home/Content/PracticeExercise/PracticeExercise';
 import Chatbot from "./components/Chatbot/Chatbot";
 
-const clientId = '886907766068-vup82vvb0h775013g7rpsfjp6it9p9df.apps.googleusercontent.com';
 
 function App() {
   return (
@@ -32,7 +31,7 @@ function App() {
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />
           <Route path='login' element={
-            <GoogleOAuthProvider clientId={clientId}>
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
               <Login />
             </GoogleOAuthProvider>
           } />

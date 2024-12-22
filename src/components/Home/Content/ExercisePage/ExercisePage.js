@@ -15,8 +15,11 @@ const ExercisePage = () => {
     const [selectedEquipment, setSelectedEquipment] = useState(null);
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
     const [listExercise, setListExercise] = useState([]);
-    const [page, setPage] = useState(1)
-    const [totalPage, setTotalPage] = useState(0)
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
+    const [showFullModel, setShowFullModel] = useState(false);
+    const [activeModel, setActiveModel] = useState('front'); // 'front' or 'back'
+
     useEffect(() => {
         async function callApi() {
             try {
@@ -47,28 +50,55 @@ const ExercisePage = () => {
                                     setGender={setGender} listExercise={listExercise}
                                 />
                                 :
-                                <div className="row exercisePage__model">
-                                    {
-                                        gender ?
-                                            <>
-                                                <div className="col-6 ">
-                                                    <ModelFrontFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
-                                                </div>
-                                                <div className="col-6">
-                                                    <ModelBackFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
-                                                </div>
-                                            </>
-                                            :
-                                            <>
-                                                <div className="col-6 ">
-                                                    <ModelFront selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
-                                                </div>
-                                                <div className="col-6">
-                                                    <ModelBack selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
-                                                </div>
-                                            </>
-                                    }
-
+                                <div>
+                                    <div className={`row exercisePage__model ${showFullModel ? 'show-full' : ''}`}>
+                                        {
+                                            gender ?
+                                                <>
+                                                    <div className="col-6">
+                                                        <ModelFrontFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <ModelBackFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                                    </div>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="col-6">
+                                                        <ModelFront selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <ModelBack selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                                    </div>
+                                                </>
+                                        }
+                                    </div>
+                                    <div className="models-preview">
+                                        <div className={`model-preview ${activeModel === 'front' ? 'active' : 'inactive'}`} 
+                                             onClick={() => {
+                                                 if (activeModel === 'front') {
+                                                     setShowFullModel(!showFullModel);
+                                                 } else {
+                                                     setActiveModel('front');
+                                                 }
+                                             }}>
+                                            {gender ? 
+                                                <ModelFrontFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} /> 
+                                                : <ModelFront selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />}
+                                        </div>
+                                        <div className={`model-preview ${activeModel === 'back' ? 'active' : 'inactive'}`}
+                                             onClick={() => {
+                                                 if (activeModel === 'back') {
+                                                     setShowFullModel(!showFullModel);
+                                                 } else {
+                                                     setActiveModel('back');
+                                                 }
+                                             }}>
+                                            {gender ? 
+                                                <ModelBackFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
+                                                : <ModelBack selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />}
+                                        </div>
+                                    </div>
                                 </div>
                         }
                     </div>
