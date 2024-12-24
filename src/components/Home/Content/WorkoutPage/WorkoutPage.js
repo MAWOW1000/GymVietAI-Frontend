@@ -39,9 +39,7 @@ const WorkoutPage = () => {
         setActiveStep(activeStep + 1);
     };
 
-    const handleGenerativeClick = () => {
-        // Implement generative functionality here
-    };
+
 
     return (
         <div className="workout-page">
@@ -98,7 +96,6 @@ const WorkoutPage = () => {
                     height={height}
                     weightUnit={weightUnit}
                     heightUnit={heightUnit}
-                    onGenerativeClick={handleGenerativeClick}
                     onGoBack={handleGoBack}
                 />
             )}

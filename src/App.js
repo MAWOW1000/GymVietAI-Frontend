@@ -2,7 +2,7 @@ import Admin from './components/Admin/Admin';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import ManageUser from './components/Admin/ManageUser/ManageUser';
 import ManageExercise from './components/Admin/ManageExercise/ManageExercise';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './components/Home/Content/HomePage/HomePage';
 import Login from './components/Home/Content/Login/Login'
 import Register from './components/Home/Content/Register/Register'
@@ -20,13 +20,26 @@ import NutritionPage from './components/Home/Content/NutritionPage/NutritionPage
 import NutritionPlanResultPage from './components/Home/Content/NutritionPage/NutritionPlanResultPage/NutritionPlanResultPage';
 import PracticeExercise from './components/Home/Content/PracticeExercise/PracticeExercise';
 import Chatbot from "./components/Chatbot/Chatbot";
+import { useEffect } from 'react';
+import { setNavigator } from './services/navigation';
 
+// Wrapper component to initialize navigation
+function NavigationInitializer() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    setNavigator(navigate);
+  }, [navigate]);
+
+  return null;
+}
 
 function App() {
   return (
     <div className="App">
       <ToastContainer />
       <Chatbot />
+      <NavigationInitializer />
       <Routes>
         <Route path='/' element={<Home />}>
           <Route index element={<HomePage />} />

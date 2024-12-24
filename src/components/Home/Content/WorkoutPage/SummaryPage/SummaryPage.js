@@ -14,7 +14,6 @@ const SummaryPage = ({
     height,
     weightUnit,
     heightUnit,
-    onGenerativeClick,
     onGoBack
 }) => {
     const navigate = useNavigate();
@@ -49,7 +48,6 @@ const SummaryPage = ({
             // Handle response
             if (response.EC === 0) {
                 toast.success(response.EM, { autoClose: 2000 });
-                if (onGenerativeClick) onGenerativeClick(response);
                 navigate('/planworkout', { state: { workoutPlan: response.DT } });
             } else {
                 toast.error(response.EM, { autoClose: 2000 });

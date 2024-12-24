@@ -93,8 +93,11 @@ function LoginModalContent({ show, onHide, onLoginSuccess }) {
         const res = await dispatch(loginUser({ email, password }));
         if (res.payload.EC === 0) {
             onLoginSuccess();
+            dispatch({ type: 'system/loginUser/fulfilled' });
+            toast.success(res.payload.EM);
             onHide();
         } else {
+            dispatch({ type: 'system/loginUser/rejected' });
             toast.error(res.payload.EM);
         }
     };

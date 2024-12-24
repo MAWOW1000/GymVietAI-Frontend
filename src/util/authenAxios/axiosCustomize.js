@@ -1,5 +1,8 @@
 import axios from "axios";
 import qs from 'qs';
+import { postLogout } from './authenApi';
+import { navigate } from '../../services/navigation';
+
 // Set config defaults when creating the instance
 const instance = axios.create({
     baseURL: 'http://localhost:8083/api/v1',
@@ -31,7 +34,24 @@ instance.interceptors.response.use(function (response) {
     // Do something with response data
     if (response && response.data) return response.data
     return response;
-}, function (error) {
+}, async function (error) {
+    // Handle unauthorized or forbidden errors (401/403)
+    if (error?.response?.status === 401 || error?.response?.status === 403) {
+        try {
+            // Call logout API
+            await postLogout();
+            // Clear any auth data from localStorage
+            localStorage.clear();
+            // Navigate to login page using our navigation service
+            navigate('/login');
+        } catch (logoutError) {
+            console.error('Logout failed:', logoutError);
+            // Force navigate to login even if logout API fails
+            navigate('/login');
+        }
+        return Promise.reject(error);
+    }
+
     // Handle timeout error
     if (error.code === 'ECONNABORTED') {
         return {
