@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { sendOTP, resetPassword } from "../../../../util/authenAxios/authenApi";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Spinner from "../../../Spinner/Spinner";
+import { validateEmail, validatePassword, validateOTP } from '../../../../components/Common/validation';
 
 function ForgotPassword() {
     const navigate = useNavigate();
@@ -45,19 +46,21 @@ function ForgotPassword() {
     };
 
     const handleResetPassword = async () => {
-        if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-            toast.error("Please enter a valid email address");
+        const emailValidation = validateEmail(email);
+        if (!emailValidation.isValid) {
+            toast.error(emailValidation.message);
             return;
         }
 
-        if (!otp.match(/^[0-9]{6}$/)) {
-            toast.error("Please enter a valid 6-digit OTP");
+        const otpValidation = validateOTP(otp);
+        if (!otpValidation.isValid) {
+            toast.error(otpValidation.message);
             return;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%^&*()_+={}\[\]:;"'<>,.?~`-])[A-Za-z\d!#$%^&*()_+={}\[\]:;"'<>,.?~`-]{8,}$/;
-        if (!passwordRegex.test(newPassword)) {
-            toast.error("Password must be at least 8 characters long, contain uppercase, lowercase, number, and special character");
+        const passwordValidation = validatePassword(newPassword);
+        if (!passwordValidation.isValid) {
+            toast.error(passwordValidation.message);
             return;
         }
 

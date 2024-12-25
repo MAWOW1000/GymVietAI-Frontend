@@ -57,7 +57,7 @@
       flex-direction: column;
       align-items: center;
       padding: 2rem;
-      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      background: linear-gradient(135deg, #F36002, darken(#F36002, 15%));
       border-radius: 1rem;
       color: white;
 
@@ -89,7 +89,7 @@
         }
 
         h5 {
-          color: #2193b0;
+          color: #F36002;
         }
 
         .macro-value {
@@ -112,7 +112,7 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
         .meal-title {
-          color: #2193b0;
+          color: #F36002;
           border-bottom: 2px solid #e9ecef;
           padding-bottom: 0.5rem;
           margin-bottom: 1rem;
@@ -139,7 +139,7 @@
             }
 
             i {
-              color: #2193b0;
+              color: #F36002;
             }
           }
         }
@@ -159,11 +159,11 @@
 
         &:hover {
           border: none;
-          color: #2193b0;
+          color: #F36002;
         }
 
         &.active {
-          color: #2193b0;
+          color: #F36002;
           border: none;
           background: none;
 
@@ -174,7 +174,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: #2193b0;
+            background: #F36002;
           }
         }
       }
@@ -191,7 +191,7 @@
       margin-top: 1.5rem;
 
       h5 {
-        color: #2193b0;
+        color: #F36002;
         margin-bottom: 0.5rem;
       }
     }

@@ -45,17 +45,17 @@
     }
 
     &.btn-primary {
-      background-color: #1A4789;
-      border-color: #1A4789;
+      background-color: #F36002;
+      border-color: #F36002;
       color: white;
     }
 
     &.btn-outline-primary {
-      color: #1A4789;
-      border-color: #1A4789;
+      color: #F36002;
+      border-color: #F36002;
       
       &:hover {
-        background-color: #1A4789;
+        background-color: #F36002;
         color: white;
       }
     }
@@ -66,11 +66,11 @@
     border-radius: 8px;
     font-weight: 500;
     transition: all 0.3s ease;
-    background-color: #1A4789;
+    background-color: #F36002;
     border: none;
 
     &:hover {
-      background-color: darken(#1A4789, 10%);
+      background-color: darken(#F36002, 10%);
       transform: translateY(-2px);
     }
 
@@ -98,7 +98,7 @@
       i {
         font-size: 1.5rem;
         margin-right: 1rem;
-        color: #1A4789;
+        color: #F36002;
       }
 
       span {

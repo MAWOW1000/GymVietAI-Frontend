@@ -9,6 +9,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, loginGoogleUser } from '../../../../redux/slices/systemSlice';
 import Spinner from '../../../Spinner/Spinner';
+import { validateEmail, validatePassword } from '../../../../components/Common/validation';
 
 function Login() {
     const navigate = useNavigate()
@@ -21,15 +22,14 @@ function Login() {
     const dispatch = useDispatch();
 
     const validateCredentials = (email, password) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%^&*()_+={}\[\]:;"'<>,.?~`-])[A-Za-z\d!#$%^&*()_+={}\[\]:;"'<>,.?~`-]{8,}$/;
-
-        if (!emailRegex.test(email)) {
-            return { valid: false, message: 'Invalid email format', code: '1' };
+        const emailValidation = validateEmail(email);
+        if (!emailValidation.isValid) {
+            return { valid: false, message: emailValidation.message };
         }
 
-        if (!passwordRegex.test(password)) {
-            return { valid: false, message: 'Your password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.', code: '1' };
+        const passwordValidation = validatePassword(password);
+        if (!passwordValidation.isValid) {
+            return { valid: false, message: passwordValidation.message };
         }
 
         return { valid: true };
