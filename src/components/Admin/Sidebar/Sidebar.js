@@ -8,7 +8,7 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import { MdHomeFilled } from "react-icons/md";
+import { MdHomeFilled, MdSecurity, MdVpnKey } from "react-icons/md";
 import { FaUser, FaBookOpen } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import './Sidebar.scss'
@@ -77,6 +77,24 @@ const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
                         onClick={() => (setActiveIndex(2), navigative('manage-exercise'))}
                     >
                         Manage Exercise
+                    </MenuItem>
+
+                    <MenuItem
+                        icon={<MdSecurity />}
+                        className='sidebarItem'
+                        active={activeIndex === 3}
+                        onClick={() => (setActiveIndex(3), navigative('manage-role'))}
+                    >
+                        Manage Roles
+                    </MenuItem>
+
+                    <MenuItem
+                        icon={<MdVpnKey />}
+                        className='sidebarItem'
+                        active={activeIndex === 4}
+                        onClick={() => (setActiveIndex(4), navigative('manage-permission'))}
+                    >
+                        Manage Permissions
                     </MenuItem>
                 </Menu>
                 {/* <Menu iconShape="circle">

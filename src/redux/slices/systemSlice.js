@@ -9,6 +9,7 @@ const initialState = {
     fullname: '',
     picture: '',
     language: 'EN',
+    email: '', // Thêm email vào initialState nếu chưa có
 };
 
 export const loginUser = createAsyncThunk('system/loginUser', async ({ email, password }) => {
@@ -52,9 +53,10 @@ const systemSlice = createSlice({
                 state.isFailed = false;
                 state.isLogin = true;
 
-                const { firstName, lastName, picture } = action?.payload?.DT ?? {};
+                const { firstName, lastName, picture, email } = action?.payload?.DT ?? {};
                 state.fullname = firstName && lastName ? `${firstName} ${lastName}` : "Gym Bro";
                 state.picture = picture || 'https://imgcdn.stablediffusionweb.com/2024/5/17/f5fb790b-36d9-4504-9ad0-d1142269fe98.jpg';
+                state.email = email; // Thêm dòng này
             })
             .addCase(loginUser.rejected, (state) => {
                 state.isLoading = false;
@@ -71,9 +73,10 @@ const systemSlice = createSlice({
                 state.isFailed = false;
                 state.isLogin = true;
 
-                const { firstName, lastName, picture } = action?.payload?.DT ?? {};
+                const { firstName, lastName, picture, email } = action?.payload?.DT ?? {};
                 state.fullname = (firstName && lastName) ? `${firstName} ${lastName}` : 'Gym Bro';
                 state.picture = picture || 'https://imgcdn.stablediffusionweb.com/2024/5/17/f5fb790b-36d9-4504-9ad0-d1142269fe98.jpg';
+                state.email = email; // Thêm dòng này
             })
             .addCase(loginGoogleUser.rejected, (state) => {
                 state.isLoading = false;

@@ -17,8 +17,26 @@
 
    .exerciseItem__video{
         position: relative;
+        margin-top: 20px;
+        
         video:first-child{
-            border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 10px;
+        }
+
+        video {
+            cursor: pointer;
+            
+            &.fullscreen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 9999;
+                background: black;
+                object-fit: contain;
+            }
         }
         
         video:last-child{
@@ -28,29 +46,30 @@
         .exerciseItem__video-level{
             position: absolute;
             top:0;
-            left: -10px;
-            border: none;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: 12px;
+            left:-20px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
             font-weight: 500;
             color: rgb(249 250 251);
             width: fit-content !important;
-                    &.Beginner{
-                        background-image: linear-gradient(to right, rgb(64, 154, 32), rgb(32, 77, 16));
-                    }
+            cursor: pointer;
+            
+            &.Beginner{
+                background-image: linear-gradient(to right, rgb(64, 154, 32), rgb(32, 77, 16));
+            }
     
-                    &.Intermediate{
-                        background-image: linear-gradient(to right, rgb(32, 64, 154), rgb(16, 32, 77));
-                    }
+            &.Intermediate{
+                background-image: linear-gradient(to right, rgb(32, 64, 154), rgb(16, 32, 77));
+            }
                     
-                    &.Advanced{
-                        background-image: linear-gradient(to right, rgb(254, 91, 127), rgb(127, 45, 63));
-                    }
+            &.Advanced{
+                background-image: linear-gradient(to right, rgb(254, 91, 127), rgb(127, 45, 63));
+            }
                     
-                    &.Novice{
-                        background-image: linear-gradient(to right, rgb(252, 186, 3), rgb(168, 124, 2));
-                    }
+            &.Novice{
+                background-image: linear-gradient(to right, rgb(252, 186, 3), rgb(168, 124, 2));
+            }
         }
    }
 

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
+import { useEffect } from 'react'; // Import useEffect hook
 
 import './ExerciseItem.scss'
 import Step from './Step'
@@ -9,7 +10,52 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const language = useSelector((state) => state.system.language)
+
+    const handleVideoClick = (e) => {
+        const video = e.target;
+        
+        // Toggle fullscreen
+        if (!document.fullscreenElement) {
+            video.classList.add('fullscreen');
+            video.requestFullscreen();
+            video.controls = true;
+            video.muted = false;
+        } else {
+            document.exitFullscreen();
+            video.classList.remove('fullscreen');
+            video.controls = false;
+            video.muted = true;
+        }
+    }
+
+    // Listen for fullscreen change
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            if (!document.fullscreenElement) {
+                const videos = document.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.classList.remove('fullscreen');
+                    video.controls = false;
+                    video.muted = true;
+                });
+            }
+        };
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        };
+    }, []);
+
     const handleClick = (exercise) => {
+        // Save current list state to localStorage
+        localStorage.setItem('previousExerciseState', JSON.stringify({
+            listExercise,
+            gender,
+            page,
+            totalPage
+        }));
+
         dispatch((setExercise(exercise)))
         dispatch((setGender(gender)))
         navigate('../information')
@@ -44,9 +90,27 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                                     })()
                                 ) : exercise['Difficulty.name']}
                             </button>
-                            <video style={{ marginTop: "0px" }} src={exercise["video_female"].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
+                            <video 
+                                style={{ marginTop: "0px" }} 
+                                src={exercise["video_female"].split(',')[0]} 
+                                loop="true" 
+                                autoPlay 
+                                playsInline 
+                                muted 
+                                className='col-6'
+                                onClick={handleVideoClick}
+                            >
                             </video>
-                            <video style={{ marginTop: "0px" }} src={exercise["video_female"].split(',')[1]} loop="true" autoplay="autoplay" conrt playsinline muted className='col-6'>
+                            <video 
+                                style={{ marginTop: "0px" }} 
+                                src={exercise["video_female"].split(',')[1]} 
+                                loop="true" 
+                                autoPlay 
+                                playsInline 
+                                muted 
+                                className='col-6'
+                                onClick={handleVideoClick}
+                            >
                             </video>
                         </div>
                         {exercise.step ?
@@ -86,9 +150,27 @@ const ExerciseItem = ({ listExercise, gender, page, setPage, totalPage }) => {
                                     })()
                                 ) : exercise['Difficulty.name']}
                             </button>
-                            <video style={{ marginTop: "0px" }} src={exercise["video_male"].split(',')[0]} loop="true" autoplay="autoplay" playsinline muted className='col-6'>
+                            <video 
+                                style={{ marginTop: "0px" }} 
+                                src={exercise["video_male"].split(',')[0]} 
+                                loop="true" 
+                                autoPlay 
+                                playsInline 
+                                muted 
+                                className='col-6'
+                                onClick={handleVideoClick}
+                            >
                             </video>
-                            <video style={{ marginTop: "0px" }} src={exercise["video_male"].split(',')[1]} loop="true" autoplay="autoplay" conrt playsinline muted className='col-6'>
+                            <video 
+                                style={{ marginTop: "0px" }} 
+                                src={exercise["video_male"].split(',')[1]} 
+                                loop="true" 
+                                autoPlay 
+                                playsInline 
+                                muted 
+                                className='col-6'
+                                onClick={handleVideoClick}
+                            >
                             </video>
                         </div>
                         {exercise.step ?

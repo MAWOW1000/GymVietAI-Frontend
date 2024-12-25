@@ -2,6 +2,7 @@ import Admin from './components/Admin/Admin';
 import Dashboard from './components/Admin/Dashboard/Dashboard';
 import ManageUser from './components/Admin/ManageUser/ManageUser';
 import ManageExercise from './components/Admin/ManageExercise/ManageExercise';
+import ManageRole from './components/Admin/ManageRole/ManageRole';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './components/Home/Content/HomePage/HomePage';
 import Login from './components/Home/Content/Login/Login'
@@ -22,11 +23,13 @@ import PracticeExercise from './components/Home/Content/PracticeExercise/Practic
 import Chatbot from "./components/Chatbot/Chatbot";
 import { useEffect } from 'react';
 import { setNavigator } from './services/navigation';
+import ManagePermission from './components/Admin/ManagePermission/ManagePermission';
+import Profile from './components/Profile/Profile';
 
 // Wrapper component to initialize navigation
 function NavigationInitializer() {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     setNavigator(navigate);
   }, [navigate]);
@@ -59,11 +62,14 @@ function App() {
           <Route path="nutrition" element={<NutritionPage />} />
           <Route path="nutrition/result" element={<NutritionPlanResultPage />} />
           <Route path='practice' element={<PracticeExercise />} />
+          <Route path='profile' element={<Profile />} />
         </Route>
 
         <Route path='admin' element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path='manage-user' element={<ManageUser />} />
+          <Route path='manage-role' element={<ManageRole />} />
+          <Route path='manage-permission' element={<ManagePermission />} />
           <Route path='manage-exercise' element={<ManageExercise />} />
         </Route>
       </Routes>

@@ -28,4 +28,27 @@
             padding: 20px;
         }
     }
+
+    .back-button {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #000;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #F45F02;
+            transform: translateX(-5px);
+        }
+
+        svg {
+            font-size: 20px;
+        }
+    }
 }

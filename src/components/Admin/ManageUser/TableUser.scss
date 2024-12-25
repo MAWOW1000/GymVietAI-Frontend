@@ -148,6 +148,40 @@
                 }
             }
         }
+
+        .no-data-message {
+            color: var(--textColor);
+            background-color: var(--lightBackground);
+            border-radius: 8px;
+            padding: 2rem !important;
+
+            p {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            small {
+                color: #A9B5DD;
+            }
+        }
+
+        .badge {
+            padding: 6px 12px;
+            font-weight: normal;
+            border-radius: 12px;
+            
+            &.bg-danger {  // Admin
+                background: linear-gradient(45deg, #ff4757, #ff6b81) !important;
+            }
+            
+            &.bg-success {  // Premium
+                background: linear-gradient(45deg, #2ed573, #7bed9f) !important;
+            }
+            
+            &.bg-secondary {  // Free User
+                background: linear-gradient(45deg, #747d8c, #a4b0be) !important;
+            }
+        }
     }
 
 }

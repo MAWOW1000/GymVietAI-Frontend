@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './DictionaryPage.scss'
 import ListExercise from './ListExercise/ListExercise';
 import Option from './Option/Option';
+import SearchBar from './SearchBar/SearchBar';
 import { postExerciseByOptionsMultiple, getNumberOfExercise } from '../../../../util/exerciseAxios/exerciseApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalExercise } from '../../../../redux/slices/exerciseSlice';
@@ -12,6 +13,7 @@ const DictionaryPage = () => {
     const [selectedMuscle, setSelectedMuscle] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState([]);
     const [selectedDifficulty, setSelectedDifficulty] = useState([]);
+    const [searchResults, setSearchResults] = useState(null);
     const [gender, setGender] = useState(true); //false is Man, true is Woman =))
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(0)
@@ -21,29 +23,39 @@ const DictionaryPage = () => {
     useEffect(() => {
         async function callApi() {
             try {
-                const result = await postExerciseByOptionsMultiple(selectedMuscle, selectedDifficulty, selectedEquipment, limit, page)
-                const result2 = await getNumberOfExercise()
-                if (result.EC === 0 && result2.EC === 0) {
-                    setExercises(result.DT.exercise)
-                    setTotalPage(result.DT["Total page"])
-                    dispatch(setTotalExercise(result.DT["Total exercise"]))
-                    setNoExercise(result2.DT)
-                }
-                else {
-                    console.log('>> fail', result.EM)
+                // Only call filter API if there's no search results
+                if (searchResults === null) {
+                    const result = await postExerciseByOptionsMultiple(selectedMuscle, selectedDifficulty, selectedEquipment, limit, page)
+                    const result2 = await getNumberOfExercise()
+                    if (result.EC === 0 && result2.EC === 0) {
+                        setExercises(result.DT.exercise)
+                        setTotalPage(result.DT["Total page"])
+                        dispatch(setTotalExercise(result.DT["Total exercise"]))
+                        setNoExercise(result2.DT)
+                    }
                 }
             } catch (err) {
                 console.log('errr >> ', err);
             }
         }
         callApi();
-    }, [selectedMuscle, selectedEquipment, selectedDifficulty, page])
+    }, [selectedMuscle, selectedEquipment, selectedDifficulty, page, searchResults])
+
+    const handleSearchResults = (results) => {
+        setSearchResults(results);
+        if (results !== null) {
+            setExercises(results);
+            setTotalPage(1); // Search results are not paginated
+        }
+    };
+
     return (
         <div className='dictionaryPage'>
             <div className='container'>
                 <div className='dictionaryPage__heading'>
                     <h3>{language === "VI" ? "Từ điển" : "Dictionary"}</h3>
                 </div>
+                <SearchBar onSearchResults={handleSearchResults} />
                 <div className='dictionaryPage__content container'>
                     <div className='dictionaryPage__content__heading row'>
                         <Option

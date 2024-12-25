@@ -1,7 +1,8 @@
 // Chatbot.jsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsChatDots } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
+import { postChat } from "../../util/chatbotAxios/chatbotApi";
 import "./Chatbot.scss";
 
 const Chatbot = () => {
@@ -10,56 +11,60 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         { text: "Hi there! How can I help you today?", sender: "bot" },
     ]);
+    const [isTyping, setIsTyping] = useState(false);
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const handleInputChange = (e) => {
         setUserMessage(e.target.value);
     };
 
-    const handleSendMessage = () => {
-        if (userMessage.trim() === "") return;
+    const handleSendMessage = async () => {
+        if (userMessage.trim() === "" || isTyping) return;
 
         const newMessages = [...messages, { text: userMessage, sender: "user" }];
         setMessages(newMessages);
-        setUserMessage(""); // Clear input field
+        setUserMessage("");
+        setIsTyping(true);
 
-        // Placeholder for bot response logic (replace with your actual logic)
-        setTimeout(() => {
-            const botResponse = getBotResponse(userMessage);
-            setMessages([...newMessages, { text: botResponse, sender: "bot" }]);
-        }, 500); // Simulate a small delay
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+            const response = await postChat(userMessage);
+            console.log('Chatbot response:', response);
+            clearTimeout(timeoutId);
+
+            // Kiểm tra và xử lý response
+            let botMessage = "Xin lỗi, hệ thống đang gặp trục trặc!";
+            if (response && response.EC === -10) {
+                botMessage = "Free users can only use chat up to 10 times, Please upgrade to premium to chat more";
+            } else if (response && response.message) {
+                botMessage = response.message;
+            } else if (response && typeof response === 'string') {
+                botMessage = response;
+            }
+
+            setMessages([...newMessages, { text: botMessage, sender: "bot" }]);
+        } catch (error) {
+            console.error('Error in chatbot:', error);
+            const errorMessage = "Xin lỗi, hệ thống đang gặp trục trặc. Vui lòng thử lại sau!";
+            setMessages([...newMessages, { text: errorMessage, sender: "bot" }]);
+        } finally {
+            setIsTyping(false);
+        }
     };
 
-    const getBotResponse = (message) => {
-        const lowerCaseMessage = message.toLowerCase();
-
-        if (lowerCaseMessage.includes("hours")) {
-            return "Our gym is open 24/7!"; // Or your specific hours
-        } else if (lowerCaseMessage.includes("class")) {
-            return "We offer various classes like Yoga, Zumba and Spin. Check our website's class schedule for details!";
-        } else if (
-            lowerCaseMessage.includes("price") ||
-            lowerCaseMessage.includes("cost") ||
-            lowerCaseMessage.includes("membership")
-        ) {
-            return "Please visit our membership page for detailed pricing and options.";
-        } else if (
-            lowerCaseMessage.includes("personal training") ||
-            lowerCaseMessage.includes("pt")
-        ) {
-            return "We have certified personal trainers. To find out more or book a consultation, contact us at [your contact info]";
-        } else if (
-            lowerCaseMessage.includes("location") ||
-            lowerCaseMessage.includes("address")
-        ) {
-            return "Our address is [your gym address]";
-        } else if (
-            lowerCaseMessage.includes("hello") ||
-            lowerCaseMessage.includes("hi") ||
-            lowerCaseMessage.includes("hey")
-        ) {
-            return "Hi there! What can I do for you?";
-        } else {
-            return "I'm still learning!  Please contact us directly for more complex inquiries. ";
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
         }
     };
 
@@ -69,7 +74,10 @@ const Chatbot = () => {
                 {isOpen ? (
                     <AiOutlineClose className="rotate-icon" />
                 ) : (
-                    <BsChatDots />
+                    <>
+                        <BsChatDots />
+                        {!isOpen && <div className="chat-tooltip">Chat with us!</div>}
+                    </>
                 )}
             </div>
             {isOpen && (
@@ -77,18 +85,42 @@ const Chatbot = () => {
                     <div className="messages">
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}`}>
-                                {message.text}
+                                {message.sender === 'bot' && (
+                                    <div className="bot-avatar">
+                                        <BsChatDots />
+                                    </div>
+                                )}
+                                <div className="message-content">{message.text}</div>
                             </div>
                         ))}
+                        {isTyping && (
+                            <div className="message bot">
+                                <div className="bot-avatar">
+                                    <BsChatDots />
+                                </div>
+                                <div className="message-content typing-indicator">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
                     </div>
                     <div className="input-area">
                         <input
                             type="text"
                             value={userMessage}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
                             placeholder="Type your message..."
+                            disabled={isTyping}
                         />
-                        <button onClick={handleSendMessage}>Send</button>
+                        <button onClick={handleSendMessage} disabled={isTyping || !userMessage.trim()}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             )}

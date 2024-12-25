@@ -21,6 +21,22 @@ const ExercisePage = () => {
     const [activeModel, setActiveModel] = useState('front'); // 'front' or 'back'
 
     useEffect(() => {
+        // Check for stored state when component mounts
+        const storedState = localStorage.getItem('previousExerciseState');
+        if (storedState) {
+            const { listExercise, gender, page, totalPage, selectedMuscle, selectedEquipment } = JSON.parse(storedState);
+            setListExercise(listExercise);
+            setGender(gender);
+            setPage(page);
+            setTotalPage(totalPage);
+            setSelectedMuscle(selectedMuscle);
+            setSelectedEquipment(selectedEquipment);
+            // Clear stored state after retrieving
+            localStorage.removeItem('previousExerciseState');
+        }
+    }, []);
+
+    useEffect(() => {
         async function callApi() {
             try {
                 const result = await postExerciseByOptionsPagination(selectedMuscle, null, selectedEquipment, 3, page)
@@ -35,8 +51,36 @@ const ExercisePage = () => {
                 console.log('errr >> ', err);
             }
         }
-        callApi();
-    }, [selectedMuscle, selectedEquipment, page])
+        if (selectedMuscle || selectedEquipment) {
+            callApi();
+        }
+        // Save state to localStorage whenever it changes
+        const currentState = {
+            listExercise,
+            gender,
+            page,
+            totalPage,
+            selectedMuscle,
+            selectedEquipment
+        };
+        localStorage.setItem('previousExerciseState', JSON.stringify(currentState));
+    }, [selectedMuscle, selectedEquipment, gender, page]);
+
+    // Save state when component unmounts
+    useEffect(() => {
+        return () => {
+            const currentState = {
+                listExercise,
+                gender,
+                page,
+                totalPage,
+                selectedMuscle,
+                selectedEquipment
+            };
+            localStorage.setItem('previousExerciseState', JSON.stringify(currentState));
+        };
+    }, [listExercise, gender, page, totalPage, selectedMuscle, selectedEquipment]);
+
     return (
         <div className="exercisePage">
             <div className="container">

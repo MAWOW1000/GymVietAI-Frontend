@@ -1,0 +1,93 @@
+.manageRole {
+    color: white;
+    background-color: var(--lightBackground);
+    border-radius: 5px;
+    margin: 24px;
+
+    .manageRoleHeader {
+        display: flex;
+        align-items: center;
+        padding: 16px 20px 10px;
+        gap: 20px;
+
+        .manageRole__header__title {
+            font-size: 20px;
+        }
+
+        .manageRole__header__search__div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #A9B5DD;
+            border: 1px solid #A9B5DD;
+            border-radius: 5px;
+            width: 400px;
+            height: 30px;
+            padding: 18px 18px 18px 0;
+
+            .manageRole__header__search__icon {
+                font-size: 18px;
+                margin-bottom: 2px;
+                margin-left: 8px;
+            }
+
+            .manageRole__header__search::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                background-color: #A9B5DD;
+                -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+                background-size: 20px 20px;
+                height: 20px;
+                width: 20px;
+            }
+
+            .manageRole__header__search {
+                width: 100%;
+                border-radius: 5px;
+                background-color: transparent;
+                border: none;
+                padding: 8px;
+                outline: none;
+                caret-color: #A9B5DD;
+                color: #A9B5DD;
+
+                &::placeholder {
+                    color: #A9B5DD;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .manageRole__header__button {
+            color: white;
+            padding: 12px 16px;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            border-radius: 4px;
+            background-image: linear-gradient(128.49deg, rgb(203, 60, 255) 19.86%, rgb(127, 37, 251) 68.34%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            width: 120px;
+            height: 38px;
+        }
+    }
+
+    .tableRoles {
+        padding: 20px;
+
+        .tableRoleIcon {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+    }
+}
+
+.modalCreateRole {
+    .modal-content {
+        background-color: #0B1739;
+        color: white;
+    }
+}

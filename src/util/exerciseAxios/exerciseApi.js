@@ -79,6 +79,20 @@ const getNumberOfExercise = () => {
     return axios.get(URL_API)
 }
 
+export const searchExercise = async (searchTerm) => {
+    try {
+        const response = await axios.get(`/search?searchTerm=${encodeURIComponent(searchTerm)}`);
+        return response;
+    } catch (error) {
+        console.log('>> error:', error);
+        return {
+            EC: -1,
+            EM: 'Something wrong ...',
+            DT: []
+        };
+    }
+};
+
 export {
     postExerciseByOptions, getEquipments, getGroupMuscles,
     postExerciseByOptionsPagination, postExerciseByOptionsMultiple, getNumberOfExercise,
