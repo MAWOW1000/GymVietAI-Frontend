@@ -1,43 +1,40 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
-import { getAllUsers, deleteUser } from '../../../util/authenAxios/authenApi';
+import { getAllPermissionRoles, deletePermissionRole } from '../../../util/authenAxios/authenApi';
 import { toast } from 'react-toastify';
+import './TablePermissionRole.scss';
 
-import './TableUser.scss'
-
-function TableUser(props) {
-    const { searchTerm, onEditUser, setShow, shouldRefetch } = props; // Add shouldRefetch to destructured props
-    const [users, setUsers] = useState([]);
+function TablePermissionRole(props) {
+    const { searchTerm, onEditPermissionRole, setShow, shouldRefetch } = props;
+    const [permissionRoles, setPermissionRoles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedUser, setSelectedUser] = useState(null);
 
     useEffect(() => {
-        fetchUsers();
-    }, [currentPage, searchTerm, shouldRefetch]); // Add shouldRefetch to dependencies
+        fetchPermissionRoles();
+    }, [currentPage, searchTerm, shouldRefetch]);
 
-    const fetchUsers = async () => {
+    const fetchPermissionRoles = async () => {
         try {
-            const response = await getAllUsers(currentPage, 10);
+            const response = await getAllPermissionRoles(currentPage, 10);
             if (response && response.EC === 0) {
-                let filteredUsers = response.DT.users;
+                let filteredPermissionRoles = response.DT.permissionRoles;
                 if (searchTerm) {
-                    filteredUsers = filteredUsers.filter(user => 
-                        user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+                    filteredPermissionRoles = filteredPermissionRoles.filter(pr => 
+                        pr.Permission.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        pr.Role.name.toLowerCase().includes(searchTerm.toLowerCase())
                     );
                 }
-                setUsers(filteredUsers);
+                setPermissionRoles(filteredPermissionRoles);
                 setTotalPages(response.DT.totalPages);
             } else {
-                toast.error(response.EM || 'Failed to fetch users');
+                toast.error(response.EM || 'Failed to fetch permission-roles');
             }
         } catch (error) {
-            console.error('Error fetching users:', error);
-            toast.error('Failed to fetch users');
+            console.error('Error fetching permission-roles:', error);
+            toast.error('Failed to fetch permission-roles');
         } finally {
             setIsLoading(false);
         }
@@ -47,95 +44,59 @@ function TableUser(props) {
         setCurrentPage(selected.selected + 1);
     };
 
-    const handleEdit = (user) => {
-        if (onEditUser) onEditUser(user);
-        // setShow is now properly defined from props
-        if (setShow) setShow(true);
-    };
-
-    const handleDelete = async (userId) => {
+    const handleDelete = async (permissionId, roleId) => {
         try {
-            const response = await deleteUser(userId);
+            const response = await deletePermissionRole(permissionId, roleId);
             if (response && response.EC === 0) {
                 toast.success(response.EM);
-                fetchUsers();
+                fetchPermissionRoles();
             } else {
-                toast.error(response.EM || 'Failed to delete user');
+                toast.error(response.EM || 'Failed to delete permission-role');
             }
         } catch (error) {
-            console.error('Error deleting user:', error);
-            toast.error('Failed to delete user');
+            console.error('Error deleting permission-role:', error);
+            toast.error('Failed to delete permission-role');
         }
     };
-
-    const getRoleBadgeClass = (role) => {
-        switch(role?.toLowerCase()) {
-            case 'admin':
-                return 'badge bg-danger';
-            case 'userpremium':
-            case 'user premium':
-                return 'badge bg-success';
-            default:
-                return 'badge bg-secondary';
-        }
-    }
-
-    const formatRoleName = (role) => {
-        switch(role?.toLowerCase()) {
-            case 'admin':
-                return 'Admin';
-            case 'userpremium':
-            case 'user premium':
-                return 'User Premium';
-            default:
-                return 'User Free';
-        }
-    }
 
     if (isLoading) {
         return <div className="text-center p-4">Loading...</div>;
     }
 
     return (
-        <div className="tableUsers">
+        <div className="tablePermissionRoles">
             <table className="px-4 table table-borderless table-striped table-hover">
-                <thead className='theadUser'>
+                <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Date of Birth</th>
+                        <th scope="col">Permission URL</th>
+                        <th scope="col">Permission Description</th>
+                        <th scope="col">Role Name</th>
+                        <th scope="col">Role Description</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
-                        <tr key={user.id}>
+                    {permissionRoles.map((pr, index) => (
+                        <tr key={`${pr.permissionId}-${pr.roleId}`}>
                             <td>{(currentPage - 1) * 10 + index + 1}</td>
-                            <td>{`${user.firstName} ${user.lastName}`}</td>
-                            <td>{user.gender}</td>
-                            <td>{user.email}</td>
+                            <td>{pr.Permission.url}</td>
+                            <td>{pr.Permission.description}</td>
+                            <td>{pr.Role.name}</td>
+                            <td>{pr.Role.description}</td>
                             <td>
-                                <span className={getRoleBadgeClass(user.role)}>
-                                    {formatRoleName(user.role)}
-                                </span>
-                            </td>
-                            <td>{new Date(user.dateOfBirth).toLocaleDateString()}</td>
-                            <td>
-                                <i className="tableUserIcon" onClick={() => handleEdit(user)}>
+                                <i className="tableIcon" onClick={() => onEditPermissionRole(pr)}>
                                     <FaPen />
                                 </i>
                                 <i 
-                                    className="tableUserIcon" 
+                                    className="tableIcon" 
                                     data-bs-toggle="modal" 
-                                    data-bs-target={`#deleteModal${user.id}`}
+                                    data-bs-target={`#deleteModal${pr.permissionId}-${pr.roleId}`}
                                 >
                                     <FaTrash />
                                 </i>
 
-                                <div className="modal fade" id={`deleteModal${user.id}`} tabIndex="-1" aria-hidden="true">
+                                <div className="modal fade" id={`deleteModal${pr.permissionId}-${pr.roleId}`} tabIndex="-1" aria-hidden="true">
                                     <div className="modal-dialog">
                                         <div className="modal-content modalDelete">
                                             <div className="modal-header">
@@ -143,21 +104,17 @@ function TableUser(props) {
                                                 <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
-                                                Do you want to delete this user?
+                                                Do you want to delete this permission-role relationship?
                                             </div>
                                             <div className="modal-footer">
-                                                <button 
-                                                    type="button" 
-                                                    className="btn btnCancel" 
-                                                    data-bs-dismiss="modal"
-                                                >
+                                                <button type="button" className="btn btnCancel" data-bs-dismiss="modal">
                                                     Cancel
                                                 </button>
                                                 <button 
                                                     type="button" 
                                                     className="btn btnDelete"
                                                     data-bs-dismiss="modal"
-                                                    onClick={() => handleDelete(user.id)}
+                                                    onClick={() => handleDelete(pr.permissionId, pr.roleId)}
                                                 >
                                                     Delete
                                                 </button>
@@ -195,4 +152,4 @@ function TableUser(props) {
     );
 }
 
-export default TableUser;
+export default TablePermissionRole;

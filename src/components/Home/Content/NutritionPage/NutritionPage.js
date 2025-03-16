@@ -154,7 +154,7 @@ const NutritionPage = () => {
         <div className="row justify-content-center">
           <div className="col-lg-6">
             <div className="card">
-              <div className="card-header bg-primary text-white">
+              <div className="card-header">
                 <h3 className="mb-0">Create Your Nutrition Plan</h3>
               </div>
               <div className="card-body">
@@ -189,7 +189,7 @@ const NutritionPage = () => {
 
                   <button 
                     type="submit" 
-                    className="btn btn-primary w-100"
+                    className="btn btn-primary w-100 mt-3"
                     disabled={loading}
                   >
                     {loading ? 'Creating Plan...' : 'Create Nutrition Plan'}

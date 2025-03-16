@@ -236,6 +236,52 @@ export const deletePermission = async (permissionId) => {
     }
 }
 
+// Permission-Role CRUD operations
+export const getAllPermissionRoles = async (page = 1, limit = 10) => {
+    try {
+        const response = await axios.get(`/permission-role/read?page=${page}&limit=${limit}`);
+        return response;
+    } catch (error) {
+        console.error('getAllPermissionRoles API error:', error);
+        throw error;
+    }
+}
+
+export const createPermissionRole = async (data) => {
+    try {
+        if (!data.permissionId || !data.roleId) {
+            throw new Error('Permission ID and Role ID are required');
+        }
+        const response = await axios.post('/permission-role/create', data);
+        return response;
+    } catch (error) {
+        console.error('createPermissionRole API error:', error);
+        throw error;
+    }
+}
+
+export const updatePermissionRole = async (data) => {
+    try {
+        const response = await axios.put('/permission-role/update', data);
+        return response;
+    } catch (error) {
+        console.error('updatePermissionRole API error:', error);
+        throw error;
+    }
+}
+
+export const deletePermissionRole = async (permissionId, roleId) => {
+    try {
+        const response = await axios.delete('/permission-role/delete', {
+            data: { permissionId, roleId }
+        });
+        return response;
+    } catch (error) {
+        console.error('deletePermissionRole API error:', error);
+        throw error;
+    }
+}
+
 export {
     postRegister,
     postLogin,

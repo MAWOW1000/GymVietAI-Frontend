@@ -25,6 +25,8 @@ import { useEffect } from 'react';
 import { setNavigator } from './services/navigation';
 import ManagePermission from './components/Admin/ManagePermission/ManagePermission';
 import Profile from './components/Profile/Profile';
+import ManagePermissionRole from './components/Admin/ManagePermissionRole/ManagePermissionRole';
+import ManageOrder from './components/Admin/ManageOrder/ManageOrder';
 
 // Wrapper component to initialize navigation
 function NavigationInitializer() {
@@ -65,12 +67,14 @@ function App() {
           <Route path='profile' element={<Profile />} />
         </Route>
 
-        <Route path='admin' element={<Admin />}>
+        <Route path="/admin" element={<Admin />}>
           <Route index element={<Dashboard />} />
-          <Route path='manage-user' element={<ManageUser />} />
-          <Route path='manage-role' element={<ManageRole />} />
-          <Route path='manage-permission' element={<ManagePermission />} />
-          <Route path='manage-exercise' element={<ManageExercise />} />
+          <Route path="manage-user" element={<ManageUser />} />
+          <Route path="manage-exercise" element={<ManageExercise />} />
+          <Route path="manage-role" element={<ManageRole />} />
+          <Route path="manage-permission" element={<ManagePermission />} />
+          <Route path="manage-permission-role" element={<ManagePermissionRole />} />
+          <Route path="manage-order" element={<ManageOrder />} />
         </Route>
       </Routes>
     </div >

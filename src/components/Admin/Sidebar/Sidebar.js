@@ -8,31 +8,42 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import { MdHomeFilled, MdSecurity, MdVpnKey } from "react-icons/md";
-import { FaUser, FaBookOpen } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { MdHomeFilled, MdSecurity, MdVpnKey, MdLink } from "react-icons/md"; // Add MdLink
+import { FaUser, FaBookOpen, FaShoppingCart } from "react-icons/fa"; // Add FaShoppingCart
+import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.scss'
 import sidebarHeader_logoImg from '../../../assets/images/logoImage2.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
-    const navigative = useNavigate();
-    const [activeIndex, setActiveIndex] = useState(0)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const getActiveIndex = (path) => {
+        switch (path) {
+            case '/admin': return 0;
+            case '/admin/manage-user': return 1;
+            case '/admin/manage-exercise': return 2;
+            case '/admin/manage-role': return 3;
+            case '/admin/manage-permission': return 4;
+            case '/admin/manage-permission-role': return 5; // Add this line
+            case '/admin/manage-order': return 6; // Add this line
+            default: return 0;
+        }
+    }
+
+    const currentIndex = getActiveIndex(location.pathname);
 
     return (
         <ProSidebar
-            // collapsed={collapsed}
-            // toggled={toggled}
             breakPoint="md"
-        // onToggle={handleToggleSidebar}
         >
             <SidebarHeader className='sidebarHeader'>
                 <div
                     className='sidebarHeader_logoTitle'
                     style={{
                         padding: '24px',
-                        // textTransform: 'uppercase',
                         fontWeight: 600,
                         fontSize: 20,
                         letterSpacing: '1px',
@@ -53,19 +64,17 @@ const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
                     <MenuItem
                         icon={<MdHomeFilled />}
                         className='sidebarItem'
-                        active={activeIndex === 0}
-                        onClick={() => (setActiveIndex(0), navigative(''))}
-                    // suffix={<span className="badge red">Dev Pham</span>}
+                        active={currentIndex === 0}
+                        onClick={() => navigate('')}
                     >
                         Dashboard
                     </MenuItem>
 
-
                     <MenuItem
                         icon={<FaUser />}
                         className='sidebarItem'
-                        active={activeIndex === 1}
-                        onClick={() => (setActiveIndex(1), navigative('manage-user'))}
+                        active={currentIndex === 1}
+                        onClick={() => navigate('manage-user')}
                     >
                         Manage User
                     </MenuItem>
@@ -73,8 +82,8 @@ const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
                     <MenuItem
                         icon={<FaBookOpen />}
                         className='sidebarItem'
-                        active={activeIndex === 2}
-                        onClick={() => (setActiveIndex(2), navigative('manage-exercise'))}
+                        active={currentIndex === 2}
+                        onClick={() => navigate('manage-exercise')}
                     >
                         Manage Exercise
                     </MenuItem>
@@ -82,8 +91,8 @@ const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
                     <MenuItem
                         icon={<MdSecurity />}
                         className='sidebarItem'
-                        active={activeIndex === 3}
-                        onClick={() => (setActiveIndex(3), navigative('manage-role'))}
+                        active={currentIndex === 3}
+                        onClick={() => navigate('manage-role')}
                     >
                         Manage Roles
                     </MenuItem>
@@ -91,54 +100,38 @@ const SideBar = ({ images, collapsed, toggled, handleToggleSidebar }) => {
                     <MenuItem
                         icon={<MdVpnKey />}
                         className='sidebarItem'
-                        active={activeIndex === 4}
-                        onClick={() => (setActiveIndex(4), navigative('manage-permission'))}
+                        active={currentIndex === 4}
+                        onClick={() => navigate('manage-permission')}
                     >
                         Manage Permissions
                     </MenuItem>
-                </Menu>
-                {/* <Menu iconShape="circle">
-                    <SubMenu
-                        // suffix={<span className="badge yellow">Features</span>}
-                        title="Features"
-                        icon={<FaRegLaughWink />}
+
+                    <MenuItem
+                        icon={<MdLink />} // Changed icon here
+                        className='sidebarItem'
+                        active={currentIndex === 5}
+                        onClick={() => navigate('manage-permission-role')}
                     >
-                        <MenuItem>
-                            Manage Users
-                            <Link to='/admin/manage-user' />
-                        </MenuItem>
-                        <MenuItem>
-                            Manage Exercise
-                            <Link to='/admin/manage-exercise' />
-                        </MenuItem>
-                    </SubMenu>
-                </Menu> */}
+                        Manage Per-Role
+                    </MenuItem>
+
+                    <MenuItem
+                        icon={<FaShoppingCart />} // Add this line
+                        className='sidebarItem'
+                        active={currentIndex === 6}
+                        onClick={() => navigate('manage-order')}
+                    >
+                        Manage Orders
+                    </MenuItem>
+                </Menu>
             </SidebarContent>
 
             <SidebarFooter className='sidebarFooter' style={{ textAlign: 'center' }}>
                 <button type='button' className='btn btn-primary btnSidebarFooter'
-                    onClick={() => { navigative('/') }}
+                    onClick={() => { navigate('/') }}
                 >
                     Go to Home Page <MdHomeFilled />
                 </button>
-                {/* <div
-                    className="sidebar-btn-wrapper"
-                    style={{
-                        padding: '20px 24px',
-                    }}
-                >
-                    <a
-                        href="https://github.com/azouaoui-med/react-pro-sidebar"
-                        target="_blank"
-                        className="sidebar-btn"
-                        rel="noopener noreferrer"
-                    >
-                        <FaGithub />
-                        <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                            View source
-                        </span>
-                    </a>
-                </div> */}
             </SidebarFooter>
         </ProSidebar>
     );

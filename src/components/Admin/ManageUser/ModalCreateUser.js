@@ -21,11 +21,16 @@ function ModalCreateUser(props) {
 
     useEffect(() => {
         if (selectedUser) {
+            // Format the date to YYYY-MM-DD for the input date field
+            const formattedDate = selectedUser.dateOfBirth ? 
+                new Date(selectedUser.dateOfBirth).toISOString().split('T')[0] : '';
+                
             setFormData({
                 ...selectedUser,
                 password: '', // Clear password when editing
-                roleId: getRoleId(selectedUser.role),
-                gender: selectedUser.gender.toLowerCase()
+                roleId: getRoleId(selectedUser?.role),
+                gender: selectedUser?.gender?.toLowerCase() || 'male',
+                dateOfBirth: formattedDate // Set the formatted date
             });
         } else {
             // Reset form for new user
@@ -42,7 +47,8 @@ function ModalCreateUser(props) {
     }, [selectedUser]);
 
     const getRoleId = (roleName) => {
-        switch(roleName?.toLowerCase()) {
+        if (!roleName) return 2; // Default to free user if role is null/undefined
+        switch(roleName.toLowerCase()) {
             case 'admin':
                 return 1;
             case 'premium':

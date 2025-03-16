@@ -42,10 +42,15 @@ const DictionaryPage = () => {
     }, [selectedMuscle, selectedEquipment, selectedDifficulty, page, searchResults])
 
     const handleSearchResults = (results) => {
-        setSearchResults(results);
-        if (results !== null) {
-            setExercises(results);
-            setTotalPage(1); // Search results are not paginated
+        if (results === null) {
+            setSearchResults(null);
+        } else {
+            setSearchResults(results);
+            if (results.DT) {
+                setExercises(results.DT.exercises);
+                setTotalPage(results.DT["Total page"]);
+                setPage(results.DT["Current page"]);
+            }
         }
     };
 
@@ -91,4 +96,4 @@ const DictionaryPage = () => {
     )
 }
 
-export default DictionaryPage;                        
+export default DictionaryPage;

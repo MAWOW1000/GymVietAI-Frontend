@@ -28,6 +28,18 @@
             &::placeholder {
                 color: #999;
             }
+
+            &.error {
+                border-color: #ff4d4f;
+            }
+        }
+
+        .error-message {
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            color: #ff4d4f;
+            font-size: 12px;
         }
 
         .search-icon {

@@ -26,7 +26,7 @@ const DietaryRestrictionsForm = ({ selectedRestrictions, onRestrictionChange }) 
 
   return (
     <div>
-      <p className="text-muted mb-3">Select your dietary restrictions:</p>
+      <p className="text-muted mb-3 mt-3">Select your dietary restrictions:</p>
       <div className="d-flex flex-wrap gap-2">
         {restrictions.map((restriction) => (
           <button

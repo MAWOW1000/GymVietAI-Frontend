@@ -53,7 +53,7 @@ const postCreateExercise = (Gender, Weight, Height, Age, continent) => {
     const formattedGender = Gender.toLowerCase() === 'male' ? 'Male' :
         Gender.toLowerCase() === 'female' ? 'Female' : Gender;
 
-    const URL_API = "/create-exercise";
+    const URL_API = "/create-workout-plan";
     const data = {
         Gender: formattedGender,
         Weight: +Weight,
@@ -79,9 +79,9 @@ const getNumberOfExercise = () => {
     return axios.get(URL_API)
 }
 
-export const searchExercise = async (searchTerm) => {
+export const searchExercise = async (searchTerm, limit = 10, page = 1) => {
     try {
-        const response = await axios.get(`/search?searchTerm=${encodeURIComponent(searchTerm)}`);
+        const response = await axios.get(`/search?searchTerm=${encodeURIComponent(searchTerm)}&limit=${limit}&page=${page}`);
         return response;
     } catch (error) {
         console.log('>> error:', error);
@@ -93,8 +93,32 @@ export const searchExercise = async (searchTerm) => {
     }
 };
 
+const createExercise = (data) => {
+    return axios.post("/create", data);
+}
+
+const updateExercise = (exerciseData) => {
+    const { id, ...data } = exerciseData;
+    return axios.put(`/update/${id}`, data);
+}
+
+const deleteExercise = (id) => {
+    return axios.delete(`/delete/${id}`);
+}
+
+const getAllExercises = (page = 1, limit = 10) => {
+    const URL_API = `/options-pagination`;
+    return axios.post(URL_API, {
+        groupMuscle: null,
+        difficulty: null, 
+        equipment: null,
+        limit: +limit,
+        page: +page
+    });
+};
+
 export {
     postExerciseByOptions, getEquipments, getGroupMuscles,
     postExerciseByOptionsPagination, postExerciseByOptionsMultiple, getNumberOfExercise,
-    postCreateExercise
+    postCreateExercise, createExercise, updateExercise, deleteExercise, getAllExercises
 }

@@ -1,0 +1,101 @@
+.modalCreateExercise {
+    .modal-content {
+        background-color: #0B1739 !important;
+        color: white !important;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #59658A;
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    .modal-footer {
+        border-top: 1px solid #59658A;
+        .btnClose {
+            background-color: #081028;
+            border-color: #565e64;
+            color: white;
+        }
+
+        .btnCreate {
+            color: white;
+            padding: 6px 12px;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            border-radius: 4px;
+            background-image: linear-gradient(128.49deg, rgb(203, 60, 255) 19.86%, rgb(127, 37, 251) 68.34%);
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    .formCreateExercise {
+        padding: 20px;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #59658A;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            display: block;
+            color: white;
+        }
+
+        .form-control {
+            background-color: transparent;
+            border: 1px solid #59658A;
+            color: white;
+            margin-bottom: 1rem;
+
+            &:focus {
+                background-color: transparent;
+                color: white;
+                border-color: #86b7fe;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            background-color: transparent;
+            border: 1px solid #59658A;
+            color: white;
+            margin-bottom: 1rem;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+
+            option {
+                background-color: #0B1739;
+                color: white;
+            }
+
+            &:focus {
+                background-color: transparent;
+                color: white;
+                border-color: #86b7fe;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+        }
+    }
+}

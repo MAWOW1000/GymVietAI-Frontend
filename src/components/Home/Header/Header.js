@@ -3,23 +3,35 @@ import Wrapper from './HeaderWrapper';
 import homepagelogo from '../../../assets/images/homepagelogo.png';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaChevronDown, FaSignInAlt, FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import './Header.scss'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, toggleLanguage } from '../../../redux/slices/systemSlice';
 import { toast } from 'react-toastify';
 import Spinner from '../../Spinner/Spinner';
 import defaultAvatar from '../../../assets/images/team3.jpg'; // Add this import
+import PremiumModal from '../PremiumModal/PremiumModal';
 
 function Header() {
     const navigator = useNavigate()
     const dispatch = useDispatch();
     const { fullname, picture, isLogin, isLoading, language } = useSelector((state) => state.system);
+    const location = useLocation();
 
     const [scrolling, setScrolling] = useState(false);
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [profileImageError, setProfileImageError] = useState(false);
+    const [showPremiumModal, setShowPremiumModal] = useState(false);
+
+    // Tự động mở modal khi có payment params
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const hasPaymentParams = searchParams.has('vnp_ResponseCode');
+        if (hasPaymentParams) {
+            setShowPremiumModal(true);
+        }
+    }, [location.search]);
 
     const handleScroll = () => {
         if (window.scrollY > 0) {
@@ -46,7 +58,8 @@ function Header() {
     };
 
     const handleGoPremium = () => {
-        navigator('/premium');
+        setDropdownVisible(false); // Close dropdown
+        setShowPremiumModal(true); // Show premium modal
     };
 
     const handleLogOut = async () => {
@@ -87,73 +100,83 @@ function Header() {
         setProfileImageError(true);
     };
 
+    const handleClosePremiumModal = () => {
+        setShowPremiumModal(false);
+    };
+
     return (
-        <Wrapper className={scrolling ? 'scrolled' : ''} isOpen={isMenuOpen}>
-            {isLoading && <Spinner />}
-            <div className="logo-container container" onClick={() => navigator('/')}>
-                <img src={homepagelogo} alt="Logo" className="logo" />
-            </div>
-
-            <div className="hamburger" onClick={toggleMenu}>
-                {isMenuOpen ? <FaTimes size={24} color="white" /> : <FaBars size={24} color="white" />}
-            </div>
-
-            <nav className="navbar header_navbar">
-                <ul className="nav-links" onClick={closeMenu}>
-                    <li><NavLink to='/'>{language === 'EN' ? 'Home' : 'Trang Chủ'}</NavLink></li>
-                    <li><NavLink to='/exercise'>{language === 'EN' ? 'Exercise' : 'Bài Tập'}</NavLink></li>
-                    <li><NavLink to='/dictionary'>{language === 'EN' ? 'Dictionary' : 'Từ Điển'}</NavLink></li>
-                    <li><NavLink to='/workout'>{language === 'EN' ? 'Workout' : 'Lịch Tập'}</NavLink></li>
-                    <li><NavLink to='/nutrition'>{language === 'EN' ? 'Meal' : 'Lịch Ăn'}</NavLink></li>
-                </ul>
-
-                <div className="switch">
-                    <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" onChange={handleLanguageToggle} />
-                    <label htmlFor="language-toggle"></label>
-                    <span className="on">EN</span>
-                    <span className="off">VI</span>
+        <>
+            <Wrapper className={scrolling ? 'scrolled' : ''} isOpen={isMenuOpen}>
+                {isLoading && <Spinner />}
+                <div className="logo-container container" onClick={() => navigator('/')}>
+                    <img src={homepagelogo} alt="Logo" className="logo" />
                 </div>
 
-                {isLogin ? (
-                    <div
-                        className='user-info'
-                        onClick={toggleDropdown}
-                    >
-                        <img
-                            src={profileImageError ? defaultAvatar : picture}
-                            alt={fullname}
-                            className="user-picture"
+                {/* <div className="hamburger" onClick={toggleMenu}>
+                    {isMenuOpen ? <FaTimes size={24} color="white" /> : <FaBars size={24} color="white" />}
+                </div> */}
+
+                <nav className="navbar header_navbar">
+                    <ul className="nav-links" onClick={closeMenu}>
+                        <li><NavLink to='/'>{language === 'EN' ? 'Home' : 'Trang Chủ'}</NavLink></li>
+                        <li><NavLink to='/exercise'>{language === 'EN' ? 'Exercise' : 'Bài Tập'}</NavLink></li>
+                        <li><NavLink to='/dictionary'>{language === 'EN' ? 'Dictionary' : 'Từ Điển'}</NavLink></li>
+                        <li><NavLink to='/workout'>{language === 'EN' ? 'Workout' : 'Lịch Tập'}</NavLink></li>
+                        <li><NavLink to='/nutrition'>{language === 'EN' ? 'Nutrition' : 'Lịch Ăn'}</NavLink></li>
+                    </ul>
+
+                    <div className="switch">
+                        <input id="language-toggle" className="check-toggle check-toggle-round-flat" type="checkbox" onChange={handleLanguageToggle} />
+                        <label htmlFor="language-toggle"></label>
+                        <span className="on">EN</span>
+                        <span className="off">VI</span>
+                    </div>
+
+                    {isLogin ? (
+                        <div
+                            className='user-info'
                             onClick={toggleDropdown}
-                            onError={handleImageError}
-                        />
-                        <span className="user-name" onClick={toggleDropdown}>{fullname}</span>
-                        <i className="user-name-icon" onClick={toggleDropdown}><FaChevronDown /></i>
-                        {dropdownVisible && (
-                            <div className="dropdown-menu" ref={dropdownRef}>
-                                <div onClick={handleProfile}>
-                                    {language === 'EN' ? 'Profile' : 'Hồ Sơ'}
+                        >
+                            <img
+                                src={profileImageError ? defaultAvatar : picture}
+                                alt={fullname}
+                                className="user-picture"
+                                onClick={toggleDropdown}
+                                onError={handleImageError}
+                            />
+                            <span className="user-name" onClick={toggleDropdown}>{fullname}</span>
+                            <i className="user-name-icon" onClick={toggleDropdown}><FaChevronDown /></i>
+                            {dropdownVisible && (
+                                <div className="dropdown-menu" ref={dropdownRef}>
+                                    <div onClick={handleProfile}>
+                                        {language === 'EN' ? 'Profile' : 'Hồ Sơ'}
+                                    </div>
+                                    <div onClick={handleGoPremium}>
+                                        {language === 'EN' ? 'Go Premium' : 'Nâng Cấp'}
+                                    </div>
+                                    <div onClick={handleLogOut}>
+                                        {language === 'EN' ? 'Log out' : 'Đăng Xuất'}
+                                    </div>
                                 </div>
-                                <div onClick={handleGoPremium}>
-                                    {language === 'EN' ? 'Go Premium' : 'Nâng Cấp'}
-                                </div>
-                                <div onClick={handleLogOut}>
-                                    {language === 'EN' ? 'Log out' : 'Đăng Xuất'}
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className='buttonGroup'>
-                        <button type="button" className="btnLogin btn btn-outline-light" onClick={handleLogIn}>
-                            {language === 'EN' ? 'Log In' : 'Đăng Nhập'}
-                        </button>
-                        <button type="button" className="btnSignup btn btn-secondary" onClick={handleSignUp}>
-                            {language === 'EN' ? 'Sign Up' : 'Đăng Ký'}
-                        </button>
-                    </div>
-                )}
-            </nav>
-        </Wrapper>
+                            )}
+                        </div>
+                    ) : (
+                        <div className='buttonGroup'>
+                            <button type="button" className="btnLogin btn btn-outline-light" onClick={handleLogIn}>
+                                {language === 'EN' ? 'Log In' : 'Đăng Nhập'}
+                            </button>
+                            <button type="button" className="btnSignup btn btn-secondary" onClick={handleSignUp}>
+                                {language === 'EN' ? 'Sign Up' : 'Đăng Ký'}
+                            </button>
+                        </div>
+                    )}
+                </nav>
+            </Wrapper>
+            <PremiumModal
+                isOpen={showPremiumModal}
+                onClose={handleClosePremiumModal}
+            />
+        </>
     );
 }
 

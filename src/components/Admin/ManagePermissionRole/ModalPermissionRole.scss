@@ -1,0 +1,55 @@
+.modalPermissionRole {
+    .modal-header {
+        border-bottom: 1px solid #59658A;
+    }
+
+    .modal-content {
+        background-color: #0B1739;
+        color: var(--textColor);
+
+        .form-group {
+            margin-bottom: 1rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            .form-control {
+                background-color: #0B1739;
+                border: 1px solid #59658A;
+                color: #A9B5DD;
+            }
+        }
+    }
+
+    .modal-footer {
+        border-top: 1px solid #59658A;
+
+        .btnClose {
+            background-color: #081028;
+            border-color: #565e64;
+            color: var(--textColor);
+        }
+
+        .btnCreate {
+            color: white;
+            padding: 12px 16px;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            border-radius: 4px;
+            background-image: linear-gradient(128.49deg, rgb(203, 60, 255) 19.86%, rgb(127, 37, 251) 68.34%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            height: 36px;
+        }
+    }
+
+    .formPermissionRole.container {
+        padding: 24px;
+    }
+}

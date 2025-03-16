@@ -41,11 +41,12 @@
                     padding: 8px;
                     outline: none;
                     caret-color: #A9B5DD;
-                }
+                    color: white; // Thêm màu trắng cho text input
 
-                .manageExercise__header__search::placeholder {
-                    color: #A9B5DD;
-                    font-size: 14px;
+                    &::placeholder {
+                        color: #A9B5DD;
+                        font-size: 14px;
+                    }
                 }
             }
 

@@ -9,7 +9,10 @@ const initialState = {
     fullname: '',
     picture: '',
     language: 'EN',
-    email: '', // Thêm email vào initialState nếu chưa có
+    email: '',
+    userId: '',
+    roleId: '',
+    isPremium: false, // Thêm state để theo dõi trạng thái premium
 };
 
 export const loginUser = createAsyncThunk('system/loginUser', async ({ email, password }) => {
@@ -39,6 +42,12 @@ const systemSlice = createSlice({
         toggleLanguage: (state) => {
             state.language = state.language === 'EN' ? 'VI' : 'EN';
         },
+        updateRoleId: (state, action) => {
+            state.roleId = action.payload;
+        },
+        setPremium: (state, action) => {
+            state.isPremium = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -53,10 +62,18 @@ const systemSlice = createSlice({
                 state.isFailed = false;
                 state.isLogin = true;
 
-                const { firstName, lastName, picture, email } = action?.payload?.DT ?? {};
+                const { firstName, lastName, picture, email, userId, role } = action?.payload?.DT ?? {};
+                console.log('Login Response:', action?.payload?.DT);
+                console.log('Role from response:', role);
+                
                 state.fullname = firstName && lastName ? `${firstName} ${lastName}` : "Gym Bro";
                 state.picture = picture || 'https://imgcdn.stablediffusionweb.com/2024/5/17/f5fb790b-36d9-4504-9ad0-d1142269fe98.jpg';
-                state.email = email; // Thêm dòng này
+                state.email = email;
+                state.userId = userId;
+                state.roleId = role;
+                // Set isPremium là true nếu roleId là 1 hoặc 3
+                state.isPremium = role === 1 || role === 3;
+                console.log('isPremium after set:', state.isPremium);
             })
             .addCase(loginUser.rejected, (state) => {
                 state.isLoading = false;
@@ -73,10 +90,14 @@ const systemSlice = createSlice({
                 state.isFailed = false;
                 state.isLogin = true;
 
-                const { firstName, lastName, picture, email } = action?.payload?.DT ?? {};
+                const { firstName, lastName, picture, email, userId, role } = action?.payload?.DT ?? {};
                 state.fullname = (firstName && lastName) ? `${firstName} ${lastName}` : 'Gym Bro';
                 state.picture = picture || 'https://imgcdn.stablediffusionweb.com/2024/5/17/f5fb790b-36d9-4504-9ad0-d1142269fe98.jpg';
-                state.email = email; // Thêm dòng này
+                state.email = email;
+                state.userId = userId;
+                state.roleId = role;
+                // Set isPremium là true nếu roleId là 1 hoặc 3
+                state.isPremium = role === 1 || role === 3;
             })
             .addCase(loginGoogleUser.rejected, (state) => {
                 state.isLoading = false;
@@ -109,6 +130,12 @@ const systemSlice = createSlice({
                 state.isSuccess = true;
                 state.isFailed = false;
                 state.isLogin = false;
+                state.fullname = '';
+                state.picture = '';
+                state.email = '';
+                state.userId = '';
+                state.roleId = null; // Reset roleId khi logout
+                state.isPremium = false; // Reset isPremium khi logout
             })
             .addCase(logoutUser.rejected, (state) => {
                 state.isLoading = false;
@@ -118,6 +145,6 @@ const systemSlice = createSlice({
     },
 });
 
-export const { toggleLanguage } = systemSlice.actions;
+export const { toggleLanguage, updateRoleId, setPremium } = systemSlice.actions;
 
 export default systemSlice.reducer;

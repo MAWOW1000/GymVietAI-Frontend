@@ -27,7 +27,7 @@ const AllergensForm = ({ selectedAllergens, onAllergenToggle }) => {
 
   return (
     <div>
-      <p className="text-muted mb-3">Select your food allergies:</p>
+      <p className="text-muted mb-3 mt-4">Select your food allergies:</p>
       <div className="d-flex flex-wrap gap-2">
         {allergens.map((allergen) => (
           <button

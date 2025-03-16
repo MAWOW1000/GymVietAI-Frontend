@@ -117,7 +117,7 @@ const ExercisePage = () => {
                                                 </>
                                         }
                                     </div>
-                                    <div className="models-preview">
+                                    {/* <div className="models-preview">
                                         <div className={`model-preview ${activeModel === 'front' ? 'active' : 'inactive'}`} 
                                              onClick={() => {
                                                  if (activeModel === 'front') {
@@ -142,7 +142,7 @@ const ExercisePage = () => {
                                                 <ModelBackFemale selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />
                                                 : <ModelBack selectedMuscle={selectedMuscle} setSelectedMuscle={setSelectedMuscle} />}
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                         }
                     </div>
